@@ -15,7 +15,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
-        tex_path: 'dir/main.tex'
+        tex_path: 'main.tex'
         push: 'yes'
 
 
