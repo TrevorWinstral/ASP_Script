@@ -1,0 +1,199 @@
+\chapter{Renewal Processes}
+\textbf{Outset} We want to model replacement times of a machine. First we wait $T_1$ until we replace it, then we wait $T_2$ until replacing the replacement, and so on.
+
+\noindent
+\textbf{Questions:} After time $t$, how many replacements did we have to make ($N_t$)? What about the expected number $m(t)=\mathbb{E}_{} \left[ N_t \right] $?
+What about the 'excess time', ie if we are at time $t$, how long until the next replacement ($E_t$, $e(t)=\mathbb{E}_{} \left[ E_t \right]$)? Or the age of the machine ($A_t$, $a(t)=\mathbb{E}_{} \left[ A_t \right] $).
+
+Case 1: $T_1... \sim Exp(\lambda)$: $m(t)=t\lambda$, $E_t \sim Exp(\lambda), e(t)= \frac{1}{\lambda}$, $A_t \sim Exp(\lambda)$.
+
+Case 2: More complicated.
+
+\section{Definition and First Properties}
+\textbf{Framework} $(\Omega, \mathcal{F}, \mathbb{P})$ Probability space, $T_1, T_2,...$ iid RVs on $\mathbb{R}_+$ 'inter-arrival times', st $\mathbb{P}_{} \left[ T_i = 0 \right] < 1$, $\mu = \mathbb{E}_{} \left[ T_1 \right] \in (0, \infty]$. $F(t) =  \mathbb{P}_{} \left[ T_1 \leq t \right] $, $S_n = \sum_{i=1}^{n} T_i, S_0 =0$ 'renewal times'.
+\begin{defn}
+	The continuous stochastic process $(N_t)_{t\geq 0}$ defined by:
+\begin{align}
+	\forall t \geq 0: N_t = \sum_{k=1}^{\infty} \mathbbm{1}_{S_k \leq t}
+\end{align}
+is called the renewal process with arrival distribution $F$.
+\end{defn}
+
+\begin{ex}[]
+	\begin{enumerate}
+		\item $pp(\lambda ), \lambda> 0, T_i \sim Exp(\lambda)$
+		\item $(T_i)_{i\geq 1}$ iid $Exp(\lambda)$, $(X_i)_{i\geq 1}$ iid $Ber(\frac{1}{2})$, $T_i'= X_i T_i$, where  $(T_i)$ and  $(X_i)$ are indep.
+		\item 'Fat Tailed' $\mathbb{P}_{} \left[ T_{i} \geq t \right] = \frac{1}{\sqrt{1+t}} \mathbbm{1}_{t\geq 0}$
+	\end{enumerate}
+	
+\end{ex}
+
+\begin{prop}[]
+	$N = (N_t)_{t\geq 0}$ is a counting process with jump times $S_1, S_2,...$ and $\lim_{t \to \infty} N_t = + \infty$.
+\end{prop}
+
+\begin{prop}[]
+	There exists $c> 0$ st $\forall t\geq 0: \mathbb{E}_{} \left[ e^{cN_t} \right] \leq e^{\frac{1+t}{c}}$, thus the expectation is finite $\forall t$.
+\end{prop}
+
+\begin{theorem}[Law of Large Numbers]
+	We have $\lim_{t \to \infty} \frac{N_t}{t} = \frac{1}{\mu}$.
+\end{theorem}
+
+\section{Renewal Function}
+\begin{defn}
+	The renewal function is defined by $\forall t\geq 0: m(t) = \mathbb{E}_{} \left[ N_t \right] $.
+\end{defn}
+
+\begin{rmk}[]
+	$m(t)<\infty$ because $N _t$ has exponential moment (you can use Jensen).
+\end{rmk}
+
+\begin{prop}[]
+	$m(t)$ is non-decreasing, non-negative, and right continuous.
+\end{prop}
+
+\begin{theorem}[Elementary Renewal Theorem]
+	$\lim_{t \to \infty} \frac{m(t)}{t}=\frac{1}{\mu }$
+\end{theorem}
+
+\section{Blackwell's Renewal Theorem}
+\begin{defn}
+	We say the law of $T_1$ is arithmetic if $\exists a > 0: \mathbb{P}_{} \left[ T_1 \in a \mathbb{Z} \right] =1$. It is non-arithmetic if this probability is $<1$.
+\end{defn}
+
+\begin{theorem}[Blackwell]
+	Assume that the law of $T_1$ is non-arithmetic, then $\lim_{t \to \infty} m(t+h)-m(t) = \frac{h}{\mu }$.
+\end{theorem}
+
+\begin{rmk}[]
+	$ \frac{m(t)}{t} \approx \frac{m(\lfloor t \rfloor)}{\lfloor t \rfloor} = \frac{1}{\lfloor t \rfloor} \sum_{k=1}^{\lfloor t \rfloor} m(k) - m(k-1) \stackrel{Blackwell}{\to} \frac{1}{\mu}$. "Blackwell is stronger than elementary renewal."
+\end{rmk}
+
+\section{Renewal Equation}
+
+\subsubsection{Lebesgue-Stieltjes Integral} 
+\textbf{Notation} $ \mathcal{M} = \{ f: \mathbb{R}_+ \to \mathbb{R}_+, \textrm{right continuous, non-decreasing}\}$ 'measures on $\mathbb{R}_+$ '. $\nu((a,b])=f(b)-f(a)$
+
+For all $h \in L^1(df)$ or $h\geq 0$ meas, we can define $\int h df$.
+
+\begin{ex}[]
+\begin{itemize}
+	\item $m \in \mathcal{M} \to \int h dm$ can be defined	
+	\item If $T$ is a RV on $\mathbb{R}_+$ the $F_T(t) = \mathbb{P}_{} \left[ T \leq t \right] $
+\end{itemize}
+
+\end{ex}
+
+\begin{defn}
+	Let $G \in \mathcal{M}$. Let $h: \mathbb{R}_+ \to \mathbb{R}$ st either $\forall t: \int_{0}^{t}| h(t-s) | dG(s) < \infty $ or $h\geq 0$ a.e. we define:
+\begin{align}
+	h*G = \int_{0}^{t} h(t-s)dG(s)
+\end{align}
+
+\end{defn}
+
+\begin{rmk}[]
+	Let $X,Y$ be two indep RV on $\mathbb{R}_+$. Then with  $F_X, F_Y$ their respective cdf's: 
+\begin{align}
+	\mathbb{P}_{} \left[ X+Y \leq t \right] =& \int_{s=0}^{t} \mathbb{P}_{} \left[  X+s \leq t \right] dF_y(s) \\
+	=& \int_{0}^{t} F_X(t-s)dF_Y(s)
+\end{align}
+So $F_{X+Y} = F_X * F_Y$.
+\end{rmk}
+
+Why is this useful?
+\begin{align}
+	m(t) =& \mathbb{E}_{} \left[ N_t \right] = \mathbb{E}_{} \left[ \sum_{n}^{} \mathbbm{1}_{T_1+...T_n \leq t} \right] \\
+	=& \sum_{n}^{} F_{T_1 +...+T_n} (t) = F^{*n}(t).
+\end{align}
+
+\subsubsection{Renewal Equation}
+\begin{defn}
+	Let $h:\mathbb{R}_+ \to \mathbb{R}$ meas. loc. bdd, $g:\mathbb{R}_+ \to \mathbb{R}$ st $ \forall t\geq 0: \int_{0}^{t} |g(t-s)|dF(s) <\infty$. We say that $g$ is a solution of the $(h,F)$ renewal equation if:
+\begin{align}
+	\forall t\geq 0: g(t) = h(t) + \int_{0}^{t} g(t-s)dF(s)
+\end{align}
+\end{defn}
+
+\begin{prop}[First Example]
+	$m$ is a solution of the $(F,F)$ renewal equation, ie $m=F+m*F$.	
+\end{prop}
+
+\begin{ex}[Excess Time, 2nd Example]
+	$E_t = S_{N_{t+1}}-t$, the time left to wait until next renewal. Define for  $x \geq 0$, $e_x(t) = \mathbb{P}_{} \left[ E_t \leq x \right] $. We can separate $e_x$ into 2 parts, one for the probability if there has already been a renewal before time $t$, and one if that hasn't occured: $e_x(t) = \mathbb{P}_{} \left[ T_1 > t, E_t \leq x \right]  + \mathbb{P}_{} \left[ T_1 \leq t, E_t \leq x \right]  = A + B$.
+
+	$A = \mathbb{P}_{} \left[ T_1 > t, T_1 \leq t+x \right] = F(t+x)-F(t)$. Observe that $E_t$ is meas wrt $T_1, T_2,...$. $E_t = \phi_t(T_1,T_2,...)$. 
+\begin{align}
+	\mathbb{P}_{} \left[ T_1 \leq t, E_t \leq x \right] =& \mathbb{P}_{} \left[ T_1 \leq t, \phi_t(T_1,T_2,...) \leq x \right] \\ 
+	=& \int_{0}^{t} \mathbb{P}_{} \left[ \phi_t(s, T_2,...) \leq x \right] dF(s) = \int_{0}^{t} \mathbb{P}_{} \left[ E_{t-s} \leq x \right] dF(s) \\
+	=& \int_{0}^{t} e_x(t-s) dF(s) = (e_x * F)(t)
+\end{align}
+Thus $e_x(t) = h_x(t) + (e_x * F)(t)$ with $h_x(t) = F(t+x)-F(t)$. So  $e_x$ is a solution of the $(h_x,F)$ renewal equation.
+\end{ex}
+
+\textbf{Exercise} Show that the age $a_x(t) = \mathbb{P}_{} \left[ A_t \leq x \right] $ is the solution to some $(h,F)$ renewal equation.
+
+\subsubsection{Well-Posedness of the Renewal Equation}
+\begin{theorem}[]
+	Let $h: \mathbb{R}_+\to \mathbb{R}$ meas, loc bdd. Then there exists a unique $g: \mathbb{R}_+ \to \mathbb{R}$ meas, loc bdd, solution of $g = h + g*F$ given by $g=h+h*m$. 
+\end{theorem}
+\begin{proof}[Intuitive Proof]
+	Assume $g$ is a solution. 
+\begin{align*}
+	g =& h + g*F \\
+	=& h + (h+g*F)*F \\
+	... \\
+	\stackrel{(*)}{=}& h + h*F + h*F^{*2} + h*F^{*3}+... \\
+	=& h + h*m
+\end{align*}
+We must only show that $(*)$ can be made rigorous. Otherwise this is just an intuitive proof, we can use this as a way to find a candidate for $g$, and then prov that it is actually a legitimate solution as follows.
+\end{proof}
+\begin{proof}[Rigorous Proof]
+	$g = h + h*m$ is meas. loc. bdd., because  $h$ is. We have $h + g*F = h + (h+h*m)*F = h + h*F + h*m*F=h+h*(F+m*F)=h+h*m = g$	
+
+\textbf{Uniqueness} 
+$g_1, g_2$ are 2 solutions, then $g_1-g_2 = (g_1 - g_2)*F = (g_1 - g_2) * F^{*n}$. We have for every $t \geq 0: |g_1(t) - g_2(t)| = \left| \int_{0}^{t} (g_1 - g_2)(t-s)dF^{*n}(s) \right| \leq sup_{[0,t]} |g_1 - g_2| \int_{0}^{t} dF^{*n}(s)$. Where we can see the integral term is equal to $\mathbb{P}_{} \left[ T_1 +... +T_n \leq t \right] $ which converges to 0.
+\end{proof}
+
+\section{Asymptotic Behavior}
+
+\textbf{Motivation} We want to study the behavior of $g(t)$ when  $t$ is large and when $g$ is a solution to the $(h,F)$ renewal equation.
+
+\textbf{Case 1} $h=\mathbbm{1}_{[a,b]} $, and $g$ a solution. $g(t) = h(t) + \int_{0}^{t} h(t-s)dm(s)$. $h(t-s) = \mathbbm{1}_{[a,b]}(t-s) = \mathbbm{1}_{s \in [t-b, t-a]}$. So $g(t) = h(t) + m(t-a)-m(t-b)$ and with Blackwell's Theorem we find that this tends towards $0+\frac{b-a}{\mu}$. Now we need to figure out how this generalizes.
+
+\textbf{Idea} Extend to simple functions $\sum_{}^{} \lambda_i \mathbbm{1}_{I_i}$ (this is easy), then try to extend to directly integrable Riemann functions.
+
+\begin{defn}
+	$h: \mathbb{R}_+ \to \mathbb{R}_+$ meas., $h$ is directly Riemann Integrable (dRi) if $\forall \Delta >0: \sum_{k=0}^{\infty}\Delta sup_{[k \Delta, (k+1)\Delta]} h < \infty$ and $lim_{\Delta \to 0} \Delta \sum_{k=0}^{\infty} sup_{[k \Delta,(k+1)\Delta] } h = lim _{\Delta \to \infty} \Delta \sum_{k=0}^{\infty} inf_{[k \Delta, (k+1)\Delta]}h$. $h: \mathbb{R}_+ \to \mathbb{R}_+$ is dRi iff $h_+$ and $h_-$ are dRi. See notes for example for integrable but not dRi function.
+\end{defn}
+
+\begin{prop}[]
+	Let $h: \mathbb{R}_+ \to \mathbb{R}$. Assume that $h$ is continuous at a.e. $t \in \mathbb{R}$, $\exists H$ non-decreasing st $0 \leq |h| \leq H$ and $\int_{0}^{\infty} H < \infty$, then $h$ is dRi. 
+\end{prop}
+
+\begin{theorem}[Smith Key Renewall Theorem]
+	Let $h$ be dRi, $F$ non-arithmetic. Then $g=h+h*m$ satisfies $lim_{t \to \infty}g(t)= \frac{1}{\mu } \int_{0}^{\infty} h(u) du$.
+\end{theorem}
+
+\begin{rmk}[]
+	The case $h= \mathbbm{1}_{[0,b]}$ corresponds to the Blackwell Theorem. 
+\end{rmk}
+
+The idea of the proof is to use an approximation of $h$ by functions of the form $h_{c,\Delta}=\sum_{k\geq 0}^{} c_k \mathbbm{1} _{[k\Delta, (k+1)\Delta)}$.
+
+\textbf{Application} Let $\mu < \infty$. Let $E_t$ be the excess time (time until next renewal) and $e_x(t) = \mathbb{P}_{} \left[ E_t \leq x \right] $. What is $lim_{t \to \infty} e_x(t)$? We know that $e_x = h_x + e_x*F$, where $h_x(t) = F(t+x)-F(t)$.
+
+\begin{rmk}[]
+	$\mu = \mathbb{E}_{} \left[ T_1 \right] = \int_{0}^{\infty} \mathbb{P}_{} \left[ T_1 > t \right] dt$
+\end{rmk}
+
+With this we have that $h_x(t) \leq 1 - F(t) = \mathbb{P}_{} \left[ T_1 > t \right] $, and $1-F(t)$ is non-increasing in $t$ and continuous ae (because it is the difference of two monotone functions). $\int_{0}^{\infty} \mathbb{P}_{} \left[ T_1 > t \right] dt = \mathbb{E}_{} \left[ T_1 \right] = \mu < \infty $. So (by the proposition) $h_x$ is dRi. Now we can apply the theorem and get that $lim_{t \to \infty} \mathbb{P}_{} \left[ E_t \leq x \right] = \frac{1}{\mu } \int_{0}^{\infty} h_x(t)dt = \frac{1}{\mu } \int_{0}^{\infty} F(t+x) - F(t) dt$, with $F(t+x) - F(t) = \mathbb{E}_{} \left[ \mathbbm{1}_{T_1 \in (t, t+x]} \right] $, we find that the limit is equal to $\frac{1}{\mu } \int_{0}^{\infty} \mathbb{E}_{} \left[ \mathbbm{1}_{T_1 \in (t, t+x]} \right]dt = \frac{1}{\mu} \mathbb{E}_{} \left[ \int_{0}^{ \infty } \mathbbm{1}_{t \in [T_1 -x, T_1)}    \right]dt = \frac{1}{\mu } \mathbb{E}_{} \left[ \int_{max\{T_1-x, 0\}}^{T_1} dt \right] =  $ $T_1$ if $T_1 \leq x$ and $x$ if  $T_1 > x$. Thus we get for $t$ large:  $\mathbb{P}_{} \left[ E_t \leq x \right] \approx  \frac{1}{\mu} \mathbb{E}_{} \left[ min\{T_1, x\} \right]  $. 
+
+\begin{rmk}[]
+	$G(x) = \frac{1}{\mu } \mathbb{E}_{} \left[ min\{T_1, x\} \right] $ is the delay distribution in the proof of Blackwell's Theorem.
+\end{rmk}
+
+\noindent \textbf{Conclusion} We have now used renewal processes to define a general structure to model a real life process mathematically. Using this object enabled us to implement the LLN and make statements about the asymptotic behavior of such processes over large periods of time.
+
+

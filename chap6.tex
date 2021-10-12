@@ -1,0 +1,250 @@
+\chapter{Continuous Time Markov Chains}
+\textbf{Framework} $(\Omega, \mathcal{F}, \mathbb{P}_{} ) $ Probability space, $E$ finite or countable. 
+
+\noindent \textbf{Outset} We will now be extending the theory of Discrete Markov Chains developed in Chapters 1 and 2 and generalizing the theory of Poisson Processes in Chapter 5. Instead of jumping at every step (studying $(X_n)_{n \in \mathbb{N}})$, we will now make jumps at random times on $\mathbb{R}_+$ with the continuous time MC $(X_t)_{t\geq 0}$ using times on $\mathbb{R}_+$. 
+\begin{tabular}{p{0.5\textwidth}  | p{0.5\textwidth}}
+\textbf{Discrete Time MC} & \textbf{Continuous Time MC} \\ 	
+\hline
+Time & \\ $\mathbb{N}$ &  $\mathbb{R}_+$ \\
+\hline
+Initial Distribution & \\ $X_0 \sim \mu$ &  $X_0 \sim \mu$ \\
+\hline
+Memoryless Property & \\
+\begin{align*}
+\mathbb{P}_{} \left[ X_{n+1}=x_{n+1} | X_0 = x_0,...,X_n=x_n \right]= \\ \mathbb{P}_{} \left[ X_{n+1} = x_{n+1} | X_n= x_{n} \right] 
+\end{align*}
+&  
+\begin{gather*}
+	\forall t_0<...<t_{n+1} \\ \mathbb{P}_{} \left[ X_{t_{n+1}} = x_{n+1} | X_{t_0}=x_0,...,X_{t_n}=x_n \right] = \\ \mathbb{P}_{} \left[ X_{t_{n+1}}| X_{t_n}=x_{n} \right]  
+\end{gather*} \\
+\hline
+Transition Probabilities & \\ $\mathbb{P}_{} \left[ X_{n+1} = y | X_n = x \right] = p _{x,y} $ & $\mu$-scopic generation, $x \neq y$, $ \mathbb{P}_{} \left[ X_{t+h}=y | X_{t}=x \right] = q_{x,y}*h + o(h)$. So for $h$ small the probability of staying at $x$ is equal to 1. \\
+
+
+\end{tabular}
+
+\section{Definition via Generator}
+\begin{defn}
+	Let $X = (X_t)_{t\geq 0}$ be a cont. time stochastic process with values in $E$. We say that $X$ is a jump process without explosion if a.s.
+\begin{enumerate}
+	\item $t \mapsto X_t$ is right continuous 
+	\item $\forall t >0 $ the number of discontinuity points of $s \mapsto X_s$ on $[0,t]$ is finite.
+\end{enumerate}
+
+\end{defn}
+
+\begin{defn}
+	Jump times: $S_0 =0, S_{i+1} = inf\{t > S_i, X_t = X_{S_i}\}$, with condition (ii) implying that $S_n \to \infty $ as $n \to \infty $ a.s.
+\end{defn}
+
+\begin{defn}
+	Skeleton: $\forall n \in \mathbb{N}: \bar{X_n} := X_{S_n}$ if $S _n< \infty$, if $\exists n_0: S_n = \infty \ \forall n \geq n_0$ then $\forall n \geq n_0: X_n = X_{n_0 -1}$.
+\end{defn}
+
+\begin{defn}
+	A generator (Q-matrix) is a family $q=(q_{xy})_{x,y \in E}$ where:
+	\begin{enumerate}
+		\item $q_{xy} \geq 0 \forall x \neq y$
+		\item $\forall x: \sum_{y \neq x}^{} q_{xy} < \infty$
+		\item $q_{xx}= -q(x) =  -\sum_{y \neq x}^{} q_{xy}$
+\end{enumerate}
+
+\end{defn}
+
+
+\begin{defn}
+	Let $\mu $ be a distribution on $E$, $q$ a generator, let $X$ be a jump process without explosion. We say that $X$ is a $CTMC(\mu, q)$ (Continuous Time Markov Chain without explosion with initial distribution $\mu $ and generator $q$ ) if:
+\begin{enumerate}
+	\item $X_0 \sim \mu $ 
+	\item $\forall t_1 <...t_{n+1}: \forall x_1,...,x_{n=1} \in E: \mathbb{P}_{} \left[ X_{t_{n+1}} = x_{n+1} | 
+		X_{t_1}=x_1,...,X_{t_{n}}=x_n \right] = \mathbb{P}_{} \left[ X_{t_{n+1}} = x_{n+1} | X_{n}=x_n \right] $
+	\item $\forall x,y \in  E: \forall t> 0:$ as $h \to 0^+$:  $\mathbb{P}_{} \left[ X_{t+h}=y | X _{t}=x \right]  = \delta_{xy} + q_{xy}h + o(h)$ uniformly in $t\geq 0, y \in E$.
+\end{enumerate}
+
+\end{defn}
+
+\begin{rmk}[]
+	In (iii): $\forall x, \exists \varphi_x: \mathbb{R}_+ \to \mathbb{R}_+$ st $\varphi_x(h) \stackrel{h \to 0^+}{\to}0$ and $\forall h> 0, \forall y \in E: \mathbb{P}_{} \left[ X_{t+h}=y |  X_{t}=x \right] = 
+	\begin{cases}
+		1 - q(x)h + h \varphi_{x,x,t}(h) \\
+		q_{xy}h + h \varphi_{x,y,t}(h)
+	\end{cases}
+	$ where $0 \leq \varphi_{x,z,t}(h) \leq \varphi_x(h)$.
+\end{rmk}
+
+\begin{ex}[Poisson Process]
+	Let $(N_t)_{t\geq 0}$ be a $pp(\lambda)$. Then  $N$ is a $CTMC(\mu, q)$ with  $\mu = \delta_0$ and $q=(q_{xy})_{x,y \in \mathbb{N}}=$ $\lambda$ if $y=x+1$,  $-\lambda$ if  $y=x$, and  $0$ otherwise.
+\end{ex}
+
+\textbf{Question} Does $CTMC(\mu, q)$ exist for arbitrary $\mu $ and $q$?
+
+\section{Non-Rigorous Section: The Constructive Approach}
+\begin{ex}[2 State Markov Chain]
+	$E=\{1,2\}$,  $q=
+	\begin{pmatrix}
+		-\alpha & \alpha \\
+		\beta & -\beta
+	\end{pmatrix}$, $\alpha, \beta > 0$.
+	$(X_t)_{t\geq 0}, X_t \sim CTMC(\delta_1, q)$?
+	$X_0 =1$, $T_1 \sim Exp(\alpha)$, $T_2 \sim Exp(\beta)$ (see notes for reasoning). This gives us the candidate $X_t = 
+\begin{cases}
+1, t \in [S_i, S_{i+1}) \\
+2, t \in [S_{i+1}, S_{i+2}) \\
+\end{cases}
+$.
+\end{ex}
+
+\textbf{Idea} $q_{xy}$ should represent the parameter for the time taken to jump from $x$ to $y$. Since we want our process to have the Markov property, it is natural to see $q_{xy}$ as the parameter in the exponential RV representing the waiting time to jump from $x$ to $y$.
+
+\begin{ex}[3 State Markov Chain]
+	We start at $X_0 =1$, we have probability  $\alpha $ to jump to 2, and probability $\beta $ to jump to 3. Thus we have $T_{12} \sim Exp(\alpha)$, $T_{13} \sim Exp(\beta )$, then we shall actually jump at $T_1 = min\{T_{12}, T_{13}\} \sim Exp(\alpha + \beta )$. $\mathbb{P}_{} \left[ \textrm{jump from } 1 \to 2 \right] = \mathbb{P}_{} \left[ T_1 = T_{12} \right]= \frac{\alpha }{\alpha + \beta } = \frac{q_{12}}{q(1)} $. The skeleton $(\overline{X_n})$ is a Discrete time MC with transition probabilities $\kappa_{xy}= \frac{q_{xy}}{q(x)}$. 
+\end{ex}
+
+\section{Definition by Skeleton and Holding Time}
+\textbf{Note} $q$ is a fixed generator.
+\subsubsection{Discrete Chain Associated to 2}
+\begin{defn}
+	Let $x,y \in E$, if $q(x)> 0$ we define $\kappa_{xy}= \frac{q_{xy}}{q(x)}$ and $\kappa_{xx}=0$, if $q(x)=0$ then $\kappa_{xy}= 
+	\begin{cases}
+		0, x \neq y \\
+		1, x =y 
+	\end{cases}
+	$.
+\end{defn}
+
+\begin{rmk}[]
+	$\kappa $ is transition probability (check for the cases where $q(x) = 0$ and $q(x)\neq 0$). 
+\end{rmk}
+
+\begin{ex}[]
+\begin{enumerate}
+	\item The $pp(\lambda)$, with $\kappa_{i,i+1}=1$.
+	\item The 2-State MC, with $\kappa_{1,2}=\kappa_{2,1}=1$ 
+	\item The 3-State MC, more complicated (see notes).
+\end{enumerate}
+
+\end{ex}
+
+\subsubsection{Something can go wrong}
+Let $\mu $ probability measure on $E$, $q$ generator. Our goal is to define $(X_t)$ a $CTMC(\mu, q)$. Let $Y= (Y_n)$ be a discrete $MC(\mu, \kappa)$, $H_1, H_2,...$ iid $Exp(1)$ RVs, set $T_i = \frac{1}{q(Y_i)} H_i$, conditional on $Y$ $T_i \sim Exp(q(Y_i))$ and they are independent.
+
+We define $S_i = T_1 + T_2 + ... + T_i$ for $i>1$, and $X_t = Y_n$ if $t \in [S_n, S_{n+1})$. Now have we defined $X_t$ for all $t\geq 0$? No, as $lim_{n \to \infty }S_n $ could be finite. 
+
+\begin{defn}
+	We say that $q$ has no explosion if $\forall $ choice of $\mu: S_{ \infty } = + \infty $ a.s.
+\end{defn}
+
+\begin{rmk}[]
+	This is only a condition on $q$.
+\end{rmk}
+
+\textbf{Question} Does there exist $q$ with explosion? (Answer later)
+
+\textbf{Question} If $q$ has no explosion, is $(X_t)$ a $CTMC(\mu, q)$? (Also later)
+
+\subsubsection{Birth Chain}
+$E= \mathbb{N}$, fix $(\lambda_i)_{i\geq 1}$, and $q_{i,i+1}= \lambda_i$, $q_{i,i}=-\lambda_i$, and otherwise $q_{i,j}=0$. We get that $\kappa_{i,j}= \delta_{i, i-1}$, $Y_n = n$, and $T_i \sim Exp(\lambda_i)$. Now we set $S_{\infty} = \sum_{i=1}^{\infty} T_i$ and we ask, is $S_\infty < \infty$ or $S_\infty = \infty$ a.s.
+
+\begin{rmk}[]
+	$pp(\lambda)$ is a birth chain with  $\lambda_i = \lambda$.
+\end{rmk}
+
+\begin{theorem}[]
+	The birth chain $q$ has no explosion $\iff$ $\sum_{i\geq 1}^{} \frac{1}{\lambda_i} = \infty$.
+\end{theorem}
+
+\subsubsection{Non-Explosion Characterization} 
+Fix $q$ a generator on $E$ ($\kappa_{xy}= \frac{q_{xy}}{q(x)}$).
+
+\begin{theorem}[]
+	For $x \in E$, let $Y=(Y_n^{(x)})_{n\geq 0}$ be a $MC(\mu, \kappa )$. Then $q$ has no explosion $\iff \forall x \sum_{n\geq 0}^{} \frac{1}{q(Y_n^{(x)})} < \infty $ a.s.
+\end{theorem}
+
+\begin{rmk}[]
+	$ \sum_{n\geq 0}^{} \frac{1}{q(Y_n)}$ is a RV.
+\end{rmk}
+\noindent
+\textbf{Application} Sufficient Condition: $q$ is non-explosive if
+\begin{itemize}
+	\item $E$ is finite (2 and 3 State MC)
+	\item $inf_{x \in E:\ q(x) \neq 0}q(x) > 0 $ (Poisson, 2 and 3 State MC)
+	\item The chain $\kappa $ is irreducible and recurrent.
+\end{itemize}
+
+\subsubsection{Key Theorem}
+
+\begin{theorem}[Characterization of CTMC]
+Let $X=(X_t)_{t\geq 0}$ be a jump process without explosion. Let $q$ be a non-explosive generator. Then TFAE:
+\begin{enumerate}
+	\item $X$ is a $CTMC(\mu, q)$
+	\item The skeleton of $X$ ($Y= \overline{X_n})$is a discrete time $MC(\mu, \kappa ) $ and conditioned on $Y$, the holding times satisfy $S_i-S_{i-1} \sim Exp(q(Y_i))$ are indep. 
+\end{enumerate}
+
+\end{theorem}
+\textbf{Consequences} 
+\begin{itemize}
+	\item Existence of CTMC	 for non-explosive $q$ 
+	\item Uniqueness of the law of a $CTMC(\mu, q)$ (if $X, Y$ are $CTMC(\mu,q )$ then $\forall t_1<...<t_n: (X_{t_1},...,X_{t_n} \sim (Y_{t_1},..., Y_{t_n})$)
+	\item There exist constructive algorithms (see Morris)
+\end{itemize}
+
+\section{Markov Properties}
+\noindent
+\textbf{Framework} $(\Omega, \mathcal{F}, (\mathbb{P}_{x})_{x \in E}) $, $(X_t)_{t\geq 0}$ st under $\mathbb{P}_{x}$, $X$ is  $CTMC(\mu, q)$ with $q$ non-explosive. (Such probability measures exist, take $\mu $ with $\mu (x)> 0 \forall x \in E$, consider $(X_t)_{t\geq 0}=CTMC(\mu,q)$ then let $\mathbb{P}_{x} = \mathbb{P}_{} \left[ . | X_0 =x \right]  $.)
+
+\textbf{Simple Markov Property} Fix $t\geq 0, x \in E$; Conditionally on $X_t =x$ we have that $(X_{t_s})_{s \geq 0}$ is a $CTMC(\delta_x, q)$ indep of $(X_n)_{n \leq t}$
+
+\textbf{Strong Markov Property}
+The same applies if we replace $t$ by a random stopping time $T$.
+
+\section{Transition Probabilities}
+$X=(X_t)_{t\geq 0}$ is a $CTMC(\delta_x, q)$ under $\mathbb{P}_{x} $, then we define for $t\geq 0$ and $x,y \in E$: $p_{xy}(t)= \mathbb{P}_{x} \left[ X_t =y \right] $. In the discrete case this corresponds to $p_{xy}^{(n)}= p_{xy}(t)$.
+
+\begin{rmk}[] We have
+\begin{itemize}
+	\item $\forall t\geq 0: (p_{xy}(t))_{x,y \in E}$ is a transition probability $\sum_{y}^{} p_{xy}(t) = \sum_{y}^{} \mathbb{P}_{x} \left[ X_t=y \right] =1$.
+	\item $\forall x: p_{xx}(t) \geq e^{-q(x) t} \forall t$
+	\item $\forall x,y \in E: p_{xx}(h) = 1 - q(x)h + o(h)$ and $p_{xy}(h)=q_{xy}h+o(h)$ for $x \neq y$.
+\end{itemize}
+
+\end{rmk}
+
+\begin{prop}[Chapman Kolmogorov (CK) Equations]
+	$\forall t,s \geq 0: p_{xy}(t+s)=\sum_{z}^{} p_{xz}(t)p_{zy}(s)$	
+\end{prop}
+\noindent
+\textbf{Question} Knowing $q$, what is $p_{xy}(t)$?
+
+\begin{theorem}[Backward/Forward equations]
+	$\forall x,y \in E: p_{xy}$ is $C^1$ on $\mathbb{R}_+$ and $\forall t \geq 0$ we have the backward equation:
+\begin{align}
+ p_{xy}'(t) = \left( \sum_{z \neq x}^{} q_{xy} p_{zy}(t) \right) - q(x) p_{xy}(t)
+\end{align}
+And the forward equation:
+\begin{align}
+	 p_{xy}'(t) = \left( \sum_{z \neq y}^{} p_{xz}(t)q_{zy} \right) - p_{xy}(t)q(y)
+\end{align}
+	
+\end{theorem}
+
+\textbf{Application} Let us look at what happens when $E$ is finite ($E = \{1...k\}$). Then $P(t) = 
+\begin{pmatrix}
+	p_{11}(t) & ... & p_{1k}(t) \\
+	\vdots & & \vdots \\
+	p_{k1}(t) & ... & p_{k k}(t)
+\end{pmatrix}$ 
+and $Q = 
+\begin{pmatrix}
+	q_{11} & ... & q_{1k} \\
+	\vdots & & \vdots \\
+	q_{k1} & ... & q_{k k }
+	
+\end{pmatrix}$
+So we get that $p_{xy}'(t) = \sum_{z \in E}^{} q_{xz}p_{zy}(t) \implies P'(t) = Q P(t)$ (from backward equation) we also get $P'(t) = P(t)Q$ (from forwards equation).
+
+\begin{theorem}[]
+	If $E$ is finite, we have $\forall t\geq 0: P(t) = exp(tQ)$.
+\end{theorem}
+
+
+

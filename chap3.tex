@@ -1,0 +1,281 @@
+\chapter{Markov Chains: Long Time Behavior}
+\noindent \textbf{Outset} With the tools and classification concepts introduced previously, we would like to expand upon these to rigorously classify chains.
+
+\noindent \textbf{Framework:} $E$ finite or countable, $p=(p_{xy})x,y \in E$ transition probabilities, ($\Omega, F, (\mathbb{P}_x) _{x \in E}$), $X=(X_n)_{n\geq 0} \sim MC(\delta_x,p)$ under $\mathbb{P}_x$, $\mathbb{P}_\mu = \sum_{}^{} \mu (x)\mathbb{P}_x$.
+
+\noindent \textbf{Questions:} 
+\begin{itemize}
+	\item When does there exist a stationary distribution?
+	\item What is the behavior of $X_n$ for $n$ large?
+	\item If we fix $x \in E$, will the chain visit $x$ infinitely many times?
+\end{itemize}
+
+\section{Recurrence/Transience}
+
+\textbf{Notation} $H_x = min\{n\geq 1: X_n=x\}$
+\begin{defn}
+	Let $x \in E$, we say that:
+\begin{itemize}
+	\item $x$ is recurrent if $\mathbb{P}_{x} \left[ H_x<\infty \right]=1 $
+	\item $x$ is transient if $\mathbb{P}_{x} \left[ H_x<\infty \right] <1$ 
+\end{itemize}
+
+\end{defn}
+\noindent
+\textbf{Notation:} For $x \in E$ write $V_x=\sum_{n\geq 0}^{} \mathbbm{1}_{X_n=x} $, ie the total number of visits.
+
+\begin{theorem}[Dichotomy Theorem]
+	$x \in E$:
+\begin{itemize}
+	\item if $x$ is recurrent, then $V_{x}=+\infty$ $P_x$-a.s.
+	\item if $x$ is transient, then $\mathbb{E}_{x} \left[ V_x \right] <\infty$
+\end{itemize}
+\end{theorem}
+
+\begin{rmk}[]
+It is impossible that $\mathbb{P}_{x} \left[ V_x<\infty \right] >0 $ and $\mathbb{E}_{x} \left[ V_x \right] =+\infty$.
+\end{rmk}
+
+
+\begin{defn}
+	$\rho_x = \mathbb{P}_{x} \left[ H_x<\infty \right]$, if $x$ is recurrent then $\rho_x=1$, otherwise if $x$ is transient $\rho_x<1$.Thus the number of visits is a geometric RV with parameter $\rho_x<1$ 
+\end{defn}
+
+\begin{lemma}[]
+	For every $i\geq 0, x \in E$, we have $\mathbb{P}_{x} \left[ V_x \geq i \right] = \rho_x^{i}$.
+\end{lemma}
+
+\begin{proof}[Proof (Lemma)]
+	We will proceed by induction over $i$. Define $H_x^{(i)}$ to be the $i$-th hit time of $x$. For $i=0$ the claim is clear.
+	\begin{gather}
+		\mathbb{P}_{x} \left[ V_x \geq i+1 \right] = \mathbb{P}_{x} \left[ V_x \geq i+1 \wedge V_x \geq i \right] = \mathbb{P}_{x} \left[ H_x^{(i_1)} < \infty \wedge H_x^{(i)} < \infty \right] \\
+		= \mathbb{P}_{x} \left[ H_x^{(i+1)} < \infty | H_x^{(i)} < \infty, X_{H_x^{(i)}}=x \right] \mathbb{P}_{x} \left[ H_x^{(i)} < \infty \right] \\
+		\stackrel{\text{StMP}}{=} \mathbb{P}_{x} \left[ H_x^{(1)} < \infty \right] \rho_x^i = \rho_x^{i+1}   
+	\end{gather}
+\end{proof}
+
+\begin{proof}[Proof (Theorem)]
+	For $x$ recurrent: 
+	\begin{gather}
+		\mathbb{P}_{x} \left[ V_x = \infty \right] = \mathbb{P}_{x} \left[ \bigcap_{i=0}^{\infty} \{V_x \geq i\} \right] = \lim_{i\to \infty} \mathbb{P}_{x} \left[ V_x \geq i \right] = \lim_{i \to \infty} \rho_x^{i} = 1 
+	\end{gather}
+	For $x$ transient:
+	\begin{gather}
+		\mathbb{E}_{x} \left[ V_x \right] = \sum_{k=0}^{\infty} k \mathbb{P}_{x} \left[ V_x = k \right] = \sum_{k=1}^{\infty} \sum_{j=1}^{k} \mathbb{P}_{x} \left[ V_x=k \right] \stackrel{(*)}{=} \sum_{j=1}^{\infty} \sum_{k=j}^{\infty} \mathbb{P}_{x} \left[ V_x=k \right] \\
+		= \sum_{j=1}^{\infty} \mathbb{P}_{x} \left[ V_x \geq j \right] = \sum_{j=1}^{\infty} \rho_x^k = \frac{\rho_x}{1-\rho_x} < \infty
+	\end{gather}
+	To justify (*) intuitively, we will write the values we are summing over in a table. In the sum on the left we sum over each row first (the inner sum), collect these values in a column, and then sum over that column (outer sum); meanwhile for the RHS we first sum over each column, collect these values in a row, and then sum over that row.	
+	\begin{gather*}
+	\begin{matrix}
+	\mathbb{P}_{x} \left[ V_x = 1 \right] & & & & \sum=\sum_{j=1}^{1} \mathbb{P}_{x} \left[ V_x =1 \right]  \\
+	\mathbb{P}_{x} \left[ V_x = 2 \right] & \mathbb{P}_{x} \left[ V_x =2 \right] & & & \sum = \sum_{j=1}^{2} \mathbb{P}_{x} \left[ V_x = 2 \right]  \\
+	\mathbb{P}_{x} \left[ V_x = 3 \right] & \mathbb{P}_{x} \left[ V_x =3 \right] &  \mathbb{P}_{x} \left[ V_x=3 \right] & & \sum = \sum_{j=1}^{3} \mathbb{P}_{x} \left[ V_x =3 \right]  \\
+	& & & & \vdots \\ 
+	\vdots & \vdots & & & \sum_{k=1}^{\infty} \sum_{j=1}^{k} \mathbb{P}_{x} \left[ V_x = k \right] \\
+	\sum_{k=1}^{\infty} \mathbb{P}_{x} \left[ V_x =k \right] & \sum_{k=2}^{\infty} \mathbb{P}_{x} \left[ V_x=k \right]  &  ...  & \sum_{j=1}^{\infty} \sum_{k=j}^{\infty} \mathbb{P}_{x} \left[ V_x = k \right]  
+	\end{matrix}
+	\end{gather*}
+	Such tricks with sums will be used again.
+\end{proof}
+
+\begin{prop}[]
+	If $E$ is finite, then there exists a recurrent state $x \in E$.
+\end{prop}
+\begin{proof}
+	Fix some $y \in E$.
+	\begin{gather}
+		\sum_{x \in E}^{} V_x = \sum_{n=0}^{\infty} \sum_{x \in E}^{} \mathbbm{1}_{X_n =x} = \sum_{n\geq 0}^{} 1  = \infty \\
+	\sum_{x \in E}^{} \mathbb{E}_{y} \left[ V_x \right] = \mathbb{E}_{y} \left[ \sum_{x \in E}^{} V_x \right] = \infty \\
+	\end{gather}
+	Thus we know $\exists x \in E$ such that $\mathbb{E}_{y} \left[ V_x \right] = \infty$ since the sum on the left is over a finite index set ($E$ finite). Since we can write $V_x = V_x \mathbbm{1}_{H_x<\infty}$, we find that (Strong Markov Property) $\infty = \mathbb{E}_{y} \left[ V_x \right] = \mathbb{E}_{y} \left[ V_x \mathbbm{1}_{H_x<\infty}  \right] = \mathbb{E}_{x} \left[ V_x \right] \mathbb{P}_{y} \left[ H_x < \infty \right] $, because a walk started from $y$ is the same (in the distribution sense) after hitting $x$ for the first time as a walk started from $x$. $\mathbb{P}_{y} \left[ H_x < \infty \right]$ must be $ \leq 1 $, thus the term of the left must be equal to $\infty \implies \mathbb{E}_{x} \left[ V_x \right] = \infty$.
+\end{proof}
+
+
+\section{Recurrence/Transience for the SRW on $\mathbb{Z}^d$}
+\textbf{SRW on $\mathbb{Z}^d$:} $E=\mathbb{Z}^d$, $p_{xy}=\frac{1}{2d}\ if\ \|x-y\|_1=1, 0\ else$ 
+
+\begin{theorem}[]
+	For the SRW, every state is recurrent if $d=1,2$, otherwise they are transient.
+\end{theorem}
+
+\section{Classification of States}
+\begin{theorem}[]
+	Let $x,y \in E$ st $x \to y$. If $x $ is recurrent then $y$ is recurrent and $\mathbb{P}_{x} \left[ H_y<\infty \right] = \mathbb{P}_{y} \left[ H_x<\infty \right]=1 $.
+	In particular $x \leftrightarrow y$.
+\end{theorem}
+
+\begin{rmk}[]
+	$x \neq y: x \to y \iff \mathbb{P}_{x} \left[ \exists n: X_n=y \right] \iff \mathbb{P}_{x} \left[ H_y<\infty \right] $
+\end{rmk}
+
+\begin{cor}[]
+	Let $C$ communication class for p. Either $\forall x$: $x$ is recurrent, or $\forall x$: x is transient.
+\end{cor}
+
+\begin{cor}[]
+	A recurrent class is always closed.
+\end{cor}
+
+\section{Positive/Null Recurrence}
+\textbf{Notation} $x \in E: m_{x}=\mathbb{E}_{x} \left[ H_x \right] $
+
+\begin{defn}
+	Let $x \in E$ be a recurrent state. We say that:
+\begin{itemize}
+	\item positive recurrent if $m_x<\infty$ 
+	\item null recurrent if $m_x=+\infty$
+\end{itemize}
+
+\end{defn}
+
+\begin{theorem}[]
+	Let $x,y \in E, x \leftrightarrow y$. Then $\lim_{n \to \infty}\frac{1}{n}\sum_{k=1}^{n} p_{xy}^{(k)}=\frac{1}{m_{y}}$
+\end{theorem}
+\begin{rmk}[]
+	Write $V_{y}^{(n)}=\sum_{k=1}^{n} \chi_{X_k=y}$, "The number of visits to $y$ up to time $n$". Thus the sum in the theorem is "Expected proportion of time spent at $y$".
+\end{rmk}
+
+If $y$ is transient, null recurrent ($m_y=\infty$), the theorem tells us that $\lim_{n \to \infty}\mathbb{E}_{x} \left[ \frac{V_y^{(n)}}{n} \right] =0$: "null density of visit"
+
+\begin{defn}[inter-visit times]
+	Let $y \in E$. Define $H_y^{0}=H_y$ and $\forall i\geq 1: H_{y}^{i}= min\{n \geq 1: X_{H_y^0 + ... + H_y^{i-1}+n}=y\}$ if $H_y^{i-1}<\infty$, else $+\infty$	
+\end{defn}
+
+\begin{lemma}[]
+	Let $x,y$ st. $x \leftrightarrow y$, assume $y$ is recurrent. Then $\forall j \geq 1, t_0...t_j \in \mathbb{N}$:
+\begin{align}
+	\mathbb{P}_{x} \left[ H_y^0=t_0...H_y^j=t_j \right] = \mathbb{P}_{x} \left[ H_y=t_0 \right] \mathbb{P}_{y} \left[ H_y=t_1 \right] ... \mathbb{P}_{y} \left[ H_y=t_j \right] 
+\end{align}
+Under $P_x$, $H_y^1,H_y^2,...$ are iid with law $\mathbb{P}_{x} \left[ H_y^i=t \right] = \mathbb{P}_{y} \left[ H_y=t \right] $
+\end{lemma}
+
+\begin{prop}[Classification of recurrent classes]
+	Let $R$ be a recurrent class. Then either:
+\begin{itemize}
+	\item $\forall x \in R: x$ is positive recurrent
+	\item $\forall x \in R: x$ is null recurrent
+\end{itemize}
+
+\end{prop}
+
+\begin{prop}[]
+	Let $R$ be a recurrent class, if $R$ is finite, then $R$ is positive recurrent.
+\end{prop}
+
+\section{Stationary Distributions for Irreducible Chains}
+\begin{theorem}[]
+	Assume that $p$ is irreducible. 
+\begin{itemize}
+	\item If the chain is transient or null recurrent, then there is no stationary distribution.
+	\item if the chain is positive recurrent, then there exists a unique stationary distribution given by $\forall x \in E: \pi (x) = \frac{1}{\mathbb{E}_{x} \left[ H_x \right] }$
+\end{itemize}
+
+\end{theorem}
+
+\section{Periodicity}
+\begin{defn}
+	Let $x \in E$. The period of $x$ is defined by $d_x = gcd\{n\geq 0: p_{xx}^{(n)}>0\}$
+\end{defn}
+
+\begin{prop}[]
+	Let $x,y \in E: x \leftrightarrow y \implies d_x=d_y$
+\end{prop}
+
+\textbf{Consequence} if p is irreducible we have $\forall x,y \in E: d_x = d_y$ 
+
+\begin{defn}
+	We say that the chain $p$ is aperiodic if $\forall x \in E: d_x=1$
+\end{defn}
+
+\begin{prop}[]
+	Let $x \in E$. We have $d_x=1 \iff \exists n_0 \geq 1 \textrm{ st } \forall n \geq n_0: p_{xx}^{(n)}>0$
+\end{prop}
+
+\section{Coupling Method}
+\textbf{What is coupling?}
+Define probability measures $\mu_1, \mu_2$ on the same space $F_1,F_2$. A coupling between $\mu_1$ and $\mu_2$ is a probability measure $\overline{\mu }$ on $F_1 \times F_2$, 
+$\overline{\mu }(A \times F_2)=\mu_1(A)$ and vice versa. 
+
+$X_1, X_2$ two random variables on $(\Omega, F, \mathbb{P}) $, $X_1 \sim \mu_1, X_2 \sim \mu_2$, the law of $(X_1,X_2)$ is a coupling!
+
+\noindent
+\textbf{Goal} Define two MCs: $X_n \sim MC(\mu, p), \quad \tilde{X_n} \sim MC(\nu, p) $ on the same probability space st $X_n = \tilde{X_n}$ for n large.
+
+\begin{defn}[Product Chain]
+	Define $\forall \omega=(x,y), \quad \omega'=(x',y') \in E^2$: $\overline{p_{\omega, \omega'}}=p_{xx'}p_{yy'}$
+\end{defn}
+
+\noindent
+\textbf{Notation} Consider:
+\begin{itemize}
+	\item $(\Omega, F, (P_\omega)_{\omega \in E^2})$ Probability Spaces
+	\item $(W_n)_{n\geq 0}=((X_n,Y_n))_{n\geq 0}$ RV on $\Omega, F$ st $\forall \omega \in E^2: W_n$ is a $MC(\delta_\omega, \overline{p})$ under $P_w$
+\end{itemize}
+
+\begin{rmk}[]
+	If $\mu, \nu $ are distributions on $E$, then $\mu \otimes \nu $ is a distribution on $E^2$. $P_{\mu \otimes \nu }= \sum_{(x,y)\in E^2}^{}\mu (x) \nu (y) P_{(x,y)} $
+\end{rmk}
+
+\begin{prop}[]
+	Let $\mu,\nu $ be distributions on $E$. Under $P_{\mu \otimes \nu }:$ 
+\begin{itemize}
+	\item $(X_n)_{n\geq 0}$ is a $MC(\mu ,p)$ 
+	\item $(Y_n)_{n\geq 0}$ is a $MC(\nu ,p)$
+\end{itemize}
+
+\end{prop}
+
+\begin{prop}[]
+	If $p$ is irreducible and aperiodic, then $\overline{p}$ is irreducible and aperiodic.
+\end{prop}
+
+\begin{rmk}[]
+	Aperiodic is important!  $p$ irreducible $\nRightarrow \overline{p}$ irreducible.
+\end{rmk}
+
+\begin{prop}[]
+	If $p$ is irreducible, aperiodic, and positive recurrent, then $\overline{p}$ is irreducible, aperiodic, and positive recurrent.
+\end{prop}
+
+\begin{defn}
+	$T=min\{n\geq 0: X_n=Y_n\}$ a stopping time.
+\end{defn}
+
+\begin{prop}[]
+	$\forall \mu, \nu $ distributions on $E $: 
+\begin{align}
+\forall n\geq 0 \sum_{x \in E}^{} |\mathbb{P}_{\mu } \left[ X_n=x \right] - \mathbb{P}_{\nu} \left[Y_n=x  \right] | \leq 2 \mathbb{P}_{\mu \otimes \nu } \left[ T>n \right]
+\end{align}
+\end{prop}
+
+\begin{lemma}[]
+	$\tilde{X}_n = Y_n\chi_{\{T<n\}} + X_n \chi_{\{T \geq n\}} $ is a $MC(\nu, p)$
+\end{lemma}
+
+\section{Convergence for Irreducible Aperiodic Chains}
+\begin{theorem}[]
+	Assume $p$ is irreducible and aperiodic, and admits a stationary distribution $\pi $. Then for every distribution $\mu$ on $E$ : $\lim_{n \to \infty}\mathbb{P}_{\mu } \left[ X_n=x \right] = \pi(x), \forall x \in E$. 
+
+	\noindent
+	Equivalently: Under $P_\mu: $ $X_n \stackrel{(law)}{\to} X_\infty$ where $X_\infty \sim \pi$ 
+
+	\noindent
+	Equivalently: $\forall f:E \to \mathbb{R}$ bdd: $\lim_{n \to \infty} \mathbb{E}_{\mu } \left[ f(X_n) \right] = \int_{E}^{} f d \pi$
+\end{theorem}
+\textbf{Note} This theorem is important!! 
+
+\begin{theorem}[]
+	Assume that $p$ is irreducible, aperiodic, and null recurrent or transient. Then for every distribution $\mu $ and every $x \in E:$ $\lim_{n \to \infty}\mathbb{P}_{\mu } \left[ X_n =x \right] = 0$ 
+\end{theorem}
+\begin{lemma}[]
+	$\overline{p}$ irreducible and recurrent, then $\forall \mu $ distribution on $E: \forall i\geq 0, \forall x \in E:\, \lim_{n \to \infty} | \mathbb{P}_{\mu } \left[ X_n=x \right] - \mathbb{P}_{\mu } \left[ X_{n+i}=x \right] | = 0$
+\end{lemma}
+
+\noindent \textbf{Conclusion} We previously asked the following questions:
+\begin{itemize}
+	\item If we fix $x \in E$, will the chain visit $x$ infinitely many times?
+	\item What is the behavior of $X_n$ for $n$ large?
+\end{itemize}
+Now we are equipped to answer them using our ideas of recurrence/transience and the theorem for existence (and uniqueness) of stationary distributions for an irreducible chain. We were also found that using coupling we find that if we let the chain evolve for a long time, then the distribution of $X_n$ actually converges to the stationary distribution (where this distribution is 0 everywhere if a stationary distribution does not exist).
+
+

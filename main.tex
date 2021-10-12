@@ -1,0 +1,66 @@
+\documentclass[12pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts, amsthm}
+\usepackage{bbm}
+\usepackage{url}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ left=20mm,
+ right=20mm
+ }
+
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs}
+
+\usepackage{xcolor}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+
+\usepackage{hyperref}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour, linkcolor=linkcolour}
+
+\renewcommand{\iff}{\Leftrightarrow}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem{ex}{Example}[section]
+\newtheorem{rmk}[theorem]{Remark}
+
+\usepackage{enumitem}
+\setenumerate[1]{label=(\roman*)}
+
+
+\title{Applied Stochastic Processes Notes}
+\author{Trevor Winstral}
+\date{Spring Semester 2021}
+
+\begin{document}
+\maketitle
+\tableofcontents 
+\newpage
+
+\include{chap1.tex}
+\newpage
+
+\include{chap2.tex}
+\newpage
+
+\include{chap3.tex}
+\newpage
+
+\include{chap4.tex}
+\newpage
+
+\include{chap5.tex}
+\newpage
+
+\include{chap6.tex}
+\end{document}
+

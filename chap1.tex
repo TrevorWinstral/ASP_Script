@@ -1,0 +1,60 @@
+\chapter{Introduction}
+\textbf{Mathematical Definition of Stochastic Processes} We want to describe a process evolving in time. The most relevant for us will be: Discrete time ($I=\mathbb{N}$) and Continuous time ($I=\mathbb{R}$).
+
+\begin{defn}
+	Let $(E, \xi)$ be a measurable space. A discrete stochastic process with state space $E$ is a collection $X=(X_n)_{n \in \mathbb{N}}$ of RVs with values in $E$.
+\end{defn}
+
+\begin{defn}
+A continuous stochastic process is a collection $(X_t)_{t \in \mathbb{R}_+}$ of RVs with values in $E$.
+\end{defn}
+
+In this class we will work with jump processes, ie when $E$ is finite or countable.
+We will work with:
+\begin{enumerate}
+	\item Discrete time Markov Chains $I=\mathbb{N}$ and $E$ finite or countable
+	\item Poisson renewal processes $I=\mathbb{R}_{+}$ and $E= \mathbb{N} $
+	\item Continuous Markov Chains $I= \mathbb{R}_{+}$ and $E$ finite or countable
+\end{enumerate}
+We will not work with Brownian Motion.
+
+\begin{ex}[Simple Random Walk] 
+	State Space $\mathbb{Z}^{d}$, $x,y$ are neighbors $\iff \|x-y\|_{1}=1$. An electron is starting at 0, and each step it jumps uniformly to one of the neighbors. How should we define this?
+
+\end{ex}
+
+\begin{defn}[SRW]
+	Let $(Z_n)_{n \in \mathbb{N}}$ iid, $\mathbb{P} \left[ Z_n = \pm e_i \right] = \frac{1}{2d}$ where $e_i$ is 1 in the i'th slot. $X_n := \sum_{k=1}^n Z_n= X_n + Z_{n+1}, X_0=1$. $\forall m,n X_m$ and $X_n$ are dependent.  The $X_n$ do satisfy the Markov property: Conditional on $X_n=x$ then $(X_{m+n})_{n \geq 0}$ is a SRW starting at $x$ independent of $(X_1,...,X_m)$.
+\end{defn}
+
+Will the SRW return to 0?
+\begin{theorem}[Polya]\ \\ \indent
+	If $d=1,2$ then $\mathbb{P} \left[ (X_n) \text{ visits x infinitely many times} \right] =1$ \\ \indent
+	If $d\geq3$ then $\mathbb{P} \left[ (X_n) \text{ visits x only finitely many times} \right] =1$
+\end{theorem}
+
+\begin{ex}[Poisson Process]
+	We want to define and study $N_t$ the number of cars passing a point during $[0,t]$.
+\end{ex}
+
+\begin{defn}
+	$T_1 =$ passage of time of the first car, $T_2=$ time between car 1 and car 2, etc. 
+\begin{itemize}
+	\item $(T_i)$ are iid
+	\item $(T_i)$ are memoryless:  $\mathbb{P} \left[ T_1 \geq t+s | T_1 \geq s \right] = \mathbb{P} \left[ T_1 \geq t \right] $ 
+	\item Regularity: $\mathbb{P} \left[ T_1 \geq s \right] $ is 'nice'
+\end{itemize}
+This implies that $\mathbb{P} \left[ T_1 \geq s \right] = e^{- \lambda s}, \quad \lambda>0$
+\end{defn}
+
+Let $(T_i)_{i\geq1}$ iid $exp(\lambda)$ RV. $N_t = \sum_{i\geq1}\chi_{T_1 + ... + T_i \leq t}$ \newline
+Dependencies:
+\begin{itemize}
+	\item $N_{t+s}-N_t \sim Pois(\lambda s)$
+	\item Markov Property
+\end{itemize}
+LLN: $ \frac{N_t}{t} \to_{t \to \infty} \frac{1}{\lambda}$
+
+
+
+
