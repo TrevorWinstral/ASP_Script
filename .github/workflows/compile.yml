@@ -16,18 +16,17 @@ jobs:
           github-token: ${{ secrets.REPO_TOKEN }}
       - name: Run Tectonic
         run: tectonic main.tex
-      - name: Upload pdf
-        uses: actions/upload-artifact@v2
-        with:
-          name: main
-          path: main.pdf
+#      - name: Upload pdf
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: main
+#          path: main.pdf
       - name: Commit files
         run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git commit -m "Add changes" -a
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Add changes, compile script" -a
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
