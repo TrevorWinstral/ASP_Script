@@ -1,0 +1,32 @@
+name: 'Build LaTex Document'
+on: 
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+          fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+      - uses: wtfjoke/setup-tectonic@v1
+        with:
+          github-token: ${{ secrets.REPO_TOKEN }}
+      - name: Run Tectonic
+        run: tectonic main.tex
+#      - name: Upload pdf
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: main
+#          path: main.pdf
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Add changes, compile script" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
