@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v2
       - uses: wtfjoke/setup-tectonic@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.REPO_TOKEN }}
       - name: Run Tectonic
         run: tectonic main.tex
       - name: Upload pdf
