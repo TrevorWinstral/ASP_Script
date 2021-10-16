@@ -1,6 +1,6 @@
 name: 'Build LaTex Document'
 on: 
-  push:
+  
 jobs:
   build:
     runs-on: ubuntu-latest
