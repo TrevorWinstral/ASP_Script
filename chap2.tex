@@ -1,4 +1,5 @@
 \chapter{Markov Chains and Generalities}
+
 \textbf{Framework}: $(\Omega, \mathcal{F}, \mathbb{P})$ Probability Space, $E$ finite or countable set with the $\sigma$-algebra $2^E$
 
 \noindent
@@ -61,9 +62,9 @@ We could also represent this as a weighted directional graph with vertices $E$ a
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=0.35\textwidth]{figures/3_step_MC.pdf}
+	$\vcenter{\hbox{\includegraphics[width=0.35\textwidth]{figures/3_step_MC.pdf}}}$
 	\phantom{\includegraphics[width=0.1\textwidth]{figures/6_step_MC.pdf}}
-	\includegraphics[width=0.35\textwidth]{figures/6_step_MC.pdf}
+	$\vcenter{\hbox{\includegraphics[width=0.35\textwidth]{figures/6_step_MC.pdf}}}$
 \caption{3-State Markov Chain and 6-State (asymmetric) Markov Chain}
 \end{figure}
 
@@ -149,7 +150,7 @@ For $\mu$ Prob measure on $E $ we write $P_\mu= \sum_{x}\mu(x)P_x$
 
 \section{Simple Markov Property}
 Under $P_\mu$ $(X_n)_{n \geq 0}$ is $ \textrm{MC}(\mu, p)$.
-$P_\mu [X_{n+1}=x_{n+1} | X_0 = x_0, \ldots ,.X_n=x_n] = P_\mu[X_{n+1}=x_{n+1}| X_n = x_n] = P_{x_n}[X_1 =x_{n+1}]$ i.e. Conditional on $X_n=x$, $x_{n+1}$ is sampled like the first step of a $ \textrm{MC}(\delta_{x},p)$ indep of the past.
+$P_\mu [X_{n+1}=x_{n+1} | X_0 = x_0, \ldots ,.X_n=x_n] = P_\mu[X_{n+1}=x_{n+1}| X_n = x_n] = P_{x_n}[X_1 =x_{n+1}]$ i.e. Conditional on $X_n=x$, $x_{n+1}$ is sampled like the first step of a $ \textrm{MC}(\delta_{x},p)$ independent of the past.
 
 \textbf{Notation} $ \mathcal{F}_n = \sigma(X_0, \ldots ,X_n)$ 
 
@@ -337,7 +338,7 @@ i.e. if you start in $C$ you never leave.
 .\end{align}
 \end{theorem}
 \noindent
-"Conditioned on $\{T<\infty,X_T=x\}$, $(X_{T+n})_{n\geq 0}$ is a $ \textrm{MC}(\delta_x,p)$ indep of $F_T$ "
+"Conditioned on $\{T<\infty,X_T=x\}$, $(X_{T+n})_{n\geq 0}$ is a $ \textrm{MC}(\delta_x,p)$ independent of $F_T$ "
 \begin{proof}
 We will multiply each side of the equation by $\mathbb{P}_{} \left[ T < \infty, X_T =x \right]$.
 \begin{align}

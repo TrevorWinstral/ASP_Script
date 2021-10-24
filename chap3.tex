@@ -12,12 +12,12 @@
 
 \section{Recurrence/Transience}
 
-\textbf{Notation} $H_x = min\{n\geq 1: X_n=x\}$
+\textbf{Notation} $H_x = \min\{n\geq 1: X_n=x\}$
 \begin{defn}
 	Let $x \in E$, we say that:
 \begin{itemize}
-	\item $x$ is recurrent if $\mathbb{P}_{x} \left[ H_x<\infty \right]=1 $
-	\item $x$ is transient if $\mathbb{P}_{x} \left[ H_x<\infty \right] <1$ 
+	\item $x$ is recurrent if $\boxed{\mathbb{P}_{x} \left[ H_x<\infty \right]=1 }$.
+	\item $x$ is transient if $\boxed{\mathbb{P}_{x} \left[ H_x<\infty \right] <1}$.
 \end{itemize}
 
 \end{defn}
@@ -27,8 +27,8 @@
 \begin{theorem}[Dichotomy Theorem]
 	$x \in E$:
 \begin{itemize}
-	\item if $x$ is recurrent, then $V_{x}=+\infty$ $P_x$-a.s.
-	\item if $x$ is transient, then $\mathbb{E}_{x} \left[ V_x \right] <\infty$
+	\item if $x$ is recurrent, then $\boxed{V_{x}=+\infty} \ P_x$-a.s..
+	\item if $x$ is transient, then $\boxed{\mathbb{E}_{x} \left[ V_x \right] <\infty}$.
 \end{itemize}
 \end{theorem}
 
@@ -38,7 +38,7 @@ It is impossible that $\mathbb{P}_{x} \left[ V_x<\infty \right] >0 $ and $\mathb
 
 
 \begin{defn}
-	$\rho_x = \mathbb{P}_{x} \left[ H_x<\infty \right]$, if $x$ is recurrent then $\rho_x=1$, otherwise if $x$ is transient $\rho_x<1$.Thus the number of visits is a geometric RV with parameter $\rho_x<1$ 
+	$\rho_x = \mathbb{P}_{x} \left[ H_x<\infty \right]$, if $x$ is recurrent then $\rho_x=1$, otherwise if $x$ is transient $\rho_x<1$. Thus the number of visits is a geometric RV with parameter $\rho_x<1$.
 \end{defn}
 
 \begin{lemma}[]
@@ -47,35 +47,23 @@ It is impossible that $\mathbb{P}_{x} \left[ V_x<\infty \right] >0 $ and $\mathb
 
 \begin{proof}[Proof (Lemma)]
 	We will proceed by induction over $i$. Define $H_x^{(i)}$ to be the $i$-th hit time of $x$. For $i=0$ the claim is clear.
-	\begin{gather}
-		\mathbb{P}_{x} \left[ V_x \geq i+1 \right] = \mathbb{P}_{x} \left[ V_x \geq i+1 \wedge V_x \geq i \right] = \mathbb{P}_{x} \left[ H_x^{(i_1)} < \infty \wedge H_x^{(i)} < \infty \right] \\
-		= \mathbb{P}_{x} \left[ H_x^{(i+1)} < \infty | H_x^{(i)} < \infty, X_{H_x^{(i)}}=x \right] \mathbb{P}_{x} \left[ H_x^{(i)} < \infty \right] \\
-		\stackrel{\text{StMP}}{=} \mathbb{P}_{x} \left[ H_x^{(1)} < \infty \right] \rho_x^i = \rho_x^{i+1}   
-	\end{gather}
+	\begin{align}
+		\mathbb{P}_{x} \left[ V_x \geq i+1 \right] &\stackrel{\phantom{\text{(SMP)}}}{=} \mathbb{P}_{x} \left[ V_x \geq i+1, V_x \geq i \right] = \mathbb{P}_{x} \left[ H_x^{(i_1)} < \infty, H_x^{(i)} < \infty \right] \\
+		&\stackrel{\phantom{\text{(SMP)}}}{=} \mathbb{P}_{x} \left[ H_x^{(i+1)} < \infty | H_x^{(i)} < \infty, X_{H_x^{(i)}}=x \right] \mathbb{P}_{x} \left[ H_x^{(i)} < \infty \right] \\
+		&\stackrel{\text{(SMP)}}{=} \mathbb{P}_{x} \left[ H_x^{(1)} < \infty \right] \rho_x^i = \rho_x^{i+1}   
+	.\end{align}
 \end{proof}
 
 \begin{proof}[Proof (Theorem)]
 	For $x$ recurrent: 
-	\begin{gather}
+	\begin{align}
 		\mathbb{P}_{x} \left[ V_x = \infty \right] = \mathbb{P}_{x} \left[ \bigcap_{i=0}^{\infty} \{V_x \geq i\} \right] = \lim_{i\to \infty} \mathbb{P}_{x} \left[ V_x \geq i \right] = \lim_{i \to \infty} \rho_x^{i} = 1 
-	\end{gather}
+	.\end{align}
 	For $x$ transient:
-	\begin{gather}
-		\mathbb{E}_{x} \left[ V_x \right] = \sum_{k=0}^{\infty} k \mathbb{P}_{x} \left[ V_x = k \right] = \sum_{k=1}^{\infty} \sum_{j=1}^{k} \mathbb{P}_{x} \left[ V_x=k \right] \stackrel{(*)}{=} \sum_{j=1}^{\infty} \sum_{k=j}^{\infty} \mathbb{P}_{x} \left[ V_x=k \right] \\
-		= \sum_{j=1}^{\infty} \mathbb{P}_{x} \left[ V_x \geq j \right] = \sum_{j=1}^{\infty} \rho_x^k = \frac{\rho_x}{1-\rho_x} < \infty
-	\end{gather}
-	To justify (*) intuitively, we will write the values we are summing over in a table. In the sum on the left we sum over each row first (the inner sum), collect these values in a column, and then sum over that column (outer sum); meanwhile for the RHS we first sum over each column, collect these values in a row, and then sum over that row.	
-	\begin{gather*}
-	\begin{matrix}
-	\mathbb{P}_{x} \left[ V_x = 1 \right] & & & & \sum=\sum_{j=1}^{1} \mathbb{P}_{x} \left[ V_x =1 \right]  \\
-	\mathbb{P}_{x} \left[ V_x = 2 \right] & \mathbb{P}_{x} \left[ V_x =2 \right] & & & \sum = \sum_{j=1}^{2} \mathbb{P}_{x} \left[ V_x = 2 \right]  \\
-	\mathbb{P}_{x} \left[ V_x = 3 \right] & \mathbb{P}_{x} \left[ V_x =3 \right] &  \mathbb{P}_{x} \left[ V_x=3 \right] & & \sum = \sum_{j=1}^{3} \mathbb{P}_{x} \left[ V_x =3 \right]  \\
-	& & & & \vdots \\ 
-	\vdots & \vdots & & & \sum_{k=1}^{\infty} \sum_{j=1}^{k} \mathbb{P}_{x} \left[ V_x = k \right] \\
-	\sum_{k=1}^{\infty} \mathbb{P}_{x} \left[ V_x =k \right] & \sum_{k=2}^{\infty} \mathbb{P}_{x} \left[ V_x=k \right]  &  ...  & \sum_{j=1}^{\infty} \sum_{k=j}^{\infty} \mathbb{P}_{x} \left[ V_x = k \right]  
-	\end{matrix}
-	\end{gather*}
-	Such tricks with sums will be used again.
+	\begin{align}
+		\mathbb{E}_{x} \left[ V_x \right] &= \sum_{k=0}^{\infty} k \mathbb{P}_{x} \left[ V_x = k \right] = \sum_{k=1}^{\infty} \sum_{j=1}^{k} \mathbb{P}_{x} \left[ V_x=k \right] = \sum_{j=1}^{\infty} \sum_{k=j}^{\infty} \mathbb{P}_{x} \left[ V_x=k \right] \\
+	&= \sum_{j=1}^{\infty} \mathbb{P}_{x} \left[ V_x \geq j \right] = \sum_{j=1}^{\infty} \rho_x^k = \frac{\rho_x}{1-\rho_x} < \infty
+	.\end{align}
 \end{proof}
 
 \begin{prop}[]
@@ -83,11 +71,11 @@ It is impossible that $\mathbb{P}_{x} \left[ V_x<\infty \right] >0 $ and $\mathb
 \end{prop}
 \begin{proof}
 	Fix some $y \in E$.
-	\begin{gather}
+	\begin{align}
 		\sum_{x \in E}^{} V_x = \sum_{n=0}^{\infty} \sum_{x \in E}^{} \mathbbm{1}_{X_n =x} = \sum_{n\geq 0}^{} 1  = \infty \\
-	\sum_{x \in E}^{} \mathbb{E}_{y} \left[ V_x \right] = \mathbb{E}_{y} \left[ \sum_{x \in E}^{} V_x \right] = \infty \\
-	\end{gather}
-	Thus we know $\exists x \in E$ such that $\mathbb{E}_{y} \left[ V_x \right] = \infty$ since the sum on the left is over a finite index set ($E$ finite). Since we can write $V_x = V_x \mathbbm{1}_{H_x<\infty}$, we find that (Strong Markov Property) $\infty = \mathbb{E}_{y} \left[ V_x \right] = \mathbb{E}_{y} \left[ V_x \mathbbm{1}_{H_x<\infty}  \right] = \mathbb{E}_{x} \left[ V_x \right] \mathbb{P}_{y} \left[ H_x < \infty \right] $, because a walk started from $y$ is the same (in the distribution sense) after hitting $x$ for the first time as a walk started from $x$. $\mathbb{P}_{y} \left[ H_x < \infty \right]$ must be $ \leq 1 $, thus the term of the left must be equal to $\infty \implies \mathbb{E}_{x} \left[ V_x \right] = \infty$.
+	\sum_{x \in E}^{} \mathbb{E}_{y} \left[ V_x \right] = \mathbb{E}_{y} \left[ \sum_{x \in E}^{} V_x \right] = \infty 
+.	\end{align}
+	Thus we know there exists $x \in E$ such that $\mathbb{E}_{y} \left[ V_x \right] = \infty$ since the sum on the left is over a finite index set ($E$ finite). Since we can write $V_x = V_x \mathbbm{1}_{H_x<\infty}$, we find that (Strong Markov Property) $\infty = \mathbb{E}_{y} \left[ V_x \right] = \mathbb{E}_{y} \left[ V_x \mathbbm{1}_{H_x<\infty}  \right] = \mathbb{E}_{x} \left[ V_x \right] \mathbb{P}_{y} \left[ H_x < \infty \right] $, because a walk started from $y$ is the same (in the distribution sense) after hitting $x$ for the first time as a walk started from $x$. $\mathbb{P}_{y} \left[ H_x < \infty \right]$ must be $ \leq 1 $, thus the term of the left must be equal to $\infty \implies \mathbb{E}_{x} \left[ V_x \right] = \infty$.
 \end{proof}
 
 
@@ -97,77 +85,233 @@ It is impossible that $\mathbb{P}_{x} \left[ V_x<\infty \right] >0 $ and $\mathb
 \begin{theorem}[]
 	For the SRW, every state is recurrent if $d=1,2$, otherwise they are transient.
 \end{theorem}
+\begin{proof}
+	Let $(Z_k)_{k> 0}$ be i.i.d. random variables on some probability space $(\Omega, \mathcal{F}, \mathbb{P})$ with $\mathbb{P}_{} \left[ Z_i = \pm e_i \right] = \frac{1}{2d}$ for $i= 1 \ldots d$ and $e_i$ being the unit vectors in $\mathbb{Z}^{d}$. Next, define $X_n = \sum_{k=1}^{n} Z_k$, which is a $MC(\delta_0, p)$. Then we find the following:
+	\begin{align}
+		\mathbb{E}_{} \left[ V_i \right] = \mathbb{E}_{} \left[ \sum_{n> 0}^{} \mathbbm{1}_{X_n =0}  \right] = \sum_{n> 0}^{} \mathbb{P}_{} \left[ X_n = 0 \right] .
+	\end{align}
+	\textbf{Idea:} $\mathbb{P}_{} \left[ X_n=x \right]  = \mathbb{P}_{} \left[ Z_1+ \ldots + Z_n = x \right] = \sum_{\delta_1 + \ldots + \delta_n =x}^{} \mathbb{P}_{} \left[ Z_1 = \delta_1 \right] \cdots \mathbb{P}_{} \left[ Z_n = \delta_n \right]  $ is not easy to calculate. Instead, we use could use the Fourier Transform to link $\mathbb{E}_{} \left[ e^{i X_n} \right] = \mathbb{E}_{} \left[ e^{iZ_1} \right] ^n $ to $(\mathbb{P}_{} \left[ X_n =x\right] )_{x \in \mathbb{Z}^d}$.
+	Define $\phi(\xi) = \mathbb{E}_{} \left[ e^{i \xi \cdot Z_1} \right] $ for $\xi$ in $\Pi^d = [-\pi, \pi)^d$. Then we have:
+	\begin{align}
+		\phi(\xi) = \frac{1}{2d} \sum_{i=1}^{d} (e^{i \xi \cdot e_1} + e^{i \xi \cdot e_1}) = \frac{1}{d} \sum_{i=1}^{d} \cos(\xi_i)
+	.\end{align}
+	Fixing $n\geq 0$, we have (by independence) that the characteristic function of $X_n$ is 
+	\begin{align}
+		\varphi_{X_n}(\xi) = \mathbb{E}_{} \left[ e^{i \xi \cdot X_n} \right]  = \mathbb{E}_{} \left[ e ^{i ( \xi \cdot Z_1 + \ldots + \xi \cdot Z_n)} \right] = \phi(\xi)^n. 	
+	\end{align}
+We can now take advantage of the Fourier Transform by using the Fourier inversion, giving
+\begin{align}
+	\mathbb{P}_{} \left[ X_n = 0 \right] = \frac{1}{(2 \pi) ^d} \int_{\Pi^d}^{} \phi(\xi)^n d\xi.
+\end{align}
+Check this by directly computing
+\begin{align}
+	\int_{[0, 2\pi)^d}^{} \phi(\xi)^n d\xi &= \int_{[-\pi, \pi)^d}^{} \sum_{x \in \mathbb{Z}^d}^{} \mathbb{P}_{} \left[ X_n = x \right] = \sum_{x \in \mathbb{Z}^d}^{} \mathbb{P}_{} \left[ X_n = x \right] \int_{[0, 2 \pi)^d}^{} e^{i \xi \cdot x} d\xi  \\
+	&= 
+	\begin{cases}
+		(2 \pi)^d & \textrm{if }x = 0 \\
+		0 & \textrm{if } x \neq 0
+	\end{cases}.
+\end{align}
+Therefore,
+\begin{align}
+	(2 \pi )^d \sum_{n\geq 0}^{} \mathbb{P}_{} \left[ X_n =0 \right] 
+		&\stackrel{\phantom{\textrm{(Fub)}}}{=} \sum_{n> 0}^{} \int_{\Pi^d}^{} \phi(\xi)^n d \xi 
+		\stackrel{\textrm{(MCT)}}{=} \lim_{\alpha \uparrow 1} \sum_{n> 0}^{} \int_{\Pi^d}^{} (\alpha \phi(\xi))^n d\xi \\
+	& \stackrel{\textrm{(Fub)}}{=} \lim_{\alpha \uparrow 1} \int_{\Pi^d}^{}  \frac{1}{1-\alpha \phi(\xi)} d \xi 
+		\stackrel{\textrm{(MCT)}}{=} \int_{\Pi^d}^{} \frac{1}{1-\phi(\xi)} d \xi
+.\end{align}
+We can see that for any $\xi_i \in [-\pi, \pi )$ we have the inequality $\frac{\xi_i^2}{6} \leq 1 - \cos(\xi_i) \leq \frac{\xi_i^2}{2}$. 
+\begin{center}
+\begin{tikzpicture}
+	\begin{axis}[xmin=- pi, xmax = pi, samples=400]
+		\addplot[black, dashed] {x^2 / 6};
+		\addplot[black]  {1 - cos(deg(x))};
+		\addplot[black, dashed] {x^2 /2};
+	\end{axis}
+	
+\end{tikzpicture}
+\end{center}
+With this, we find that $\frac{1}{6d}\| \xi \|_2^2 \leq 1 - \phi(\xi) \leq \frac{1}{2d} \| \xi \|_2^2$, finally giving us
+\begin{align}
+	\sum_{n\geq 0}^{} \mathbb{P}_{} \left[  X_n = 0\right] < \infty \iff \int_{B_1(0)}^{} \frac{d\xi}{\| \xi \|_2^2} < \infty \iff d>2.
+\end{align}
+The final equivalence can be justified by transforming into polar coordinates
+\begin{align}
+	\int_{B_1(0)}^{} \frac{d\xi}{\| \xi \|_2^2} = \int_{0}^{1} \frac{| \partial B_1(0) |}{r^2} dr = C \int_{0}^{1} r^{d-3} dr.
+\end{align}
+
+\end{proof}
 
 \section{Classification of States}
 \begin{theorem}[]
-	Let $x,y \in E$ st $x \to y$. If $x $ is recurrent then $y$ is recurrent and $\mathbb{P}_{x} \left[ H_y<\infty \right] = \mathbb{P}_{y} \left[ H_x<\infty \right]=1 $.
+	Let $x,y \in E$ such that $x \to y$. If $x $ is recurrent then $y$ is recurrent and $\mathbb{P}_{x} \left[ H_y<\infty \right] = \mathbb{P}_{y} \left[ H_x<\infty \right]=1 $.
 	In particular $x \leftrightarrow y$.
 \end{theorem}
+\begin{proof}
+	We want to use that every time the chain visits $x$, it has a non-zero probability to visit $y$ after that, visiting $x$ infinitely often should ensure that $y$ is also visited infinitely often.
+	Assume $y \neq x$ and $x$ recurrent. Let $z_1, \ldots, z_{k-1}$ be distinct elements of $E$, not equal to $x$ or $y$ such that $p_{xz_1}\cdots p_{z_{k-1}y}>0$. Then we have
+	\begin{align}
+		0 &\stackrel{\phantom{\textrm{(SiMP)}}}{=} \mathbb{P}_{x} \left[ H_x = \infty \right]  
+			> \mathbb{P}_{x} \left[ X_1=z_1, \ldots, X_k=1, \forall n> 0\ X_{k+n} \neq x \right]  \\
+		  &\stackrel{\textrm{(SiMP)}}{=} \underbrace{\mathbb{P}_{x} \left[ X_1 = z_1, \ldots, X_k=y \right]}_{>0}
+		  \underbrace{\mathbb{P}_{y} \left[ \forall n> 0\ X_n \neq x \right]}_{\mathbb{P}_{y} \left[ H_x = \infty \right]}  
+	.\end{align}
+Thus $\mathbb{P}_{y} \left[ H_x < \infty \right] =1$.
+Next, we have to show that $y$ is recurrent. Choose $m,n$ such that $p_{xy}^{(n)}, p_{yx}^{(m)}>0$, we have
+\begin{align}
+	\mathbb{E}_{y} \left[ V_y \right] = \sum_{k> 0}^{} p_{yy}^{(k)} \geq \sum_{k> 0}^{} p_{yy}^{(m+k+n)} \stackrel{\textrm{(CK)}}{\geq} \underbrace{p_{yx}^{(m)}}_{>0} \underbrace{\left( \sum_{k> 0}^{} p_{xx}^{(k)} \right)}_{=\infty} \underbrace{ p_{xy}^{(n)}}_{> 0}.
+\end{align}
+Hence, $y$ is recurrent. To show that $\mathbb{P}_{x} \left[ H_y < \infty \right] = 1$, use the same argument as above, but with the roles of $x$ and $y$ swapped ($y \to x,\ y$ recurrent).
+\end{proof}
+
 
 \begin{rmk}[]
-	$x \neq y: x \to y \iff \mathbb{P}_{x} \left[ \exists n: X_n=y \right] \iff \mathbb{P}_{x} \left[ H_y<\infty \right] $
+	$x \neq y: x \to y$ if and only if $\mathbb{P}_{x} \left[ \exists n: X_n=y \right]>0$ if and only if $ \mathbb{P}_{x} \left[ H_y<\infty \right]=1 $
 \end{rmk}
 
 \begin{cor}[]
-	Let $C$ communication class for p. Either $\forall x$: $x$ is recurrent, or $\forall x$: x is transient.
+	Let $C$ communication class for p. Either $x$ is recurrent for every $x \in E$, or every $x \in E$ is transient.
 \end{cor}
+\begin{proof}
+	If $x  \leftrightarrow y $, we have that $x$ recurrent if and only if $y$ is recurrent.
+\end{proof}
+\begin{rmk}[]
+	We call a class which is comprised of recurrent states a recurrent class, and one comprised of transient states a transient class.
+\end{rmk}
+
 
 \begin{cor}[]
 	A recurrent class is always closed.
 \end{cor}
+\begin{proof}
+	$C$ recurrent, $x \in C$, if $x \to y$ then we must have $y \to x$ (otherwise $x$ wouldn't be recurrent), therefore $y \in C$.
+\end{proof}
+\begin{cor}[]
+	Thus we have an intuitive criterion for transience: if $x \to y$ but $y  \nrightarrow x$, then $x$ is transient. 'If we start at  $x$ and can get to a state, from which we cannot return to $x$, then $x$ is transient'.
+\end{cor}
+
+\begin{rmk}[]
+	In general it is possible to find disjoint subsets of $E$ $T$ and $R_k$ such that $T$ is the class of transient states, and $R_k$ are recurrent classes, with $E = T \cup \bigcup_{k\geq 0}R_k$. Then we can broadly classify the behavior of the chain by differentiating if $X_n$ starts in some $R_k$, in which case the chain remains in $R_k$ forever, and if $X_n$ starts in $T$. If $X_n$ starts in $T$, either it remains in $T$ forever, or at some point it moves into an $R_k$ and remains there forever.
+\end{rmk}
+
 
 \section{Positive/Null Recurrence}
-\textbf{Notation} $x \in E: m_{x}=\mathbb{E}_{x} \left[ H_x \right] $
+\textbf{Notation} For $x \in E$ write $m_{x}=\mathbb{E}_{x} \left[ H_x \right] $.
 
 \begin{defn}
-	Let $x \in E$ be a recurrent state. We say that:
+	Let $x \in E$ be a recurrent state. We say that $x$ is:
 \begin{itemize}
-	\item positive recurrent if $m_x<\infty$ 
-	\item null recurrent if $m_x=+\infty$
+	\item positive recurrent if $\boxed{m_x<\infty}$ 
+	\item null recurrent if $\boxed{m_x=+\infty}$.
 \end{itemize}
 
 \end{defn}
 
 \begin{theorem}[]
-	Let $x,y \in E, x \leftrightarrow y$. Then $\lim_{n \to \infty}\frac{1}{n}\sum_{k=1}^{n} p_{xy}^{(k)}=\frac{1}{m_{y}}$
+	Let $x,y \in E, x \leftrightarrow y$. Then 
+	\begin{align}
+	\boxed{\lim_{n \to \infty}\frac{1}{n}\sum_{k=1}^{n} p_{xy}^{(k)}=\frac{1}{m_{y}}}
+	.\end{align}
 \end{theorem}
 \begin{rmk}[]
 	Write $V_{y}^{(n)}=\sum_{k=1}^{n} \chi_{X_k=y}$, "The number of visits to $y$ up to time $n$". Thus the sum in the theorem is "Expected proportion of time spent at $y$".
 \end{rmk}
 
-If $y$ is transient, null recurrent ($m_y=\infty$), the theorem tells us that $\lim_{n \to \infty}\mathbb{E}_{x} \left[ \frac{V_y^{(n)}}{n} \right] =0$: "null density of visit"
+If $y$ is transient, or null recurrent ($m_y=\infty$), the theorem tells us that $\lim_{n \to \infty}\mathbb{E}_{x} \left[ \frac{V_y^{(n)}}{n} \right] =0$: "null density of visits". Otherwise, $y$ is positive recurrent and the expected density of visits is strictly positive.
 
 \begin{defn}[inter-visit times]
-	Let $y \in E$. Define $H_y^{0}=H_y$ and $\forall i\geq 1: H_{y}^{i}= min\{n \geq 1: X_{H_y^0 + ... + H_y^{i-1}+n}=y\}$ if $H_y^{i-1}<\infty$, else $+\infty$	
+	Let $y \in E$. Define $H_y^{0}=H_y$ and for all $i\geq 1: H_{y}^{i}= \min\{n \geq 1: X_{H_y^0 +  \ldots  + H_y^{i-1}+n}=y\}$ if $H_y^{i-1}<\infty$, else $+\infty$	
 \end{defn}
+TODO: Figure would be good here
 
 \begin{lemma}[]
-	Let $x,y$ st. $x \leftrightarrow y$, assume $y$ is recurrent. Then $\forall j \geq 1, t_0...t_j \in \mathbb{N}$:
+	Let $x,y$ with $x \leftrightarrow y$, assume $y$ is recurrent. Then for every $j \geq 1$ and $t_0, \ldots, t_j \in \mathbb{N}$:
 \begin{align}
-	\mathbb{P}_{x} \left[ H_y^0=t_0...H_y^j=t_j \right] = \mathbb{P}_{x} \left[ H_y=t_0 \right] \mathbb{P}_{y} \left[ H_y=t_1 \right] ... \mathbb{P}_{y} \left[ H_y=t_j \right] 
+	\mathbb{P}_{x} \left[ H_y^0=t_0 \ldots H_y^j=t_j \right] = \mathbb{P}_{x} \left[ H_y=t_0 \right] \mathbb{P}_{y} \left[ H_y=t_1 \right]  \ldots  \mathbb{P}_{y} \left[ H_y=t_j \right] 
 \end{align}
-Under $P_x$, $H_y^1,H_y^2,...$ are iid with law $\mathbb{P}_{x} \left[ H_y^i=t \right] = \mathbb{P}_{y} \left[ H_y=t \right] $
+Under $P_x$, $H_y^1,H_y^2, \ldots $ are i.i.d. with law $\mathbb{P}_{x} \left[ H_y^i=t \right] = \mathbb{P}_{y} \left[ H_y=t \right] $.
 \end{lemma}
+\begin{proof}
+	Write $H^i = H_y^i$, we will prove via induction over $j$. We have $\mathbb{P}_{x} \left[ H^0 = t \right]  = \mathbb{P}_{x} \left[ H_y = y \right] $ for all $t$, showing for $j=0$.
+	$j \to j+1$: First note that 
+	\begin{align}
+	\mathbb{P}_{x} \left[ H^0 < \infty, \ldots, H^j < \infty \right] = \sum_{t_0,\ldots, t_j}^{} \mathbb{P}_{x} \left[ H^0 = t_0, \ldots, H^j=t_j \right] = \mathbb{P}_{x} \left[ H_y < \infty \right] \mathbb{P}_{y} \left[ H_y < \infty \right] ^j = 1.
+	\end{align}
+	Therefore $T = H^0 + \ldots + H^j$ is finite $\mathbb{P}_{x} $-a.s. and $X_T=y$. Hence, we have that for every $t_0,\ldots,t_{j+1} \in \mathbb{N}$ that
+	\begin{align}
+		\mathbb{P}_{x} \left[ H^0=t_0,\ldots,H^{j+1}=t_{j+1} \right] &\stackrel{\phantom{\textrm{(SMP)}}}{=} \mathbb{P}_{x} \left[ H^0 = t_0, \ldots, H^{j+1}=t_{j+1} | T<\infty, X_T = y \right]  \\
+		&\stackrel{\textrm{(SMP)}}{=} \mathbb{P}_{x} \left[ H^0=t_0, \ldots, H^j=t_j \right] \mathbb{P}_{y} \left[ \min\{n> 0: X_n =y\} = t_{j+1} \right] \\ 
+	&\stackrel{\phantom{\textrm{(SMP)}}}{=} \mathbb{P}_{x} \left[ X_y = t_0 \right] \mathbb{P}_{y} \left[ H_y = t_1 \right] \cdots \mathbb{P}_{y} \left[ H_y = t_{j+1} \right]  
+	.\end{align}
+\end{proof}
+
+\begin{proof}[Proof (Theorem)]
+	\textbf{Case 1:} $y$ transient:	we know that $\mathbb{E}_{y} \left[ V_y \right] < \infty$, thus (Strong Markov Property) $\mathbb{E}_{x} \left[ V_y \right] < \infty$. Hence,
+	\begin{align}
+		\frac{\mathbb{E}_{x} \left[ V_y^{(n)} \right] }{n} \leq \frac{\mathbb{E}_{x} \left[ V_x \right] }{n} \to 0
+	.\end{align}
+	\textbf{Case 2:} $y$ recurrent: using the lemma, we know that the random variables $H^j$ are i.i.d. under $\mathbb{P}_{x}$ and fulfill $\mathbb{E}_{x} \left[ H^1 \right] = \mathbb{E}_{y} \left[ H_y \right]  = m_y$. Then we can use the Law of Large Numbers and $\mathbb{P}_{x} \left[ H^0 < \infty \right] =1$ we find $\mathbb{P}_{x}$-a.s.,
+	\begin{align}
+		\lim_{i\to \infty } \frac{H^0 + \ldots + H^i}{i} = m_y
+	.\end{align}
+	It should be noted that this includes the case of $m_y=\infty$ by truncation. Now we write $N_n = V_y^{(n)}$ (the number of visits to $y$ at time $n$).
+
+	TODO: Figure
+
+Following directly from the definition of $N_n$ we have that for any $n> 0$ that 
+\begin{align}
+	H^0 + \ldots + H^{N_n -1} \leq n < H^0 + \ldots + H^{N_n}
+.\end{align}
+Hence, for every $n> 0$ 
+\begin{align}
+	\frac{1}{m_y} \leftarrow \frac{N_n}{H^0 + \ldots H^{N_n}} < \frac{V_y^{(n)}}{n} \leq \frac{N_n}{H^0 + \ldots + H^{N_n -1}} \to \frac{1}{m_y}
+.\end{align}
+Finally, we can conclude that $\mathbb{E}_{x} \left[ \frac{V_y^{(n)}}{n} \right] \to \frac{1}{m_y}$ by the Dominated Convergence Theorem.
+\end{proof}
+
 
 \begin{prop}[Classification of recurrent classes]
 	Let $R$ be a recurrent class. Then either:
 \begin{itemize}
-	\item $\forall x \in R: x$ is positive recurrent
-	\item $\forall x \in R: x$ is null recurrent
+	\item For all $x \in R,\ x$ is positive recurrent
+	\item For all $x \in R\ x$ is null recurrent.
 \end{itemize}
-
 \end{prop}
+\begin{proof}
+	Fix $x,y \in E$ with $x  \leftrightarrow  y$ and $x$ recurrent. Fix $k\geq 0$ with $p_{xy}^{(k)}>0$. By Chapman-Kolmogorov, we have for all $j> 0$
+	\begin{align}
+		p_{xy}^{(k+j)} \geq p_{xx}^{(j)} p_{xy}^{(k)}	
+.	\end{align}
+Thus	
+\begin{align}
+	\underbrace{\frac{1}{n} \sum_{i=1}^{n} p_{xy}^{(i)}}_{\to  \frac{1}{\mathbb{E}_{y} \left[ H_y \right] }} \geq \underbrace{\left( \frac{1}{n} \sum_{j=1}^{n-k} p_{xx}^{(j)} \right)}_{\to \mathbb{E}_{x} \left[ H_x \right]} \underbrace{p_{xy}^{(k)}}_{>0}
+.\end{align}
+Therefore, $\frac{1}{\mathbb{E}_{y} \left[ H_y \right] }> 0$ and $y$ is recurrent.
+\end{proof}
+
 
 \begin{prop}[]
 	Let $R$ be a recurrent class, if $R$ is finite, then $R$ is positive recurrent.
 \end{prop}
+\begin{proof}
+	Fix $x\in R$, since $R$ is closed we have for every $n> 0$
+	\begin{align}
+		1 = \mathbb{P}_{x} \left[ X_n \in R \right] = \sum_{y\in R}^{} p_{xy}^{(n)}.
+	\end{align}
+Hence, 
+\begin{align}
+	1 = \sum_{y\in R}^{} \frac{1}{n} \sum_{k=1}^{n} p_{xy}^{(k)} \to \sum_{y \in R}^{} \frac{1}{\mathbb{E}_{y} \left[ H_y \right] }.
+\end{align}
+Thus, there must be a $y\in R$ such that $\mathbb{E}_{y} \left[ H_y \right] < \infty $, implying that the entire class is positive recurrent.
+\end{proof}
+
 
 \section{Stationary Distributions for Irreducible Chains}
 \begin{theorem}[]
 	Assume that $p$ is irreducible. 
 \begin{itemize}
 	\item If the chain is transient or null recurrent, then there is no stationary distribution.
-	\item if the chain is positive recurrent, then there exists a unique stationary distribution given by $\forall x \in E: \pi (x) = \frac{1}{\mathbb{E}_{x} \left[ H_x \right] }$
+	\item if the chain is positive recurrent, then there exists a unique stationary distribution given by $\pi (x) = \frac{1}{\mathbb{E}_{x} \left[ H_x \right] }$
 \end{itemize}
 
 \end{theorem}
@@ -181,14 +325,14 @@ Under $P_x$, $H_y^1,H_y^2,...$ are iid with law $\mathbb{P}_{x} \left[ H_y^i=t \
 	Let $x,y \in E: x \leftrightarrow y \implies d_x=d_y$
 \end{prop}
 
-\textbf{Consequence} if p is irreducible we have $\forall x,y \in E: d_x = d_y$ 
+\textbf{Consequence} if p is irreducible we have for arbitrary $x,y \in E: d_x = d_y$ 
 
 \begin{defn}
-	We say that the chain $p$ is aperiodic if $\forall x \in E: d_x=1$
+	We say that the chain $p$ is aperiodic if for every $x \in E: d_x=1$
 \end{defn}
 
 \begin{prop}[]
-	Let $x \in E$. We have $d_x=1 \iff \exists n_0 \geq 1 \textrm{ st } \forall n \geq n_0: p_{xx}^{(n)}>0$
+	Let $x$ be in $E$. We have $d_x=1$ if and only if there is an $n_0 \geq 1$ such that for every $n \geq n_0: p_{xx}^{(n)}>0$.
 \end{prop}
 
 \section{Coupling Method}
@@ -199,28 +343,28 @@ $\overline{\mu }(A \times F_2)=\mu_1(A)$ and vice versa.
 $X_1, X_2$ two random variables on $(\Omega, F, \mathbb{P}) $, $X_1 \sim \mu_1, X_2 \sim \mu_2$, the law of $(X_1,X_2)$ is a coupling!
 
 \noindent
-\textbf{Goal} Define two MCs: $X_n \sim MC(\mu, p), \quad \tilde{X_n} \sim MC(\nu, p) $ on the same probability space st $X_n = \tilde{X_n}$ for n large.
+\textbf{Goal} Define two MCs: $X_n \sim MC(\mu, p), \quad \tilde{X_n} \sim MC(\nu, p) $ on the same probability space such that $X_n = \tilde{X_n}$ for n large.
 
 \begin{defn}[Product Chain]
-	Define $\forall \omega=(x,y), \quad \omega'=(x',y') \in E^2$: $\overline{p_{\omega, \omega'}}=p_{xx'}p_{yy'}$
+	Define $\omega=(x,y), \ \omega'=(x',y') \in E^2$ with $\ \overline{p_{\omega, \omega'}}=p_{xx'}p_{yy'}$.
 \end{defn}
 
 \noindent
 \textbf{Notation} Consider:
 \begin{itemize}
 	\item $(\Omega, F, (P_\omega)_{\omega \in E^2})$ Probability Spaces
-	\item $(W_n)_{n\geq 0}=((X_n,Y_n))_{n\geq 0}$ RV on $\Omega, F$ st $\forall \omega \in E^2: W_n$ is a $MC(\delta_\omega, \overline{p})$ under $P_w$
+	\item $(W_n)_{n\geq 0}=((X_n,Y_n))_{n\geq 0}$ RV on $\Omega, F$ such that for all $\omega \in E^2: W_n$ is a $MC(\delta_\omega, \overline{p})$ under $P_w$
 \end{itemize}
 
 \begin{rmk}[]
-	If $\mu, \nu $ are distributions on $E$, then $\mu \otimes \nu $ is a distribution on $E^2$. $P_{\mu \otimes \nu }= \sum_{(x,y)\in E^2}^{}\mu (x) \nu (y) P_{(x,y)} $
+	If $\mu, \nu $ are distributions on $E$, then $\mu \otimes \nu $ is a distribution on $E^2$. $P_{\mu \otimes \nu }= \sum_{(x,y)\in E^2}^{}\mu (x) \nu (y) P_{(x,y)} $.
 \end{rmk}
 
 \begin{prop}[]
 	Let $\mu,\nu $ be distributions on $E$. Under $P_{\mu \otimes \nu }:$ 
 \begin{itemize}
 	\item $(X_n)_{n\geq 0}$ is a $MC(\mu ,p)$ 
-	\item $(Y_n)_{n\geq 0}$ is a $MC(\nu ,p)$
+	\item $(Y_n)_{n\geq 0}$ is a $MC(\nu ,p)$.
 \end{itemize}
 
 \end{prop}
@@ -230,7 +374,7 @@ $X_1, X_2$ two random variables on $(\Omega, F, \mathbb{P}) $, $X_1 \sim \mu_1, 
 \end{prop}
 
 \begin{rmk}[]
-	Aperiodic is important!  $p$ irreducible $\nRightarrow \overline{p}$ irreducible.
+	Aperiodic is important!  $p$ irreducible does not imply that $\overline{p}$ irreducible!
 \end{rmk}
 
 \begin{prop}[]
@@ -238,29 +382,29 @@ $X_1, X_2$ two random variables on $(\Omega, F, \mathbb{P}) $, $X_1 \sim \mu_1, 
 \end{prop}
 
 \begin{defn}
-	$T=min\{n\geq 0: X_n=Y_n\}$ a stopping time.
+	$T=\min\{n\geq 0: X_n=Y_n\}$ is a stopping time.
 \end{defn}
 
 \begin{prop}[]
-	$\forall \mu, \nu $ distributions on $E $: 
+	For $\mu, \nu $ distributions on $E$, $n\geq 0$: 
 \begin{align}
-\forall n\geq 0 \sum_{x \in E}^{} |\mathbb{P}_{\mu } \left[ X_n=x \right] - \mathbb{P}_{\nu} \left[Y_n=x  \right] | \leq 2 \mathbb{P}_{\mu \otimes \nu } \left[ T>n \right]
-\end{align}
+\sum_{x \in E}^{} |\mathbb{P}_{\mu } \left[ X_n=x \right] - \mathbb{P}_{\nu} \left[Y_n=x  \right] | \leq 2 \mathbb{P}_{\mu \otimes \nu } \left[ T>n \right]
+.\end{align}
 \end{prop}
 
 \begin{lemma}[]
-	$\tilde{X}_n = Y_n\chi_{\{T<n\}} + X_n \chi_{\{T \geq n\}} $ is a $MC(\nu, p)$
+	$\tilde{X}_n = Y_n\chi_{\{T<n\}} + X_n \chi_{\{T \geq n\}} $ is a $MC(\nu, p)$.
 \end{lemma}
 
 \section{Convergence for Irreducible Aperiodic Chains}
 \begin{theorem}[]
-	Assume $p$ is irreducible and aperiodic, and admits a stationary distribution $\pi $. Then for every distribution $\mu$ on $E$ : $\lim_{n \to \infty}\mathbb{P}_{\mu } \left[ X_n=x \right] = \pi(x), \forall x \in E$. 
+	Assume $p$ is irreducible and aperiodic, and admits a stationary distribution $\pi $. Then for every distribution $\mu$ on $E$ : $\lim_{n \to \infty}\mathbb{P}_{\mu } \left[ X_n=x \right] = \pi(x)$ for all $x \in E$. 
 
 	\noindent
-	Equivalently: Under $P_\mu: $ $X_n \stackrel{(law)}{\to} X_\infty$ where $X_\infty \sim \pi$ 
+	Equivalently: Under $P_\mu: $ $X_n \stackrel{(law)}{\to} X_\infty$ where $X_\infty \sim \pi$. 
 
 	\noindent
-	Equivalently: $\forall f:E \to \mathbb{R}$ bdd: $\lim_{n \to \infty} \mathbb{E}_{\mu } \left[ f(X_n) \right] = \int_{E}^{} f d \pi$
+	Equivalently: $\forall f:E \to \mathbb{R}$ bounded: $\lim_{n \to \infty} \mathbb{E}_{\mu } \left[ f(X_n) \right] = \int_{E}^{} f d \pi$.
 \end{theorem}
 \textbf{Note} This theorem is important!! 
 
