@@ -310,32 +310,78 @@ Thus, there must be a $y\in R$ such that $\mathbb{E}_{y} \left[ H_y \right] < \i
 \begin{theorem}[]
 	Assume that $p$ is irreducible. 
 \begin{itemize}
-	\item If the chain is transient or null recurrent, then there is no stationary distribution.
-	\item if the chain is positive recurrent, then there exists a unique stationary distribution given by $\pi (x) = \frac{1}{\mathbb{E}_{x} \left[ H_x \right] }$
+	\item If the chain is transient or null recurrent, then there is no stationary distribution;
+	\item if the chain is positive recurrent, then there exists a unique stationary distribution given by 
+		\begin{align}
+		\boxed{\pi (x) = \frac{1}{\mathbb{E}_{x} \left[ H_x \right] }}
+		.\end{align}
+		
 \end{itemize}
-
 \end{theorem}
+\begin{proof}
+	We will begin by assuming a stationary distribution $\pi$ exists. Then for every $x \in E$ we have for all $n> 0$
+	\begin{align}
+		\pi (x) = \frac{1}{n} \sum_{k=1}^{n} \mathbb{P}_{\pi } \left[ X_k=x \right]  = \sum_{y \in E}^{} \pi(y) \frac{1}{n} \sum_{k=1}^{n} \mathbb{P}_{y} \left[ X_k = x \right] \to \sum_{y \in E}^{} \pi (y) \frac{1}{\mathbb{E}_{x} \left[ H_x \right] }	
+	.\end{align}	
+	Note that this also shows uniqueness of the stationary distribution.
+
+	Now if we assume that the chain is transient or null recurrent, then using Dominated Convergence Theorem, we have that $\pi (x) = \frac{1}{\mathbb{E}_{x} \left[ H_x \right] } = 0$. This is a contradiction to $\sum_{x \in E}^{} \pi (x) = 1$, therefore no stationary distribution can exist.
+	If, instead, we assume that the chain is positive recurrent, we have the same formula as before for $\pi (x)$ as the only possible candidate for the stationary distribution. So if we can show that $\pi $ indeed defines a stationary distribution (unlike in the previous case), then we will be done. First, we fix $x> 0$ and find the inequality for all $y \in E$ 
+\begin{align}
+\frac{1}{\mathbb{E}_{y} \left[ H_y \right] } &\stackrel{\phantom{\textrm{(Fatou)}}}{=} \lim_{n\to \infty} \frac{1}{n} \sum_{j=k}^{n} p_{yy}^{(j)} \\
+					     &\stackrel{\phantom{\textrm{(Fatou)}}}{=}  \lim_{n \to \infty} \sum_{x \in E}^{} \left( \frac{1}{n} \sum_{j=k}^{n} p_{yx}^{(j-k)} \right) p_{xy}^{(k)} \\
+					     &\stackrel{\textrm{(Fatou)}}{\geq} \sum_{x \in E}^{}  \liminf_{n \to \infty } \left( \frac{1}{n} \sum_{j=k}^{n} p_{yx}^{(j-k)} \right) p_{xy}^{(k)} \\
+					     &\stackrel{\phantom{\textrm{(Fatou)}}}{=}  \sum_{x \in E}^{} \frac{1}{\mathbb{E}_{x} \left[ H_x \right] } p_{xy}^{(k)}.
+\end{align}
+Analogously for fixed $x$
+\begin{align}
+	1 = \lim_{n \to \infty } \frac{1}{n} \sum_{j=1}^{n} \mathbb{P}_{x} \left[ X_j \in E \right] = \lim_{n\to \infty }\sum_{y \in E}^{}  \frac{1}{n} \sum_{j=1}^{n}\mathbb{P}_{x} \left[ X_j = y \right] \stackrel{\textrm{(Fatou)}}{\geq} \sum_{y \in E}^{} \frac{1}{\mathbb{E}_{y} \left[ H_y \right] }
+.\end{align}
+So we would like to prove that these two inequalities are actually inequalities. First we sum the second inequality over $y$ and get
+\begin{align}
+	\sum_{y \in E}^{} \frac{1}{\mathbb{E}_{y} \left[ H_y \right] } \geq \sum_{y \in E}^{} \left( \sum_{x \in E}^{} \frac{1}{\mathbb{E}_{x} \left[ H_x \right] } p_{xy}^{(k)} \right) = \sum_{x \in E}^{} \frac{1}{\mathbb{E}_{x} \left[ H_x \right] }
+.\end{align}
+Thus the inequality must be an equality. Also note that if we can show that $\pi$ is a distribution, this also shows that it is stationary. We can use this to show that the first inequality is actually an equality. Fix $y \in E$ and note that $\frac{1}{\mathbb{E}_{y} \left[ H_y \right] }>0$ by positive recurrence. We have
+\begin{align}
+	\frac{1}{\mathbb{E}_{y} \left[ H_y \right] } &\stackrel{\phantom{\textrm{(DCT)}}}{=} \lim_{n \to \infty } \frac{1}{n} \sum_{k=1}^{n}  \left( \sum_{x \in E}^{} \frac{1}{\mathbb{E}_{x} \left[ H_x \right] } p_{xy}^{(k)} \right) \\
+						     &\stackrel{\phantom{\textrm{(DCT)}}}{=} \lim_{n \to \infty }\sum_{x \in E}^{} \frac{1}{\mathbb{E}_{x} \left[ H_x \right] } \left( \frac{1}{n} \sum_{k=1}^{n} p_{xy}^{(k)} \right) \\
+						     &\stackrel{\textrm{(DCT)}}{=} \sum_{x \in E}^{} \frac{1}{\mathbb{E}_{x} \left[ H_x \right] } \frac{1}{\mathbb{E}_{y} \left[ H_y \right] }
+.\end{align}
+Hence, $\pi(x) = \frac{1}{\mathbb{E}_{x} \left[ H_x \right] } $ defines a distribution, which is stationary.
+\end{proof}
+
+TODO: Applications
 
 \section{Periodicity}
 \begin{defn}
-	Let $x \in E$. The period of $x$ is defined by $d_x = gcd\{n\geq 0: p_{xx}^{(n)}>0\}$
+	Let $x \in E$. The period of $x$ is defined by
+	\begin{align}
+	\boxed{d_x = \gcd\{n\geq 0: p_{xx}^{(n)}>0\} }
+	.\end{align}
+	
 \end{defn}
 
 \begin{prop}[]
-	Let $x,y \in E: x \leftrightarrow y \implies d_x=d_y$
+	Let $x,y$ be arbitrary elements of $ E$ then $ x \leftrightarrow y$ implies that $d_x=d_y$.
 \end{prop}
 
-\textbf{Consequence} if p is irreducible we have for arbitrary $x,y \in E: d_x = d_y$ 
+\textbf{Consequence} If $p$ is irreducible we have for arbitrary $x,y \in E$ that $d_x = d_y$.
 
 \begin{defn}
-	We say that the chain $p$ is aperiodic if for every $x \in E: d_x=1$
+	We say that the chain $p$ is aperiodic if for every $x \in E$
+	\begin{align}
+	\boxed{d_x=1}.
+	\end{align}
 \end{defn}
 
 \begin{prop}[]
-	Let $x$ be in $E$. We have $d_x=1$ if and only if there is an $n_0 \geq 1$ such that for every $n \geq n_0: p_{xx}^{(n)}>0$.
+	Let $x$ be in $E$. We have $d_x=1$ if and only if there is an $n_0 \geq 1$ such that for every $n \geq n_0$ we have that $ p_{xx}^{(n)}>0$.
 \end{prop}
+TODO: Proof, possibly include number theory lemma in appendix, in my opinion the idea can be explained in a hand wavy fashion intuitively and the algebra distracts from the concept here.
 
 \section{Coupling Method}
+TODO: This needs some work with how we phrase it
+
 \textbf{What is coupling?}
 Define probability measures $\mu_1, \mu_2$ on the same space $F_1,F_2$. A coupling between $\mu_1$ and $\mu_2$ is a probability measure $\overline{\mu }$ on $F_1 \times F_2$, 
 $\overline{\mu }(A \times F_2)=\mu_1(A)$ and vice versa. 
@@ -345,29 +391,62 @@ $X_1, X_2$ two random variables on $(\Omega, F, \mathbb{P}) $, $X_1 \sim \mu_1, 
 \noindent
 \textbf{Goal} Define two MCs: $X_n \sim MC(\mu, p), \quad \tilde{X_n} \sim MC(\nu, p) $ on the same probability space such that $X_n = \tilde{X_n}$ for n large.
 
+TODO: Figure
+
+To achieve that we first consider two independent chains $X$ and $Y$. We then show that the chains meet almost surely (using some assumptions on $p$ ) at some random time $T$. Then we ask that the chains follow the same trajectory for $t>T$. In order to introduce a suitable probability space, we consider the product chain.
+
 \begin{defn}[Product Chain]
-	Define $\omega=(x,y), \ \omega'=(x',y') \in E^2$ with $\ \overline{p_{\omega, \omega'}}=p_{xx'}p_{yy'}$.
+	Define for every $\omega=(x,y), \ \omega'=(x',y') \in E^2$ 
+	\begin{align}
+	\boxed{\overline{p_{\omega, \omega'}}=p_{xx'}p_{yy'} }.
+	\end{align}
 \end{defn}
+\begin{rmk}[]
+	To see that $\overline{p}$ is a transition probability, calculate
+	\begin{align}
+		\sum_{\omega'\in E}^{} \overline{p}_{\omega \omega'} = \sum_{x',y' \in E}^{} p_{xx'}p_{yy'} = 1. 
+	\end{align}
+\end{rmk}
+
 
 \noindent
 \textbf{Notation} Consider:
 \begin{itemize}
-	\item $(\Omega, F, (P_\omega)_{\omega \in E^2})$ Probability Spaces
-	\item $(W_n)_{n\geq 0}=((X_n,Y_n))_{n\geq 0}$ RV on $\Omega, F$ such that for all $\omega \in E^2: W_n$ is a $MC(\delta_\omega, \overline{p})$ under $P_w$
+	\item $(\Omega, F, (P_\omega)_{\omega \in E^2})$ Probability Spaces,
+	\item $(W_n)_{n\geq 0}=((X_n,Y_n))_{n\geq 0}$ a random variable on $(\Omega, \mathcal{F})$ such that for all $\omega \in E^2$ $W_n$ is a $MC(\delta_\omega, \overline{p})$ under $P_w$.
 \end{itemize}
 
 \begin{rmk}[]
-	If $\mu, \nu $ are distributions on $E$, then $\mu \otimes \nu $ is a distribution on $E^2$. $P_{\mu \otimes \nu }= \sum_{(x,y)\in E^2}^{}\mu (x) \nu (y) P_{(x,y)} $.
+	If $\mu, \nu $ are distributions on $E$, then $\mu \otimes \nu $ is a distribution on $E^2$.
+	\begin{align}
+		\boxed{P_{\mu \otimes \nu }= \sum_{(x,y)\in E^2}^{}\mu (x) \nu (y) P_{(x,y)}}.
+	\end{align}
+	
 \end{rmk}
 
 \begin{prop}[]
 	Let $\mu,\nu $ be distributions on $E$. Under $P_{\mu \otimes \nu }:$ 
 \begin{itemize}
-	\item $(X_n)_{n\geq 0}$ is a $MC(\mu ,p)$ 
+	\item $(X_n)_{n\geq 0}$ is a $MC(\mu ,p)$;
 	\item $(Y_n)_{n\geq 0}$ is a $MC(\nu ,p)$.
 \end{itemize}
-
 \end{prop}
+\begin{proof}
+	For every $k\geq 0$ and $x_0,\ldots,x_k, y_0, \ldots, y_k \in E$ we have
+\begin{align}
+&	\mathbb{P}_{\mu \otimes \nu } \left[ X_0 = x_0, \ldots, X_k=x_k, Y_0 = y_0, \ldots Y_k = y_k \right] \\
+&\qquad= \mathbb{P}_{\mu \otimes \nu } \left[ W_0=(x_0, y_0), \ldots, W_k = (x_k, y_k) \right] \\
+&\qquad= \mu (x_0) p_{x_0x_1}\cdots p_{x_{k-1}x_k} \nu (y_0) p_{y_0 y_1} \cdots p_{y_{k-1}y_k}
+.	\end{align}
+Summing over all possible $y_0,\ldots , y_k$ in $E$, implies that $(X_n)_{n}$ is a MC$(\mu ,p)$, and equivalently that $(Y_n)_{n}$ is a MC$(\nu ,p)$.	
+
+Now to show independence, we need to show that for all measurable sets $A,B \subset E^{\mathbb{N}}$ 
+\begin{align}
+	\mathbb{P}_{\mu \otimes \nu } \left[ X \in A, Y\in B \right] = \mathbb{P}_{\mu \otimes \nu } \left[ X \in A \right] \mathbb{P}_{\mu \otimes \nu } \left[ Y \in B \right].
+\end{align}
+Our calculation from before shows that this equality holds for all sets of the form $A = \{(x_0,\ldots,x_n)\} \times E^{\mathbb{N}}$, $B=E^{\mathbb{N}}\times \{(y_0,\ldots , y_n)\}$. Therefore, it holds for all cylindrical sets, and thus, by Dynkin's Lemma, for all measurable sets.
+\end{proof}
+
 
 \begin{prop}[]
 	If $p$ is irreducible and aperiodic, then $\overline{p}$ is irreducible and aperiodic.
@@ -376,25 +455,96 @@ $X_1, X_2$ two random variables on $(\Omega, F, \mathbb{P}) $, $X_1 \sim \mu_1, 
 \begin{rmk}[]
 	Aperiodic is important!  $p$ irreducible does not imply that $\overline{p}$ irreducible!
 \end{rmk}
+\begin{proof}
+	Let $w=(x,y)$ and $w'=(x',y') \in E^2$. By irreducibility we can choose $k,l\geq 0$ such that $p_{xx'}^{(k)}, p_{yy'}^{(l)} >0$. Then for every $n \gg \max(k,l)$ we have
+\begin{align}
+	\overline{p}_{ww'}^{(n)} = p_{xx'}^{(n)}p_{yy'}^{(n)} \geq p_{xx'}^{(k)}p_{x'x'}^{(n-k)} p_{yy'}^{(l)} p_{y'y'}^{(n-l)} > 0.
+\end{align}
+This holds as the two terms $p_{x'x'}^{(n-k)}$ and $p_{y'y'}^{(n-l)}$ are strictly positive for $n$ large enough.
+\end{proof}
 
 \begin{prop}[]
 	If $p$ is irreducible, aperiodic, and positive recurrent, then $\overline{p}$ is irreducible, aperiodic, and positive recurrent.
 \end{prop}
+\begin{proof}
+	We only have to show that the product chain is positive recurrent, as the other properties follow from the previous proposition. Since $p$ is irreducible and positive recurrent, it must admit a stationary distribution $\pi $. For every $(y,y')\in E^2$ we then have
+\begin{align}
+	\pi (y) \pi (y') = \sum_{x \in E}^{} \pi(x)p_{xy} \sum_{x' \in E}^{}p_{x'y'} = \sum_{(x,x')\ in E^2}^{} p_{xy}p_{x'y'}. 
+\end{align}
+Showing that $\pi \otimes \pi $ is stationary for $\overline{p}$, implying that $\overline{p}$ is positive recurrent.
+
+\end{proof}
+
 
 \begin{defn}
 	$T=\min\{n\geq 0: X_n=Y_n\}$ is a stopping time.
 \end{defn}
+\begin{rmk}[]
+	In fact for $A = \{ (x,y) \in E^2: x=y\}$ (which is measurable) $T=H_A$, so $T$ is a stopping time.
+\end{rmk}
+
 
 \begin{prop}[]
 	For $\mu, \nu $ distributions on $E$, $n\geq 0$: 
 \begin{align}
-\sum_{x \in E}^{} |\mathbb{P}_{\mu } \left[ X_n=x \right] - \mathbb{P}_{\nu} \left[Y_n=x  \right] | \leq 2 \mathbb{P}_{\mu \otimes \nu } \left[ T>n \right]
+	\boxed{ \sum_{x \in E}^{} |\mathbb{P}_{\mu } \left[ X_n=x \right] - \mathbb{P}_{\nu} \left[Y_n=x  \right] | \leq 2 \mathbb{P}_{\mu \otimes \nu } \left[ T>n \right] }
 .\end{align}
 \end{prop}
-
 \begin{lemma}[]
-	$\tilde{X}_n = Y_n\chi_{\{T<n\}} + X_n \chi_{\{T \geq n\}} $ is a $MC(\nu, p)$.
+	$\tilde{X}_n = Y_n \mathbbm{1}_{\{T<n\}} + X_n \mathbbm{1}_{\{T \geq n\}} $ is a $MC(\nu, p)$.
 \end{lemma}
+\begin{proof}
+	We consider the product Markov Chain $W_n = (X_n, Y_n)$ under $\mathbb{P}_{\mu \otimes \nu}$. We then define, for every $n$ 
+	\begin{align}
+		\tilde{X}_n =
+	\begin{cases}
+		Y_n & \textrm{for } n < T \\
+		X_n & \textrm{for } n \geq T
+	\end{cases}
+	.\end{align}
+TODO: Figure
+
+We now show that $(\tilde{X}_n)$ is a MC$(\nu, p)$ under $\mathbb{P} = \mathbb{P}_{\mu \otimes \nu}$. Let $n\geq 0$ and $x_0, \ldots, x_n \in E$. Now we distinguish between possible values for $T$ and find
+\begin{align}
+	\mathbb{P}_{} \left[ \tilde{X}_0 = x_0, \ldots , \tilde{X}_n = x_n \right] = \sum_{k \in \mathbb{N} \cup \{\infty\}}^{} \mathbb{P}_{} \left[ \tilde{X}_0 = x_0, \ldots , \tilde{X}_n , T=k \right] .
+\end{align}
+If $k>n$, the summand is equal to 
+\begin{align}
+	\nu (x_0) p_{x_0x_1}\cdots p_{x_{n-1}x_n} \cdot \mathbb{P}_{} \left[ T=k | Y_0 = x_0, \ldots , Y_n=x_n \right].
+\end{align}
+If $k \leq n$, the summand is equal to
+\begin{align}
+	&\mathbb{P}_{} \left[ \underbrace{Y_0=x_0, \ldots , Y_k=x_k,T=k}_{\in \mathcal{F}_T},X_{T+1}=x_{k+1}, \ldots X_{T+n-k}=x_n \right]  \\
+	&\qquad \stackrel{\textrm{(SMP)}}{=} \mathbb{P}_{} \left[ Y_0=x_0, \ldots Y_k=x_k, T=k \right] \mathbb{P}_{(x_k, x_k)} \left[ X_1=x_{k+1}, \ldots , X_{n-k}=x_n \right]  \\
+	&\qquad \stackrel{\phantom{\textrm{(SMP)}}}{=} \nu (x_0) p_{x_0x_1}\cdots p_{x_{k-1}x_k} \mathbb{P}_{} \left[ T=k | Y_0 = y_0, \ldots, Y_k=x_k \right] p_{x_k x_{k+1}} \cdots p_{x_{n-1}x_n}  \\
+	&\qquad \stackrel{\phantom{\textrm{(SMP)}}}{=} \nu (x_0) p_{x_0 x_1} \cdots p_{x_{n-1}x_n} \mathbb{P}_{} \left[ T=k | Y_0=x_0, \ldots, Y_n=x_n \right]  .
+\end{align}
+To justify the last equality, we used the independence between $(X_n)$ and $(Y_n)$ to write
+ \begin{align}
+	 \mathbb{P}_{} \left[ T=k | Y_0=x_0, \ldots , Y_k =x_k \right] &= \mathbb{P}_{} \left[ \forall i<k\ X_i \neq x_i, X_k=x_k \right] \\
+								       &= \mathbb{P}_{} \left[ T=k | Y_0=x_0, \ldots , Y_n=x_n \right] . 
+\end{align}
+Finally using that $\sum_{k \in \mathbb{N}\cup \{\infty\}}^{} \mathbb{P}_{} \left[ T=k | Y_0 = x_0, \ldots , Y_n =x_n \right] =1$ we obtain
+\begin{align}
+	\mathbb{P}_{} \left[ \tilde{X}_0 = x_0, \ldots , \tilde{X}_n=x_n \right] = \nu (x_0) p_{x_0 x_1} \cdots p_{x_{n-1}x_n}.
+\end{align}
+\end{proof}
+\begin{proof}[Proof (Theorem)]
+We can now take advantage of the coupling between $X$ and $\tilde{X}$ to conclude that for every $n\geq 0$ 
+\begin{align}
+	\sum_{x \in E}^{} \left| \mathbb{P}_{\mu} \left[ X_n = x \right] - \mathbb{P}_{\nu } \left[ X_n=x \right] \right|
+	&= \sum_{x \in E}^{} \left| \mathbb{P}_{} \left[X_n =x  \right] - \mathbb{P}_{} \left[ \tilde{X}_n = x \right] \right| \\
+	&= \sum_{x \in E}^{} \Big| \mathbb{P}_{} \left[ X_n =x, T \leq n \right] + \mathbb{P}_{} \left[ X_n = x, T>n \right] \\
+	&\qquad  - \mathbb{P}_{} \left[ \tilde{X}_n = x, T \leq n \right] + \mathbb{P}_{} \left[ \tilde{X}_n = x, T>n \right] \Big| \\
+	&\leq \sum_{x \in E}^{} \mathbb{P}_{} \left[ X_n=x, T>n \right] + \mathbb{P}_{} \left[ \tilde{X}_n=x, T>n \right]\\
+	&= 2\mathbb{P}_{} \left[ T>n \right] 
+\end{align}
+
+
+\end{proof}
+
+
+
 
 \section{Convergence for Irreducible Aperiodic Chains}
 \begin{theorem}[]
