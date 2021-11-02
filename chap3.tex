@@ -75,7 +75,12 @@ It is impossible that $\mathbb{P}_{x} \left[ V_x<\infty \right] >0 $ and $\mathb
 		\sum_{x \in E}^{} V_x = \sum_{n=0}^{\infty} \sum_{x \in E}^{} \mathbbm{1}_{X_n =x} = \sum_{n\geq 0}^{} 1  = \infty \\
 	\sum_{x \in E}^{} \mathbb{E}_{y} \left[ V_x \right] = \mathbb{E}_{y} \left[ \sum_{x \in E}^{} V_x \right] = \infty 
 .	\end{align}
-	Thus we know there exists $x \in E$ such that $\mathbb{E}_{y} \left[ V_x \right] = \infty$ since the sum on the left is over a finite index set ($E$ finite). Since we can write $V_x = V_x \mathbbm{1}_{H_x<\infty}$, we find that (Strong Markov Property) $\infty = \mathbb{E}_{y} \left[ V_x \right] = \mathbb{E}_{y} \left[ V_x \mathbbm{1}_{H_x<\infty}  \right] = \mathbb{E}_{x} \left[ V_x \right] \mathbb{P}_{y} \left[ H_x < \infty \right] $, because a walk started from $y$ is the same (in the distribution sense) after hitting $x$ for the first time as a walk started from $x$. $\mathbb{P}_{y} \left[ H_x < \infty \right]$ must be $ \leq 1 $, thus the term of the left must be equal to $\infty \implies \mathbb{E}_{x} \left[ V_x \right] = \infty$.
+
+	Thus we know there exists $x \in E$ such that $\mathbb{E}_{y} \left[ V_x \right] = \infty$ since the sum on the left is over a finite index set ($E$ finite). Since we can write $V_x = V_x \mathbbm{1}_{H_x<\infty}$, we find that (using the Strong Markov Property) 
+\begin{align}
+	\infty = \mathbb{E}_{y} \left[ V_x \right] = \mathbb{E}_{y} \left[ V_x \mathbbm{1}_{H_x<\infty}  \right] = \mathbb{E}_{x} \left[ V_x \right] \mathbb{P}_{y} \left[ H_x < \infty \right] 
+,\end{align}
+	 because a walk started from $y$ is the same (in the distribution sense) after hitting $x$ as a walk started from $x$. $\mathbb{P}_{y} \left[ H_x < \infty \right]$ must be $ \leq 1 $, thus the term of the left must be equal to $\infty$, implying that $\mathbb{E}_{x} \left[ V_x \right] = \infty$.
 \end{proof}
 
 
@@ -86,12 +91,12 @@ It is impossible that $\mathbb{P}_{x} \left[ V_x<\infty \right] >0 $ and $\mathb
 	For the SRW, every state is recurrent if $d=1,2$, otherwise they are transient.
 \end{theorem}
 \begin{proof}
-	Let $(Z_k)_{k> 0}$ be i.i.d. random variables on some probability space $(\Omega, \mathcal{F}, \mathbb{P})$ with $\mathbb{P}_{} \left[ Z_i = \pm e_i \right] = \frac{1}{2d}$ for $i= 1 \ldots d$ and $e_i$ being the unit vectors in $\mathbb{Z}^{d}$. Next, define $X_n = \sum_{k=1}^{n} Z_k$, which is a $MC(\delta_0, p)$. Then we find the following:
+	Let $(Z_k)_{k> 0}$ be i.i.d. random variables on some probability space $(\Omega, \mathcal{F}, \mathbb{P})$ with $\mathbb{P}_{} \left[ Z_i = \pm e_i \right] = \frac{1}{2d}$ for $i= 1 \ldots d$ and $e_i$ being the unit vectors in $\mathbb{Z}^{d}$. Next, define $X_n = \sum_{k=1}^{n} Z_k$, which is a $MC(\delta_0, p)$. Then we find the following
 	\begin{align}
 		\mathbb{E}_{} \left[ V_i \right] = \mathbb{E}_{} \left[ \sum_{n> 0}^{} \mathbbm{1}_{X_n =0}  \right] = \sum_{n> 0}^{} \mathbb{P}_{} \left[ X_n = 0 \right] .
 	\end{align}
 	\textbf{Idea:} $\mathbb{P}_{} \left[ X_n=x \right]  = \mathbb{P}_{} \left[ Z_1+ \ldots + Z_n = x \right] = \sum_{\delta_1 + \ldots + \delta_n =x}^{} \mathbb{P}_{} \left[ Z_1 = \delta_1 \right] \cdots \mathbb{P}_{} \left[ Z_n = \delta_n \right]  $ is not easy to calculate. Instead, we use could use the Fourier Transform to link $\mathbb{E}_{} \left[ e^{i X_n} \right] = \mathbb{E}_{} \left[ e^{iZ_1} \right] ^n $ to $(\mathbb{P}_{} \left[ X_n =x\right] )_{x \in \mathbb{Z}^d}$.
-	Define $\phi(\xi) = \mathbb{E}_{} \left[ e^{i \xi \cdot Z_1} \right] $ for $\xi$ in $\Pi^d = [-\pi, \pi)^d$. Then we have:
+	Define $\phi(\xi) = \mathbb{E}_{} \left[ e^{i \xi \cdot Z_1} \right] $ for $\xi$ in $\Pi^d = [-\pi, \pi)^d$. Then we have
 	\begin{align}
 		\phi(\xi) = \frac{1}{2d} \sum_{i=1}^{d} (e^{i \xi \cdot e_1} + e^{i \xi \cdot e_1}) = \frac{1}{d} \sum_{i=1}^{d} \cos(\xi_i)
 	.\end{align}
@@ -214,7 +219,7 @@ Hence, $y$ is recurrent. To show that $\mathbb{P}_{x} \left[ H_y < \infty \right
 	.\end{align}
 \end{theorem}
 \begin{rmk}[]
-	Write $V_{y}^{(n)}=\sum_{k=1}^{n} \chi_{X_k=y}$, "The number of visits to $y$ up to time $n$". Thus the sum in the theorem is "Expected proportion of time spent at $y$".
+	Write $V_{y}^{(n)}=\sum_{k=1}^{n} \mathbbm{1}_{X_k=y}$, "The number of visits to $y$ up to time $n$". Thus the sum in the theorem is "Expected proportion of time spent at $y$".
 \end{rmk}
 
 If $y$ is transient, or null recurrent ($m_y=\infty$), the theorem tells us that $\lim_{n \to \infty}\mathbb{E}_{x} \left[ \frac{V_y^{(n)}}{n} \right] =0$: "null density of visits". Otherwise, $y$ is positive recurrent and the expected density of visits is strictly positive.
@@ -274,7 +279,7 @@ Finally, we can conclude that $\mathbb{E}_{x} \left[ \frac{V_y^{(n)}}{n} \right]
 	Let $R$ be a recurrent class. Then either:
 \begin{itemize}
 	\item For all $x \in R,\ x$ is positive recurrent
-	\item For all $x \in R\ x$ is null recurrent.
+	\item For all $x \in R,\ x$ is null recurrent.
 \end{itemize}
 \end{prop}
 \begin{proof}
@@ -612,7 +617,7 @@ Since $(x,x)$ is null recurrent, $m_x= \infty$, so by the density of visits theo
 The first inequality can be justified by noticing that the probability of the chain hitting $x$ after $n$ and before $ H$ is 0. Hence
 \begin{align}
 	\mathbb{P}_{\mu } \left[ X_n = x \right] &= \frac{1}{k+1} \sum_{i=0}^{k} \mathbb{P}_{\mu } \left[ X_n = x \right] \\
-	&\leq \frac{1}{k+1}\sum_{i=0}^{k} \left| \mathbb{P}_{\mu } \left[ X_n = x \right] - \mathbb{P}_{\mu } \left[ X_{n+i} = x \right] \right| + \underbrace{\frac{1}{k+1} \sum_{i=0}^{k} \mathbb{P}_{\mu } \left[ X_{n+i}=x \right]}_{\leq \epsilon} 
+						 &\leq \underbrace{\frac{1}{k+1}\sum_{i=0}^{k} \left| \mathbb{P}_{\mu } \left[ X_n = x \right] - \mathbb{P}_{\mu } \left[ X_{n+i} = x \right] \right|}_{\to 0} + \underbrace{\frac{1}{k+1} \sum_{i=0}^{k} \mathbb{P}_{\mu } \left[ X_{n+i}=x \right]}_{\leq \epsilon} 
 .\end{align}
 Using the lemma ($\overline{p}$ is irreducible and recurrent) we find that
 \begin{align}
