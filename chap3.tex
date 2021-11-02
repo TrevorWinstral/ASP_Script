@@ -87,7 +87,7 @@ It is impossible that $\mathbb{P}_{x} \left[ V_x<\infty \right] >0 $ and $\mathb
 \section{Recurrence/Transience for the SRW on $\mathbb{Z}^d$}
 \textbf{SRW on $\mathbb{Z}^d$:} $E=\mathbb{Z}^d$, $p_{xy}=\frac{1}{2d}\ if\ \|x-y\|_1=1, 0\ else$ 
 
-\begin{theorem}[]
+\begin{theorem}[Polya]
 	For the SRW, every state is recurrent if $d=1,2$, otherwise they are transient.
 \end{theorem}
 \begin{proof}
@@ -126,25 +126,21 @@ Therefore,
 		\stackrel{\textrm{(MCT)}}{=} \int_{\Pi^d}^{} \frac{1}{1-\phi(\xi)} d \xi
 .\end{align}
 We can see that for any $\xi_i \in [-\pi, \pi )$ we have the inequality $\frac{\xi_i^2}{6} \leq 1 - \cos(\xi_i) \leq \frac{\xi_i^2}{2}$. 
-\begin{center}
-\begin{tikzpicture}
-	\begin{axis}[xmin=- pi, xmax = pi, samples=400]
-		\addplot[black, dashed] {x^2 / 6};
-		\addplot[black]  {1 - cos(deg(x))};
-		\addplot[black, dashed] {x^2 /2};
-	\end{axis}
-	
-\end{tikzpicture}
-\end{center}
+
 With this, we find that $\frac{1}{6d}\| \xi \|_2^2 \leq 1 - \phi(\xi) \leq \frac{1}{2d} \| \xi \|_2^2$, finally giving us
 \begin{align}
 	\sum_{n\geq 0}^{} \mathbb{P}_{} \left[  X_n = 0\right] < \infty \iff \int_{B_1(0)}^{} \frac{d\xi}{\| \xi \|_2^2} < \infty \iff d>2.
 \end{align}
-The final equivalence can be justified by transforming into polar coordinates
+The final equivalence can be justified by using a change of variables and homogeneity. Define $A_i = B_0(2^{-i}) \setminus B_0(2^{-(i+1)})$ for every $i$. Next use the change of variable $\psi = 2^{i}\xi$, we find that
 \begin{align}
-	\int_{B_1(0)}^{} \frac{d\xi}{\| \xi \|_2^2} = \int_{0}^{1} \frac{| \partial B_1(0) |}{r^2} dr = C \int_{0}^{1} r^{d-3} dr.
+	\int_{A_i}^{} \frac{d\xi}{\| \xi \|^2} = \int_{A_0}^{} \frac{2^{2i}}{\| \psi \|^2} (2^{i})^{-d} d\psi
+	= (2^{i})^{2-d} \underbrace{ \int_{A_0}\frac{d\psi}{\| \psi\|^2}}_{=: I_0}.
 \end{align}
-
+Therefore 
+\begin{align}
+	\int_{B_0(1)}^{} \frac{d \xi}{\| \xi \|^2} = \sum_{i=0}^{\infty} \int_{A_i}^{} \frac{d\xi}{\| \xi\| ^2} = I_0 \sum_{i=0}^{\infty} (2^i)^{2-d}.
+\end{align}
+Which is finite if and only if $d>2$.
 \end{proof}
 
 \section{Classification of States}
@@ -269,9 +265,9 @@ Following directly from the definition of $N_n$ we have that for any $n> 0$ that
 .\end{align}
 Hence, for every $n> 0$ 
 \begin{align}
-	\frac{1}{m_y} \leftarrow \frac{N_n}{H^0 + \ldots H^{N_n}} < \frac{V_y^{(n)}}{n} \leq \frac{N_n}{H^0 + \ldots + H^{N_n -1}} \to \frac{1}{m_y}
+\frac{N_n}{H^0 + \ldots H^{N_n}} < \frac{V_y^{(n)}}{n} \leq \frac{N_n}{H^0 + \ldots + H^{N_n -1}} 
 .\end{align}
-Finally, we can conclude that $\mathbb{E}_{x} \left[ \frac{V_y^{(n)}}{n} \right] \to \frac{1}{m_y}$ by the Dominated Convergence Theorem.
+The upper and lower bounds each converge to $\frac{1}{m_y}$ almost surely. Hence, we can conclude that $\mathbb{E}_{x} \left[ \frac{V_y^{(n)}}{n} \right] \to \frac{1}{m_y}$ by the Dominated Convergence Theorem.
 \end{proof}
 
 
@@ -609,7 +605,7 @@ Now, if we consider the product chain $(X_n, Y_n)_{n\geq 0}$ under $\mathbb{P}_{
 \begin{align}
 	\frac{1}{k+1} \sum_{i\leq k}^{} p_{xx}^{(i)} < \epsilon.
 \end{align}
-Since $(x,x)$ is null recurrent, $m_x= \infty$, so by the density of visits theorem, the above sum converges to $0$, thus choosing such a $k$ is possible. Now define the stopping time $H = \min\{j \geq n: X_j = x\}$, 'the first hit time of $x$ after time $n$'. So for every $n\geq 0$ we have
+We can choose such a $k$ using the density of visits theorem and that $(x,x)$ is null recurrent. Now define the stopping time $H = \min\{j \geq n: X_j = x\}$, 'the first hit time of $x$ after time $n$'. So for every $n\geq 0$ we have
 \begin{align}
 	\frac{1}{k+1} \sum_{i=0}^{k} \mathbb{P}_{\mu } \left[ X_{n+1}=x \right]  \leq \frac{1}{k+1} \sum_{i=0}^{k} \mathbb{P}_{\mu } \left[ X_{H+i}=x \right]  
 	\stackrel{\textrm{(SMP)}}{=} \frac{1}{k+1} \sum_{i=0}^{k} \mathbb{P}_{x} \left[ X_i =x \right]  \leq \epsilon.

@@ -275,10 +275,7 @@ Hence, $\pi (x)= \binom{N}{x} \frac{1}{2^N}$, the binomial distribution; which i
 \section{Communication Classes}
 Here we will will see $p$ as a weighted oriented graph.
 \begin{defn}
-	Let $x,y \in E$. Write:
-\itemize
-\item $x \to y$ if $\exists  n \geq 0$ st $p_{xy}^{(n)}> 0$ "y can be reached from x"
-\item $x \leftrightarrow y$ if ($x \to y$ and  $y\to x $) "x and y communicate"
+	Let $x,y \in E$. We say that "$y$ can be reached from $ x$" if there exists an $n \geq 0$ such that  $p_{xy}^{(n)}>0$ and we write $x \to y$. Furthermore, we say that "$x$ and $y $ communicate"  if $y$ can be reached from $x$ and $x$ can be reached from $y$, we write $x  \leftrightarrow y$.
 \end{defn}
 
 \begin{prop}[]
@@ -294,11 +291,8 @@ Here we will will see $p$ as a weighted oriented graph.
 \end{proof}
 
 
-\begin{defn} \hfill
-\begin{itemize}
-\item The equivalence classes of $\leftrightarrow$ are called communication classes.
-\item The chain $p$ is called irreducible if there is a unique communication class.
-\end{itemize}
+\begin{defn}
+	The equivalence classes of $ \leftrightarrow $ are called communication classes, and if there is a single unique communication class for a chain $p$, we say that $p$ is irreducible.
 \end{defn}
 
 \noindent
@@ -307,10 +301,10 @@ Here we will will see $p$ as a weighted oriented graph.
 \begin{defn}
 	A communication class $C$ is closed if for any $x,y \in E$
 \begin{align}
- x \in C, x \to y \implies y \in C,
+ x \in C, x \to y \implies y \in C.
 \end{align}
-i.e. if you start in $C$ you never leave.
 \end{defn}
+"If you start in $C$ you never leave."
 
 \section{Strong Markov Property}
 %$F_n=\sigma(X_0, \ldots ,X_n)$ 
