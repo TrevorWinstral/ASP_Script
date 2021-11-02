@@ -548,7 +548,11 @@ We can now take advantage of the coupling between $X$ and $\tilde{X}$ to conclud
 
 \section{Convergence for Irreducible Aperiodic Chains}
 \begin{theorem}[]
-	Assume $p$ is irreducible and aperiodic, and admits a stationary distribution $\pi $. Then for every distribution $\mu$ on $E$ : $\lim_{n \to \infty}\mathbb{P}_{\mu } \left[ X_n=x \right] = \pi(x)$ for all $x \in E$. 
+	Assume $p$ is irreducible and aperiodic, and admits a stationary distribution $\pi $. Then for every distribution $\mu$ on $E$ and $x \in E$  
+	\begin{align}
+\boxed{	\lim_{n \to \infty}\mathbb{P}_{\mu } \left[ X_n=x \right] = \pi(x)}
+	.\end{align}
+	
 
 	\noindent
 	Equivalently: Under $P_\mu: $ $X_n \stackrel{(law)}{\to} X_\infty$ where $X_\infty \sim \pi$. 
@@ -557,13 +561,68 @@ We can now take advantage of the coupling between $X$ and $\tilde{X}$ to conclud
 	Equivalently: $\forall f:E \to \mathbb{R}$ bounded: $\lim_{n \to \infty} \mathbb{E}_{\mu } \left[ f(X_n) \right] = \int_{E}^{} f d \pi$.
 \end{theorem}
 \textbf{Note} This theorem is important!! 
+\begin{proof}
+	Consider the product chain $(X_n, Y_n)_{n\geq 0}$ as before. We know that $\overline{p}$ is irreducible and positive recurrent, furthermore the stopping time $T=\min\{n\geq 0: X_n = Y_n\}$ is $\mathbb{P}_{\mu \otimes \pi }$-a.s. finite. To check this last claim, simply note that $T \leq H_{(a,a)}$ for any $a$ fixed. Then we have that for every $x \in E$ 
+\begin{align}
+	\left| \mathbb{P}_{\mu } \left[ X_n = x \right] - \pi(x) \right| = \left|\mathbb{P}_{\mu } \left[ X_n = x \right] - \mathbb{P}_{\pi } \left[ X_n = x \right] \right| \leq 2 \mathbb{P}_{\mu \otimes \pi } \left[ T >n \right] \to 0 
+	.\end{align}
+\end{proof}
+
 
 \begin{theorem}[]
-	Assume that $p$ is irreducible, aperiodic, and null recurrent or transient. Then for every distribution $\mu $ and every $x \in E:$ $\lim_{n \to \infty}\mathbb{P}_{\mu } \left[ X_n =x \right] = 0$ 
+	Assume that $p$ is irreducible, aperiodic, and null recurrent or transient. Then for every distribution $\mu $ and every $x \in E$  
+	\begin{align}
+\boxed{	\lim_{n \to \infty}\mathbb{P}_{\mu } \left[ X_n =x \right] = 0 }
+.	\end{align}
+	
 \end{theorem}
 \begin{lemma}[]
 	$\overline{p}$ irreducible and recurrent, then $\forall \mu $ distribution on $E: \forall i\geq 0, \forall x \in E:\, \lim_{n \to \infty} | \mathbb{P}_{\mu } \left[ X_n=x \right] - \mathbb{P}_{\mu } \left[ X_{n+i}=x \right] | = 0$
 \end{lemma}
+\begin{proof}
+	Define the distribution $\mu_i(y) = \mathbb{P}_{\mu } \left[ X_i = y \right] $, 'the $i$-step initial distribution'. Next, observe that
+\begin{align}
+	\mathbb{P}_{\mu _i} \left[ X_n = x \right] &= \sum_{y \in E}^{} \mu _i \mathbb{P}_{y} \left[ X_n = x \right] 
+	\stackrel{\textrm{(SiMP)}}{=} \sum_{y \in E}^{} \mathbb{P}_{\mu } \left[ X_i = y \right] \mathbb{P}_{\mu } \left[ X_{n+i} | X_i = y\right] 
+	= \mathbb{P}_{\mu } \left[ X_{n+i}=x \right] 
+\end{align}
+
+Now, if we consider the product chain $(X_n, Y_n)_{n\geq 0}$ under $\mathbb{P}_{\mu \otimes \mu_i} $ and define the stopping time $T= \min\{n\geq 0: X_n = Y_n\}$. Here, we have that $T<\infty$ almost surely as $\overline{p}$ is recurrent. Hence we find that
+\begin{align}
+	\left| \mathbb{P}_{\mu } \left[ X_n = x \right] - \mathbb{P}_{\mu } \left[ X_{n+i} = x \right] \right|
+	= \left| \mathbb{P}_{\mu } \left[ X_n = x \right] - \mathbb{P}_{\mu} \left[ X_n = x \right] \right| 
+	\leq 2  \mathbb{P}_{\mu \otimes \mu _i} \left[ T>n \right]  \to 0.
+\end{align}
+\end{proof}
+\begin{proof}[Proof (Theorem)]
+	\textbf{Case 1:} Assume $\overline{p}$ transient. If we look at the product chain $(X_n, Y_n)$ under $\mathbb{P}_{\mu \otimes \mu}$, we can see that $(x,x)$ is a transient state. Thus the time of the last visit  $L = \max\{n\geq 0: (X_n, Y_n) = (x,x) \}$ is finite $\mathbb{P}_{\mu \otimes \mu}$-a.s. (if this was not almost sure, then we would have a non-zero probability that $(x,x)$ is revisited infinitely often, thus by the Dichotomy Theorem $(x,x)$ would be recurrent). Thus
+\begin{align}
+	\mathbb{P}_{\mu } \left[ X_n = x \right]^2 = \mathbb{P}_{\mu \otimes \mu} \left[ X_n =x, Y_n=x \right] \leq \mathbb{P}_{\mu \otimes \mu } \left[ L \geq n \right] \to 0.
+\end{align}
+
+\textbf{Case 2:} Assume $\overline{p}$ is null recurrent, fix  $y \in E$. We would like to prove that $p_{yx}^{(n)} \to 0$. To do this fix $\epsilon > 0$ and choose $k$ such that
+\begin{align}
+	\frac{1}{k+1} \sum_{i\leq k}^{} p_{xx}^{(i)} < \epsilon.
+\end{align}
+Since $(x,x)$ is null recurrent, $m_x= \infty$, so by the density of visits theorem, the above sum converges to $0$, thus choosing such a $k$ is possible. Now define the stopping time $H = \min\{j \geq n: X_j = x\}$, 'the first hit time of $x$ after time $n$'. So for every $n\geq 0$ we have
+\begin{align}
+	\frac{1}{k+1} \sum_{i=0}^{k} \mathbb{P}_{\mu } \left[ X_{n+1}=x \right]  \leq \frac{1}{k+1} \sum_{i=0}^{k} \mathbb{P}_{\mu } \left[ X_{H+i}=x \right]  
+	\stackrel{\textrm{(SMP)}}{=} \frac{1}{k+1} \sum_{i=0}^{k} \mathbb{P}_{x} \left[ X_i =x \right]  \leq \epsilon.
+\end{align}
+The first inequality can be justified by noticing that the probability of the chain hitting $x$ after $n$ and before $ H$ is 0. Hence
+\begin{align}
+	\mathbb{P}_{\mu } \left[ X_n = x \right] &= \frac{1}{k+1} \sum_{i=0}^{k} \mathbb{P}_{\mu } \left[ X_n = x \right] \\
+	&\leq \frac{1}{k+1}\sum_{i=0}^{k} \left| \mathbb{P}_{\mu } \left[ X_n = x \right] - \mathbb{P}_{\mu } \left[ X_{n+i} = x \right] \right| + \underbrace{\frac{1}{k+1} \sum_{i=0}^{k} \mathbb{P}_{\mu } \left[ X_{n+i}=x \right]}_{\leq \epsilon} 
+.\end{align}
+Using the lemma ($\overline{p}$ is irreducible and recurrent) we find that
+\begin{align}
+	\limsup_{n\to\infty} \mathbb{P}_{\mu } \left[ X_n = x \right] \leq \epsilon.
+\end{align}
+
+
+	
+\end{proof}
+
 
 \noindent \textbf{Conclusion} We previously asked the following questions:
 \begin{itemize}
