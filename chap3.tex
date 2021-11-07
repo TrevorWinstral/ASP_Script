@@ -223,7 +223,12 @@ If $y$ is transient, or null recurrent ($m_y=\infty$), the theorem tells us that
 \begin{defn}[inter-visit times]
 	Let $y \in E$. Define $H_y^{0}=H_y$ and for all $i\geq 1: H_{y}^{i}= \min\{n \geq 1: X_{H_y^0 +  \ldots  + H_y^{i-1}+n}=y\}$ if $H_y^{i-1}<\infty$, else $+\infty$	
 \end{defn}
-TODO: Figure would be good here
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figures/inter_arrival.pdf}
+	\caption{Inter-arrival times for the Simple Random Walk.}
+\end{figure}
+
 
 \begin{lemma}[]
 	Let $x,y$ with $x \leftrightarrow y$, assume $y$ is recurrent. Then for every $j \geq 1$ and $t_0, \ldots, t_j \in \mathbb{N}$:
@@ -255,18 +260,23 @@ Under $P_x$, $H_y^1,H_y^2, \ldots $ are i.i.d. with law $\mathbb{P}_{x} \left[ H
 	\begin{align}
 		\lim_{i\to \infty } \frac{H^0 + \ldots + H^i}{i} = m_y
 	.\end{align}
-	It should be noted that this includes the case of $m_y=\infty$ by truncation. Now we write $N_n = V_y^{(n)}$ (the number of visits to $y$ at time $n$).
-
-	TODO: Figure
+	Note that this includes the case of $m_y=\infty$ by truncation. Now we write $N_n = V_y^{(n)}$ (the number of visits to $y$ at time $n$).
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.8\textwidth]{figures/inter_arrival_ineq.pdf}
+		\caption{Inter-arrival times of $0$ around time $n$ of the Simple Random Walk.}
+	\end{figure}
 
 Following directly from the definition of $N_n$ we have that for any $n> 0$ that 
 \begin{align}
 	H^0 + \ldots + H^{N_n -1} \leq n < H^0 + \ldots + H^{N_n}
 .\end{align}
+	
 Hence, for every $n> 0$ 
 \begin{align}
 \frac{N_n}{H^0 + \ldots H^{N_n}} < \frac{V_y^{(n)}}{n} \leq \frac{N_n}{H^0 + \ldots + H^{N_n -1}} 
 .\end{align}
+
 The upper and lower bounds each converge to $\frac{1}{m_y}$ almost surely. Hence, we can conclude that $\mathbb{E}_{x} \left[ \frac{V_y^{(n)}}{n} \right] \to \frac{1}{m_y}$ by the Dominated Convergence Theorem.
 \end{proof}
 
@@ -378,23 +388,25 @@ TODO: Applications
 \begin{prop}[]
 	Let $x$ be in $E$. We have $d_x=1$ if and only if there is an $n_0 \geq 1$ such that for every $n \geq n_0$ we have that $ p_{xx}^{(n)}>0$.
 \end{prop}
+\begin{proof}
+	This follows from a lemma out of Number Theory, see the Appendix for more details.
+\end{proof}
+
 TODO: Proof, possibly include number theory lemma in appendix, in my opinion the idea can be explained in a hand wavy fashion intuitively and the algebra distracts from the concept here.
 
-\section{Coupling Method}
+\section{Product Chain}
 TODO: This needs some work with how we phrase it
 
-\textbf{What is coupling?}
-Define probability measures $\mu_1, \mu_2$ on the same space $F_1,F_2$. A coupling between $\mu_1$ and $\mu_2$ is a probability measure $\overline{\mu }$ on $F_1 \times F_2$, 
-$\overline{\mu }(A \times F_2)=\mu_1(A)$ and vice versa. 
+\textbf{Goal} Define two MCs: $X_n$ a MC$(\mu, p)$ and $\tilde{X_n}$ a MC$(\nu, p) $ on the same probability space such that $X_n = \tilde{X_n}$ for $n$ large.
 
-$X_1, X_2$ two random variables on $(\Omega, F, \mathbb{P}) $, $X_1 \sim \mu_1, X_2 \sim \mu_2$, the law of $(X_1,X_2)$ is a coupling!
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figures/coupling.pdf}
+	\caption{A coupling of two simple random walks started from $6$ and $0$}
+\end{figure}
 
-\noindent
-\textbf{Goal} Define two MCs: $X_n \sim MC(\mu, p), \quad \tilde{X_n} \sim MC(\nu, p) $ on the same probability space such that $X_n = \tilde{X_n}$ for n large.
 
-TODO: Figure
-
-To achieve that we first consider two independent chains $X$ and $Y$. We then show that the chains meet almost surely (using some assumptions on $p$ ) at some random time $T$. Then we ask that the chains follow the same trajectory for $t>T$. In order to introduce a suitable probability space, we consider the product chain.
+To achieve that we first consider two independent chains $X$ and $Y$. We then show that the chains meet almost surely (using some assumptions on $p$) at some random time $T$. Then we ask that the chains follow the same trajectory for $t>T$. In order to introduce a suitable probability space, we consider the product chain.
 
 \begin{defn}[Product Chain]
 	Define for every $\omega=(x,y), \ \omega'=(x',y') \in E^2$ 
@@ -454,8 +466,15 @@ Our calculation from before shows that this equality holds for all sets of the f
 \end{prop}
 
 \begin{rmk}[]
-	Aperiodic is important!  $p$ irreducible does not imply that $\overline{p}$ irreducible!
+	Aperiodic is important!  $p$ irreducible does not imply that $\overline{p}$ irreducible! Take $E = \{1,2\}$ and $p_{12} = p_{21}=1$, the product chain here is no longer irreducible.
 \end{rmk}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/non_irred_prod_chain.pdf}
+\caption{Example of an irreducible chain, with a reducible product chain.}
+\end{figure}
+
 \begin{proof}
 	Let $w=(x,y)$ and $w'=(x',y') \in E^2$. By irreducibility we can choose $k,l\geq 0$ such that $p_{xx'}^{(k)}, p_{yy'}^{(l)} >0$. Then for every $n \gg \max(k,l)$ we have
 \begin{align}

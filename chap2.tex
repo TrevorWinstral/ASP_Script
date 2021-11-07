@@ -62,10 +62,11 @@ We could also represent this as a weighted directional graph with vertices $E$ a
 
 \begin{figure}[!h]
 	\centering
-	$\vcenter{\hbox{\includegraphics[width=0.35\textwidth]{figures/3_step_MC.pdf}}}$
-	\phantom{\includegraphics[width=0.1\textwidth]{figures/6_step_MC.pdf}}
-	$\vcenter{\hbox{\includegraphics[width=0.35\textwidth]{figures/6_step_MC.pdf}}}$
-\caption{3-State Markov Chain and 6-State (asymmetric) Markov Chain}
+	%$\vcenter{\hbox{\includegraphics[width=0.35\textwidth]{figures/3_step_MC.pdf}}}$
+	%\phantom{\includegraphics[width=0.1\textwidth]{figures/6_step_MC.pdf}}
+	%$\vcenter{\hbox{\includegraphics[width=0.35\textwidth]{figures/6_step_MC.pdf}}}$
+	\includegraphics[width=\textwidth]{figures/n_step_MC.pdf}
+\caption{6-State (asymmetric) Markov Chain and 3-State Markov Chain}
 \end{figure}
 
 \begin{prop}
@@ -332,7 +333,7 @@ Here we will will see $p$ as a weighted oriented graph.
 .\end{align}
 \end{theorem}
 \noindent
-"Conditioned on $\{T<\infty,X_T=x\}$, $(X_{T+n})_{n\geq 0}$ is a $ \textrm{MC}(\delta_x,p)$ independent of $F_T$ "
+"Conditioned on $\{T<\infty,X_T=x\}$, $(X_{T+n})_{n\geq 0}$ is a $ \textrm{MC}(\delta_x,p)$ independent of $ \mathcal{F}_T$ "
 \begin{proof}
 We will multiply each side of the equation by $\mathbb{P}_{} \left[ T < \infty, X_T =x \right]$.
 \begin{align}
