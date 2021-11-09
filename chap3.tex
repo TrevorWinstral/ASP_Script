@@ -98,7 +98,7 @@ It is impossible that $\mathbb{P}_{x} \left[ V_x<\infty \right] >0 $ and $\mathb
 	\textbf{Idea:} $\mathbb{P}_{} \left[ X_n=x \right]  = \mathbb{P}_{} \left[ Z_1+ \ldots + Z_n = x \right] = \sum_{\delta_1 + \ldots + \delta_n =x}^{} \mathbb{P}_{} \left[ Z_1 = \delta_1 \right] \cdots \mathbb{P}_{} \left[ Z_n = \delta_n \right]  $ is not easy to calculate. Instead, we use could use the Fourier Transform to link $\mathbb{E}_{} \left[ e^{i X_n} \right] = \mathbb{E}_{} \left[ e^{iZ_1} \right] ^n $ to $(\mathbb{P}_{} \left[ X_n =x\right] )_{x \in \mathbb{Z}^d}$.
 	Define $\phi(\xi) = \mathbb{E}_{} \left[ e^{i \xi \cdot Z_1} \right] $ for $\xi$ in $\Pi^d = [-\pi, \pi)^d$. Then we have
 	\begin{align}
-		\phi(\xi) = \frac{1}{2d} \sum_{i=1}^{d} (e^{i \xi \cdot e_1} + e^{i \xi \cdot e_1}) = \frac{1}{d} \sum_{i=1}^{d} \cos(\xi_i)
+		\phi(\xi) = \frac{1}{2d} \sum_{i=1}^{d} (e^{i \xi \cdot e_1} + e^{-i \xi \cdot e_1}) = \frac{1}{d} \sum_{i=1}^{d} \cos(\xi_i)
 	.\end{align}
 	Fixing $n\geq 0$, we have (by independence) that the characteristic function of $X_n$ is 
 	\begin{align}
@@ -522,7 +522,6 @@ Showing that $\pi \otimes \pi $ is stationary for $\overline{p}$, implying that 
 		X_n & \textrm{for } n \geq T
 	\end{cases}
 	.\end{align}
-TODO: Figure
 
 We now show that $(\tilde{X}_n)$ is a MC$(\nu, p)$ under $\mathbb{P} = \mathbb{P}_{\mu \otimes \nu}$. Let $n\geq 0$ and $x_0, \ldots, x_n \in E$. Now we distinguish between possible values for $T$ and find
 \begin{align}
@@ -578,7 +577,7 @@ We can now take advantage of the coupling between $X$ and $\tilde{X}$ to conclud
 	Equivalently: Under $P_\mu: $ $X_n \stackrel{(law)}{\to} X_\infty$ where $X_\infty \sim \pi$. 
 
 	\noindent
-	Equivalently: $\forall f:E \to \mathbb{R}$ bounded: $\lim_{n \to \infty} \mathbb{E}_{\mu } \left[ f(X_n) \right] = \int_{E}^{} f d \pi$.
+	Equivalently: For all $f:E\to \mathbb{R}$ bounded: $\lim_{n \to \infty} \mathbb{E}_{\mu } \left[ f(X_n) \right] = \int_{E}^{} f d \pi$.
 \end{theorem}
 \textbf{Note} This theorem is important!! 
 \begin{proof}

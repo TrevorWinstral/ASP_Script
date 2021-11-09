@@ -6,7 +6,7 @@
 \textbf{Outset} We would like to define a class of processes such that the evolution of the process is memoryless, but still location dependent. This means that the way a process continues past this point in time, does not depend on how it got to where it is now, but only on where it is at this point in time. 
 
 \begin{defn}
-	A sequence $X_n, n \in \mathbb{N}$ of random variables with values in $E$ is a (time homogeneous) Markov Chain (MC) if:
+	Let $X=(X_n)_{n \in \mathbb{N}}$ be a sequence of random variables in $E$. We say that $X$ is a time homogeneous Markov Chain (MC) if:
 \begin{enumerate}
 	\item  For all $n \geq 0$ and $x_1,\ldots,x_{n+1} \in E$
 \begin{align}
@@ -20,15 +20,27 @@
 
 \end{defn}
 
-
-By convention when we write $\mathbb{P} \left[ A|B \right] $ we assume $\mathbb{P} \left[ B \right] >0$.
+\textbf{Note:} By convention when we write $\mathbb{P} \left[ A|B \right] $ we assume $\mathbb{P} \left[ B \right] >0$.
 
 \begin{rmk}
-The first condition is equivalent to for all $f:E\to \mathbb{R}$ bounded, $\mathbb{E} \left[ f(X_{n+1}) | X_0,\ldots,X_n \right] = \mathbb{E} \left[ f(X_{n+1}) | X_n \right] $
+The first condition is equivalent to
+\begin{align}
+	\forall f:E\to \mathbb{R}\textrm{ bounded},\ \mathbb{E} \left[ f(X_{n+1}) | X_0,\ldots,X_n \right] = \mathbb{E} \left[ f(X_{n+1}) | X_n \right] 
+.\end{align}
+
 \end{rmk}
+{\color{blue}
+\begin{rmk}
+The first condition is equivalent to for all $f: E\to \mathbb{R}$ bounded,
+\begin{align}
+	\boxed{\mathbb{E} \left[ f(X_{n+1}) | X_0,\ldots,X_n \right] = \mathbb{E} \left[ f(X_{n+1}) | X_n \right]} 
+.\end{align}
+
+\end{rmk}
+}
 
 \begin{ex}
-	If $X_n$ are i.i.d. in $E$ then $X_n$ is a Markov Chain
+	If $X_n$ are i.i.d. in $E$ then $(X_n)$ is a Markov Chain.
 \end{ex}
 
 \begin{ex}
@@ -36,29 +48,23 @@ The first condition is equivalent to for all $f:E\to \mathbb{R}$ bounded, $\math
 \end{ex}
 
 \section{Transition Probabilities}
-\textbf{Motivation} In a finite state space $E=\{1,2,3\}$, then we write the probability to go from 1 to 2 as $p_{12}$. We would like to write these probabilities in a matrix.
 
 \begin{defn}
-	A transition probability is a collection $p=(p_{x,y})_{x,y \in E}$ such that:
+	A \emph{transition probability} is a collection $p=(p_{x,y})_{x,y \in E}$ such that:
 	\begin{itemize}
-		\item For any $x,y \in E$: $p_{x,y}\in [0,1]$ 
-		\item $\sum_{y \in E} p_{x,y}=1$
+		\item For any $x,y \in E$: $p_{x,y}\in [0,1]$, and
+		\item $\sum_{y \in E} p_{x,y}=1$.
 	\end{itemize}
 	
 \end{defn}
 
-We could also represent this as a weighted directional graph with vertices $E$ and weighted oriented edges: $\{(x,y) \in E: p_{x,y}>0\}$. We know there is a 1 to 1 correspondence between directional graphs and matrices.
+There are a few different representations of transition probabilities.
 
-\textbf{Matrix} So say $E=\{1,\ldots,N\}$ and $p=(p_{ij})_{1\leq i,j\leq N}$ with $p_{ij}\geq 0$ and $\sum_{j}p_{ij}=1$. We call this a stochastic matrix.
+\textbf{Graph} For $E$ finite or countable, we could set the vertices of a weighted oriented graph to the elements of $E$, and the edges to $(x,y)\in E^2$ with the weights $p_{xy}$. Note here that the sum of the weights of the edges leaving a vertex is equal to 1.
 
-\textbf{Operator} If $E$ is finite or infinite then $\forall f \in L^\infty (E)$ define $Pf \in L^\infty (E)$ by  $Pf(x)=\sum_{y \in E}P_{x,y}f(y)$ with $P\geq 0 $ ($\forall  f \geq 0: Pf \geq 0$ ) and satisfies $P1=1$.
+\textbf{Matrix} Say $E=\{1,\ldots,N\}$ and $p=(p_{ij})_{1\leq i,j\leq N}$ with $P_{ij}\geq 0$ and $\sum_{j}p_{ij}=1$. We call this a stochastic matrix.
 
-\begin{defn}
-	Let $p$ be a transition probability, $\psi$ distribution on $E$, a sequence $(X_n)_{n\geq 0}$ of random variables with values in $E $ is a Markov Chain with initial distribution $\mu$ and transition probability $p$ (written $ \textrm{MC}(\psi, p)$) if for $x_0, \ldots, x_n \in E$
-\begin{align}
-	\boxed{ \mathbb{P} \left[ X_0=x_0, \ldots ,X_n=x_n \right] = \mu(x_0)p_{x_0,x} \cdots p_{x_{n-1},x_{n}} }
-.\end{align}
-\end{defn}
+\textbf{Operator} If $E$ is finite or infinite then for all $f \in L^\infty (E)$ define the functor $Pf \in L^\infty (E)$ by  $Pf(x)=\sum_{y \in E}P_{x,y}f(y)$ with $P\geq 0 $ (for all $f \geq 0: Pf \geq 0$ ) and satisfies $P1=1$.
 
 \begin{figure}[!h]
 	\centering
@@ -69,31 +75,84 @@ We could also represent this as a weighted directional graph with vertices $E$ a
 \caption{6-State (asymmetric) Markov Chain and 3-State Markov Chain}
 \end{figure}
 
+\begin{defn}
+	Let $p$ be a transition probability, $\mu$ a distribution on $E$, a sequence $(X_n)_{n\geq 0}$ of random variables with values in $E $ is a Markov Chain with initial distribution $\mu$ and transition probability $p$ (written $ \textrm{MC}(\mu, p)$) if for $x_0, \ldots, x_n \in E$
+\begin{align}
+	\boxed{ \mathbb{P} \left[ X_0=x_0, \ldots ,X_n=x_n \right] = \mu(x_0)p_{x_0,x} \cdots p_{x_{n-1},x_{n}} }
+.\end{align}
+\end{defn}
+
+
 \begin{prop}
-	Let $(X_n)_{n \geq 0}$ sequence of random variables with values in $E$:
+	Let $X=(X_n)_{n \geq 0}$ sequence of random variables with values in $E$:
 	\begin{align}
-		(X_n)_{n \geq 1}\textrm{ is a Markov Chain }\iff \exists \mu, p\textrm{ such that }(X_n)_n \textrm{ is a }MC(\mu, p)
+	X\textrm{ is a Markov Chain }\iff \exists \mu, p\textrm{ such that }X\textrm{ is a }MC(\mu, p)
 	.\end{align}
 	
 \end{prop}
 \begin{proof}
-	$\implies:$ If $X_n$ is a Markov Chain, then set $p_{xy}=\mathbb{P}_{} \left[ X_{n+1}=y | X_{n}=x \right] $. $\sum_{y \in E}^{} p_{xy}=1$, as the conditional probability is a probability measure itself, and $p_{xy}\geq 0, \forall x, y \in E$ for the same reason. Thus we have that the collection of $(p_{xy})_{x,y \in E}$ form a transition probability. Setting $\mu(x) = \mathbb{P}_{} \left[ X_0 =x \right] $, which is also clearly a probability measure on $E$. Now we only have to show that $X_{n} $ is a $ \textrm{MC}(\mu, p)$. For every $x_0,\ldots , x_n \in E$, and every $n\geq 0$, we have
+	$\implies:$ Define $\mu =$ law of $X_0$ and set 
+	\begin{align}
+		p_{xy} = 
+	\begin{cases}
+		\mathbb{P}_{} \left[ X_{n+1}=y | X_n -x \right] & \textrm{if } \exists n: \mathbb{P}_{} \left[ X_n = x \right] >0 \\
+		\mathbbm{1}_{x=y} & \textrm{else}
+	\end{cases}.
+	\end{align}
+	By homogeneity, $p_{xy}$ is well-defined. Furthermore, for every $x_0,\ldots,x_n \in E$ we have
 \begin{align}
 & \mathbb{P}_{} \left[ X_0=x_0, \ldots ,X_n=x_n \right] \\ 
 	& \qquad = \mathbb{P}_{} \left[ X_n = x_n | X_0=x_0 , \ldots , X_{n-1}=x_{n-1} \right] \mathbb{P}_{} \left[ X_0=x_0 , \ldots , X_{n-1}=x_{n-1} \right] \\
 	& \qquad = \mathbb{P}_{} \left[ X_0 = x_0 \right] \prod_{i=1}^{n} \mathbb{P}_{} \left[ X_i = x_i | X_0=x_0, \ldots , X_{i-1}=x_{i-1} \right] \\
 	& \qquad = \mu(x_0) \prod_{i=1}^n \mathbb{P}_{} \left[ X_i = x_i | X_{i-1} = x_{i-1}  \right] = \mu(x_0) \prod_{i=1}^n p_{x_{i-1}x_{i}} 
 .\end{align}
-Thus we have proven this implication, by using the Markov Property of Markov Chains.
-
-$\impliedby:$ Here we have to show the two aspects of a Markov chain, the Markov Property and homogeneity. For homogeneity we have
+It remains to check that $p$ is a transition probability. Let $x \in E$. If there exists $n\geq 0$ such that $\mathbb{P}_{} \left[ X_n=x \right] >0$, then 
+\begin{align}
+	\sum_{y \in E}^{} p_{xy} = \sum_{y \in E}^{} \mathbb{P}_{} \left[ X_{n+1}=y | X_n =x \right] =1.
+\end{align}
+Otherwise,
+\begin{align}
+	\sum_{y \in E}^{} p_{xy} = \sum_{y \in E}^{} \mathbbm{1}_{x=y} =1
+.\end{align}
+$\impliedby:$ Assume  $(X_n)_{n\geq 0}$ is an MC$(\mu ,p)$. Let $n\geq 0$ and $x_0,\ldots,x_{n+1}$ such that $\mu (x_0) p_{x_0 x_1}\cdots p_{x_{n-1}x_n}>0$. We have that
+\begin{align}
+	\mathbb{P}_{} \left[ X_{n+1} = x_{n+1} | x_0 = x_0, \ldots, X_n = x_n \right] = \frac{\mathbb{P}_{} \left[ X_0 = x_0, \ldots, X_{n+1}= x_{n+1} \right] }{\mathbb{P}_{} \left[ X_0=x_0, \ldots, X_n = X_n \right] } = p_{x_nx_{n+1}}.
+\end{align}
+Now let $n\geq 0$ and $y \in E$ such that $\mathbb{P}_{} \left[ X_n = x \right] > 0$.
 \begin{align}
 &	\mathbb{P}_{} \left[ X_{n+1} = y | X_n =x \right] \\
-&\qquad = \sum_{(u_0, \ldots ,u_{n-1}) \in E^n}^{} \mathbb{P}_{} \left[ X_{n+1}=y | X_0=u_0, \ldots ,X_{n-1}=u_{n-1}, X_n =x \right] * \\
+&\qquad = \sum_{(u_0, \ldots ,u_{n-1}) \in E^n}^{} \mathbb{P}_{} \left[ X_{n+1}=y | X_0=u_0, \ldots ,X_{n-1}=u_{n-1}, X_n =x \right] \cdot \\
 & \qquad \qquad \qquad \qquad \qquad  \mathbb{P}_{} \left[ X_0=u_0, \ldots , X_{n-1}=u_{n-1} | X_n = x \right] \\
 &\qquad = p_{xy} \sum_{(u_0, \ldots ,u_{n-1})\in E^n}^{} \mathbb{P}_{} \left[ X_0=u_0, \ldots ,X_{n-1}=u_{n-1} | X_n = x \right] = p_{xy}
 .\end{align}
-here we have implicitly (sneakily) assumed that $\mathbb{P}_{} \left[ X_n = x \right] > 0$, as without this the conditional probability we are taking is not well-defined.
+This concludes that $X$ fulfills the two properties of a Markov Chain.
+
+{\color{blue}
+	$\implies:$ If $X_n$ is a Markov Chain, then set
+	\begin{align}
+		p_{xy} = 
+	\begin{cases}
+		\mathbb{P}_{} \left[ X_{n+1}=y | X_n -x \right] & \textrm{if } \exists n: \mathbb{P}_{} \left[ X_n = x \right] >0 \\
+		\mathbbm{1}_{x=y} & \textrm{else}
+	\end{cases}.
+	\end{align}
+	We have that $\sum_{y \in E}^{} p_{xy}=1$, as the conditional probability is a probability measure itself, and $p_{xy}\geq 0$, for every $x, y \in E$ for the same reason. Thus we have that the collection of $(p_{xy})_{x,y \in E}$ form a transition probability. Setting $\mu(x) = \mathbb{P}_{} \left[ X_0 =x \right] $, which is also clearly a probability measure on $E$. Now we only have to show that $X_{n} $ is a $ \textrm{MC}(\mu, p)$. For every $x_0,\ldots , x_n \in E$, and every $n\geq 0$, we have
+\begin{align}
+& \mathbb{P}_{} \left[ X_0=x_0, \ldots ,X_n=x_n \right] \\ 
+	& \qquad = \mathbb{P}_{} \left[ X_n = x_n | X_0=x_0 , \ldots , X_{n-1}=x_{n-1} \right] \mathbb{P}_{} \left[ X_0=x_0 , \ldots , X_{n-1}=x_{n-1} \right] \\
+	& \qquad = \mathbb{P}_{} \left[ X_0 = x_0 \right] \prod_{i=1}^{n} \mathbb{P}_{} \left[ X_i = x_i | X_0=x_0, \ldots , X_{i-1}=x_{i-1} \right] \\
+	& \qquad = \mu(x_0) \prod_{i=1}^n \mathbb{P}_{} \left[ X_i = x_i | X_{i-1} = x_{i-1}  \right] = \mu(x_0) \prod_{i=1}^n p_{x_{i-1}x_{i}} 
+.\end{align}
+Thus we have proven this implication by using the Markov property of Markov Chains.
+
+$\impliedby:$ Here we have to demonstrate the two properties of a Markov Chain, the Markov property and homogeneity. For homogeneity we have
+\begin{align}
+&	\mathbb{P}_{} \left[ X_{n+1} = y | X_n =x \right] \\
+&\qquad = \sum_{(u_0, \ldots ,u_{n-1}) \in E^n}^{} \mathbb{P}_{} \left[ X_{n+1}=y | X_0=u_0, \ldots ,X_{n-1}=u_{n-1}, X_n =x \right] \cdot \\
+& \qquad \qquad \qquad \qquad \qquad  \mathbb{P}_{} \left[ X_0=u_0, \ldots , X_{n-1}=u_{n-1} | X_n = x \right] \\
+&\qquad = p_{xy} \sum_{(u_0, \ldots ,u_{n-1})\in E^n}^{} \mathbb{P}_{} \left[ X_0=u_0, \ldots ,X_{n-1}=u_{n-1} | X_n = x \right] = p_{xy}
+.\end{align}
+here we have implicitly assumed that $\mathbb{P}_{} \left[ X_n = x \right] > 0$, as without this the conditional probability we are taking is not well-defined. In the case where this is not true, the fulfillment of the homogeneity property is trivial as the transition probability is constantly $1$.
 
 For the Markov Property we have
 \begin{align}
@@ -104,7 +163,7 @@ For the Markov Property we have
 	&= p_{x_n x_{n+1}} = \mathbb{P}_{} \left[ X_{n+1} = x_{n+1} | X_n=x_n \right] 
 .\end{align}
 Where it is important to note that, again,  we have implicitly assumed that \newline $\mu(x_0)p_{x_0x_1} \cdots p_{x_{n-1}x_n}>0$. 
-
+}
 \end{proof}
 
 
@@ -113,23 +172,39 @@ Where it is important to note that, again,  we have implicitly assumed that \new
 \section{Existence}
 
 \begin{theorem}
-	Let $p$ be a transition probability on $E$. Then there exists:
+	Let $p$ be a transition probability on $E$. Then there exist:
 \begin{enumerate}
-	\item a measurable space $(\Omega, F)$
-	\item a collection of probability measures $(P_x)_{x}$ on $(\Omega, F)$
-	\item a sequence of random variables $(X_n)_{n \geq 0}$ on $(\Omega, F)$ such that for all $x\in E$, under $P_x$, $(X_n)$ is  $ \textrm{MC}(\delta_x, p)$
+	\item a measurable space $(\Omega, F)$,
+	\item a collection of probability measures $(\mathbb{P}_x)_{x}$ on $(\Omega, F)$, and
+	\item a sequence of random variables $(X_n)_{n \geq 0}$ on $(\Omega, F)$ such that for all $x\in E$, under $P_x$, $(X_n)$ is  $ \textrm{MC}(\delta_x, p)$.
 \end{enumerate}
 
 \end{theorem}
 
-There are 2 approaches to prove this. 
-
-One could set $\Omega = E^{\mathbb{N}}, \quad \mathbb{P} \left[ (x_0, \ldots ,x_n) | x \in E^n \right] = \delta_x(x_0) p_{x_0,x_1} \cdots p_{x_{n-1},x_n}$.
-Instead we will work as follows:
 \begin{proof}
-	We consider a measure $\mu $ on $E$ such that $\forall x \in E: \mu (x) >0$ on some abstract probability space (this part is of technical relevance) $(\Omega, \mathcal{F}, \mathbb{P} )$. Now we look at a random variable $X_0$ with distribution $\mu$, and $U_1,U_2, \ldots $ independent, uniformly distributed, random variables on $[0,1]$ (we know these exist from previous probability lectures). Our goal is to use these uniform random variables to produce the probabilities given by the transition probabilities, in a way similar to Sklar's Theorem (knowledge of Sklar's is not needed here). To do this we enumerate $E=\{x_i, i \in I \}$ where $I$ is our index set (eg. $\{1,2, \ldots ,n\}$ or  $\mathbb{N}$) and set $s_{ij}= \sum_{k<j}p_{x_ix_k} $. Note here that $s_{i,j+1}-s_{i,j} = p_{x_ix_j} $. Finally, set $\Phi: E \times [0,1] \to E; (x_i,u) \mapsto x_j $ if $u \in (s_{i,j}, s_{i,j+1}]$, a measurable function. Now we have $X_0$ as needed and the tools to construct the sequence of random variables, along with the collection of probability measures we want.
+	We first fix a measure $\mu $ on $E$ with $\mu (x)>0$ for every $x$ and construct a MC$(\mu,p)$ on some abstract probability space $(\Omega, \mathcal{F}, \mathbb{P}_{})$. Consider $X_0$ a random variable with law $\mu $, $U_1, U_2, \ldots$ i.i.d uniform random variable on  $[0,1]$. One can construct a measurable function $\Phi: E \times [0,1] \to E$ such that for any  $x \in E\ \mathbb{P}_{} \left[ \Phi(x,U)=y \right] = p_{xy}$. To achieve this, order $E=\{x_1, x_2, \ldots \}$ and define for every  $s_{i,j} = \sum_{k<j}^{} p_{x_ix_k}$ for every $i, j$, then set $\Phi(x_i, u) = x_j$ if $s_{ij}\leq u < s_{ij} p_{x_ix_j}$. Define by induction, for every $n\geq 0$ 
+	\begin{align}
+		X_{n+1} = \Phi(X_n, U_{n+1}).
+	\end{align}
+Then we have for every $x_0, \ldots, x_n \in E$ 
+\begin{align}
+	\mathbb{P}_{} \left[ X_0=x_0, \ldots ,X_n=x_n \right] &=
+		\mathbb{P}_{} \left[ X_0=x_0, \Phi(x_0, U_1)=x_1 , \ldots , \Phi(x_{n-1}, U_{n}) = x_n \right] \\
+	&= \mu(x_0)p_{x_0x_1} \cdots p_{x_{n-1}x_n}
+\end{align}
+Now define for every $x \in E$ $\mathbb{P}_{x}  = \mathbb{P}_{} \left[ \cdot | X_0 = x \right] $, this is well defined as $\mu (x)>0$. Then we have that for all $x \in E$ 
+\begin{align}
+	\mathbb{P}_{x} \left[ X_0 = x_0, \ldots, X_n = x_n \right] = \delta_x(x_0) p_{x_0 x_1} \cdots p_{x_{n-1}x_n}.
+\end{align}
 
-	What these tools have given us is that $\mathbb{P}_{} \left[\Phi(x,U_1) = y  \right] = p_{xy}$. So if we set $X_{n+1} = \Phi(X_n, U_{n+1})$ for every $n>0$ (by induction), we find that
+{\color{blue}
+We consider a measure $\mu $ on $E$ such that for every $x \in E: \mu (x) >0$, some abstract probability space $(\Omega, \mathcal{F}, \mathbb{P} )$, let $X_0$ be a random variable with distribution $\mu $. Let $U_1,U_2, \ldots $ be i.i.d. uniform  random variables on $[0,1]$. Our goal is to use these uniform random variables to produce the probabilities given by the transition probabilities, in a way similar to Sklar's Theorem (knowledge of Sklar's is not needed here). To do this we enumerate $E=\{x_i, i> 0 \}$ and set $s_{ij}= \sum_{k<j}p_{x_ix_k} $. Note here that $s_{i,j+1}-s_{i,j} = p_{x_ix_j} $. Finally, set
+\begin{align}
+	\Phi: E \times [0,1] \to E;\ (x_i,u) \mapsto x_j \textrm{ if } u \in (s_{ij}, s_{i,j+1}]
+.\end{align}
+Now we have $X_0$ as needed and the tools to construct the sequence of random variables, along with the collection of probability measures we want.
+
+We now have that $\mathbb{P}_{} \left[\Phi(x,U_1) = y  \right] = p_{xy}$. So if we set $X_{n+1} = \Phi(X_n, U_{n+1})$ for every $n>0$ (by induction), we find that
 \begin{align}
 	\mathbb{P}_{} \left[ X_0=x_0, \ldots ,X_n=x_n \right] &=
 		\mathbb{P}_{} \left[ X_0=x_0, \Phi(x_0, U_1)=x_1 , \ldots , \Phi(x_{n-1}, U_{n}) = x_n \right] \\
@@ -137,22 +212,27 @@ Instead we will work as follows:
 ,\end{align}
 by independence.
 
-Now if we define $\mathbb{P}_{x} $ as $\mathbb{P}_{} \left[\ \cdot\ | X_0 = x_0 \right] $, then we have $\forall x \in E$ $\mathbb{P}_{x} \left[ X_0=x_0, \ldots ,X_n=x_n \right] = \delta_x(x_0)p_{x_0x_1} \cdots p_{x_{n-1}x_n}$.
-
-
+Now if we define $\mathbb{P}_{x} $ as $\mathbb{P}_{} \left[\ \cdot\ | X_0 = x_0 \right] $, then we have for every $x \in E$ that
+\begin{align}
+	\mathbb{P}_{x} \left[ X_0=x_0, \ldots ,X_n=x_n \right] = \delta_x(x_0)p_{x_0x_1} \cdots p_{x_{n-1}x_n}
+.\end{align}
+}
 \end{proof}
-
 
 \noindent
 \textbf{Framework for the rest of the chapter} 
-$E$ is finite or countable, $p$ transition probability, $(\Omega, F, (P_x)_{x \in E})$ Prob. Spaces, $(X_n)_{n \geq 0}$ random variables such that it is a  $ \textrm{MC}(\delta_x, p)$ under $P_x$.
+$E$ is finite or countable, $p$ transition probability, $(\Omega, \mathcal{F}, (P_x)_{x \in E})$ Probability Spaces, $(X_n)_{n \geq 0}$ random variables such that it is a  $ \textrm{MC}(\delta_x, p)$ under $P_x$.
 
-For $\mu$ Prob measure on $E $ we write $P_\mu= \sum_{x}\mu(x)P_x$
+For $\mu$ Prob measure on $E $ we write $\mathbb{P}_\mu = \sum_{x}\mu(x)\mathbb{P}_{x}$
 
 \section{Simple Markov Property}
-Under $P_\mu$ $(X_n)_{n \geq 0}$ is $ \textrm{MC}(\mu, p)$.
-$P_\mu [X_{n+1}=x_{n+1} | X_0 = x_0, \ldots ,.X_n=x_n] = P_\mu[X_{n+1}=x_{n+1}| X_n = x_n] = P_{x_n}[X_1 =x_{n+1}]$ i.e. Conditional on $X_n=x$, $x_{n+1}$ is sampled like the first step of a $ \textrm{MC}(\delta_{x},p)$ independent of the past.
-
+\begin{rmk}[]
+Under $\mathbb{P}_\mu$, $X=(X_n)_{n \geq 0}$ is $ \textrm{MC}(\mu, p)$.
+\begin{align}
+	\mathbb{P}_\mu [X_{n+1}=x_{n+1} | X_0 = x_0, \ldots ,.X_n=x_n] = \mathbb{P}_\mu[X_{n+1}=x_{n+1}| X_n = x_n] = \mathbb{P}_{x_n}[X_1 =x_{n+1}]
+\end{align}
+i.e. conditional on $X_n=x$, $x_{n+1}$ is sampled like the first step of a $ \textrm{MC}(\delta_{x},p)$ independent of the past.
+\end{rmk}
 \textbf{Notation} $ \mathcal{F}_n = \sigma(X_0, \ldots ,X_n)$ 
 
 \begin{theorem}[Simple Markov Property (SiMP)]
@@ -162,7 +242,11 @@ $P_\mu [X_{n+1}=x_{n+1} | X_0 = x_0, \ldots ,.X_n=x_n] = P_\mu[X_{n+1}=x_{n+1}| 
 \end{align}
 \end{theorem}
 \begin{proof}
-	First note that using $Z= \mathbbm{1}_{X_0=x_0, \ldots ,X_{k-1}=x_{k-1}}$ we only have to prove that \newline $\mathbb{E}_{\mu } \left[ f((X_{k+n})_{n\geq 0}) | X_0=x_0 , \ldots , X_k=x_k \right]= \mathbb{E}_{x_k} \left[ f((X_n)_{n\geq 0}) \right]$. We will proceed using measure theoretic induction (see any book on measure theory). Approximate $f$ by step functions $f_k$, using linearity, we only have to show our claim for the function $\mathbbm{1}_{A} $ with $A \subset E ^{\mathbb{N}}$, i.e. 
+	First note that using $Z= \mathbbm{1}_{X_0=x_0, \ldots ,X_{k-1}=x_{k-1}}$ we only have to prove that 
+\begin{align}
+	\mathbb{E}_{\mu } \left[ f((X_{k+n})_{n\geq 0}) | X_0=x_0 , \ldots , X_k=x_k \right]= \mathbb{E}_{x_k} \left[ f((X_n)_{n\geq 0}) \right]
+.\end{align}
+	 We will proceed using measure theoretic induction (see any book on measure theory). Approximate $f$ by step functions $f_k$, using linearity, we only have to show our claim for the function $\mathbbm{1}_{A} $ with $A \subset E ^{\mathbb{N}}$ measurable, i.e. 
 	\begin{align}
 	\mathbb{P}_{\mu } \left[ (X_{k+n})_{n\geq 0}\in A | X_0=x_0, \ldots ,X_k=x_k \right] = \mathbb{P}_{x_k} \left[ (X_n)_{n\geq 0} \in A \right] 
 .\end{align}  
@@ -179,7 +263,7 @@ Dynkin's Lemma then allows us to extend this property to the entire $\sigma$-alg
 
 
 \begin{cor}
-Let $\mu$ be a  distribution on $E$, $x \in E$, $k \in \mathbb{N}$, $\forall f: E^{\mathbb{N}} \to \mathbb{R}$ measurable and bounded:
+Let $\mu$ be a  distribution on $E$, $x \in E$, $k \in \mathbb{N}$, for all $f: E^{\mathbb{N}} \to \mathbb{R}$ measurable and bounded:
 \begin{align}
 	\boxed{	\mathbb{E}_\mu \left[ f((X_{k+n})_{n \geq 0} | X_k =x \right] = \mathbb{E} _x \left[ f((X_n)_{n \geq 0} \right] } . 
 \end{align}
@@ -209,16 +293,21 @@ Fix $m,n$ and $x,y \in E$.
 \end{proof}
 
 
-\begin{rmk}[]
+\begin{prop}[]
 	If $E$ is finite:
-\itemize
-\item The matrix $(p_{ij}^{(n)})_{ij \leq 0}=P^n$
-\item For $\mu$ a distribution on $E$ the following holds for any $f:E \to \mathbb{R}$
+The matrix $(p_{ij}^{(n)})_{ij \leq 0}$ is equal to $P^n$. for $\mu$ a distribution on $E$ the following holds for any $f:E \to \mathbb{R}$
 	\begin{align}
 	\mathbb{E}_{\mu} \left[ f(X_n) \right] = \mu P^n f
 ,\end{align}
 for any $n\geq 0$, with $f = [f(1), \ldots ,f(n)]^T$.
-\end{rmk}
+\end{prop}
+\begin{proof}
+	The first equation follows from $p_{ik}^{(n+1)}= \sum_{j}^{} p_{ij}^{(n)}p_{jk}$ by induction. For the second equation, use the definition of the expectation
+\begin{align}
+	\mathbb{E}_{\mu } \left[ f(X_n) \right]  = \sum_{y \in E}^{}  f(y) \mathbb{P}_{\mu } \left[ X_n = y \right] = \sum_{x,y \in E^2}^{}  \mu (x) \underbrace{\mathbb{P}_{x} \left[ X_n =y \right]}_{=p_{xy}^{(n)}} f(y).
+\end{align}
+\end{proof}
+
 
 \section{Stationary Distributions}
 \textbf{Motivation}: write $\mu_{n}$ as the law of $X_{n}$ under $P_{\mu}$, $\mu_0=\mu$ and $\mu_{n+1}=\mu_{n}P$. For $n$ large $\mu_n$ is a fixed point of the map $\lambda \to \lambda P = \left( \sum_{x \in E} \lambda(z)p_{xy} \right)_{y \in E}$
@@ -235,9 +324,11 @@ for any $n\geq 0$, with $f = [f(1), \ldots ,f(n)]^T$.
 \end{align}
 i.e. $\pi$ is a left eigenvector of P for the eigenvalue 1.
 
-\textbf{Probabilistic interpretation} If $\pi $ is a stationary distribution, then $\forall n \geq 0$ $P_{\pi }[X_n =x] = \pi (x)$
-\newline \indent
-Basically, no matter how far along you are in the chain, the probability that you land on a value $x$ is equal to the probability that you start at $x$.
+\textbf{Probabilistic interpretation} If $\pi $ is a stationary distribution, then for all $ n \geq 0$ 
+\begin{align}
+	P_{\pi }[X_n =x] = \pi (x)
+.\end{align}
+No matter how far along you are in the chain, the probability that you land on a value $x$ is equal to the probability that you start at $x$.
 \end{defn}
 
 \section{Reversibility}
