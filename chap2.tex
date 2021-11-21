@@ -10,12 +10,12 @@
 \begin{enumerate}
 	\item  For all $n \geq 0$ and $x_1,\ldots,x_{n+1} \in E$
 \begin{align}
-	\quad \boxed{\mathbb{P} \left[ X_{n+1}=x_{n+1} | X_0=x_0,\ldots,X_n=x_n \right] = \mathbb{P} \left[ X_{n+1}=x_{n+1} | X_n = x_n \right]}
-.\end{align}
+	\quad \boxed{\mathbb{P} \left[ X_{n+1}=x_{n+1} | X_0=x_0,\ldots,X_n=x_n \right] = \mathbb{P} \left[ X_{n+1}=x_{n+1} | X_n = x_n \right].}
+\end{align}
 	\item For all $m,n \geq 0$ and $x,y \in E$
 \begin{align}	
-	\boxed{\mathbb{P} \left[ X_{n+1}=y | X_{n}=x \right] = \mathbb{P} \left[ X_{n+1=y}| X_n=x \right]} 
-.\end{align}
+	\boxed{\mathbb{P} \left[ X_{n+1}=y | X_{n}=x \right] = \mathbb{P} \left[ X_{n+1=y}| X_n=x \right].} 
+\end{align}
 \end{enumerate}
 
 \end{defn}
@@ -33,8 +33,8 @@ The first condition is equivalent to
 \begin{rmk}
 The first condition is equivalent to for all $f: E\to \mathbb{R}$ bounded,
 \begin{align}
-	\boxed{\mathbb{E} \left[ f(X_{n+1}) | X_0,\ldots,X_n \right] = \mathbb{E} \left[ f(X_{n+1}) | X_n \right]} 
-.\end{align}
+	\boxed{\mathbb{E} \left[ f(X_{n+1}) | X_0,\ldots,X_n \right] = \mathbb{E} \left[ f(X_{n+1}) | X_n \right].} 
+\end{align}
 
 \end{rmk}
 }
@@ -44,7 +44,8 @@ The first condition is equivalent to for all $f: E\to \mathbb{R}$ bounded,
 \end{ex}
 
 \begin{ex}
-	SRW on $\mathbb{Z}^d$
+	SRW on $\mathbb{Z}^d$. 
+	{\color{blue} // You mentioned that this should be a definition, I think we define this in the introduction (which we haven't done yet in Latex, but we did it in the course in this way //}
 \end{ex}
 
 \section{Transition Probabilities}
@@ -78,10 +79,10 @@ There are a few different representations of transition probabilities.
 \end{figure}
 
 \begin{defn}
-	Let $p$ be a transition probability, $\mu$ a distribution on $E$, a sequence $(X_n)_{n\geq 0}$ of random variables with values in $E $ is a Markov Chain with initial distribution $\mu$ and transition probability $p$ (written $ \textrm{MC}(\mu, p)$) if for $x_0, \ldots, x_n \in E$
+	Let $p$ be a transition probability, $\mu$ a distribution on $E$, a sequence $(X_n)_{n\geq 0}$ of random variables with values in $E $ is a Markov Chain with initial distribution $\mu$ and transition probability $p$ (written $ \textrm{MC}(\mu, p)$) if for every $x_0, \ldots, x_n \in E$
 \begin{align}
-	\boxed{ \mathbb{P} \left[ X_0=x_0, \ldots ,X_n=x_n \right] = \mu(x_0)p_{x_0,x} \cdots p_{x_{n-1},x_{n}} }
-.\end{align}
+	\boxed{ \mathbb{P} \left[ X_0=x_0, \ldots ,X_n=x_n \right] = \mu(x_0)p_{x_0,x} \cdots p_{x_{n-1},x_{n}} .}
+\end{align}
 \end{defn}
 
 
@@ -116,7 +117,7 @@ Otherwise,
 \begin{align}
 	\sum_{y \in E}^{} p_{xy} = \sum_{y \in E}^{} \mathbbm{1}_{x=y} =1
 .\end{align}
-$\impliedby:$ Assume  $(X_n)_{n\geq 0}$ is an MC$(\mu ,p)$. Let $n\geq 0$ and $x_0,\ldots,x_{n+1}$ such that $\mu (x_0) p_{x_0 x_1}\cdots p_{x_{n-1}x_n}>0$. We have that
+$\impliedby:$ Assume  $(X_n)_{n\geq 0}$ is a MC$(\mu ,p)$. Let $n\geq 0$ and $x_0,\ldots,x_{n+1}$ such that $\mu (x_0) p_{x_0 x_1}\cdots p_{x_{n-1}x_n}>0$. We have that
 \begin{align}
 	\mathbb{P}_{} \left[ X_{n+1} = x_{n+1} | x_0 = x_0, \ldots, X_n = x_n \right] = \frac{\mathbb{P}_{} \left[ X_0 = x_0, \ldots, X_{n+1}= x_{n+1} \right] }{\mathbb{P}_{} \left[ X_0=x_0, \ldots, X_n = X_n \right] } = p_{x_nx_{n+1}}.
 \end{align}
@@ -138,7 +139,7 @@ This concludes that $X$ fulfills the two properties of a Markov Chain.
 		\mathbbm{1}_{x=y} & \textrm{else}
 	\end{cases}.
 	\end{align}
-	We have that $\sum_{y \in E}^{} p_{xy}=1$, as the conditional probability is a probability measure itself, and $p_{xy}\geq 0$, for every $x, y \in E$ for the same reason. Thus we have that the collection of $(p_{xy})_{x,y \in E}$ form a transition probability. Setting $\mu(x) = \mathbb{P}_{} \left[ X_0 =x \right] $, which is also clearly a probability measure on $E$. Now we only have to show that $X_{n} $ is a $ \textrm{MC}(\mu, p)$. For every $x_0,\ldots , x_n \in E$, and every $n\geq 0$, we have
+	We have that $\sum_{y \in E}^{} p_{xy}=1$, as the conditional probability is a probability measure itself, and $p_{xy}\geq 0$, for every $x, y \in E$ for the same reason. Thus we have that the collection of $(p_{xy})_{x,y \in E}$ forms a transition probability. Setting $\mu(x) = \mathbb{P}_{} \left[ X_0 =x \right] $, which is also clearly a probability measure on $E$. Now we only have to show that $X_{n} $ is a $ \textrm{MC}(\mu, p)$. For every $x_0,\ldots , x_n \in E$, and every $n\geq 0$, we have
 \begin{align}
 & \mathbb{P}_{} \left[ X_0=x_0, \ldots ,X_n=x_n \right] \\ 
 	& \qquad = \mathbb{P}_{} \left[ X_n = x_n | X_0=x_0 , \ldots , X_{n-1}=x_{n-1} \right] \mathbb{P}_{} \left[ X_0=x_0 , \ldots , X_{n-1}=x_{n-1} \right] \\
@@ -214,7 +215,7 @@ We now have that $\mathbb{P}_{} \left[\Phi(x,U_1) = y  \right] = p_{xy}$. So if 
 ,\end{align}
 by independence.
 
-Now if we define $\mathbb{P}_{x} $ as $\mathbb{P}_{} \left[\ \cdot\ | X_0 = x_0 \right] $, then we have for every $x \in E$ that
+Now if we define $\mathbb{P}_{x} $ as $\mathbb{P}_{} \left[\ \cdot\ | X_0 = x \right] $, then we have for every $x \in E$ that
 \begin{align}
 	\mathbb{P}_{x} \left[ X_0=x_0, \ldots ,X_n=x_n \right] = \delta_x(x_0)p_{x_0x_1} \cdots p_{x_{n-1}x_n}
 .\end{align}
@@ -235,12 +236,12 @@ Under $\mathbb{P}_\mu$, $X=(X_n)_{n \geq 0}$ is $ \textrm{MC}(\mu, p)$.
 \end{align}
 i.e. conditional on $X_n=x$, $x_{n+1}$ is sampled like the first step of a $ \textrm{MC}(\delta_{x},p)$ independent of the past.
 \end{rmk}
-\textbf{Notation} $ \mathcal{F}_n = \sigma(X_0, \ldots ,X_n)$ 
+\textbf{Notation} $ \mathcal{F}_n = \sigma(X_0, \ldots ,X_n)$.
 
 \begin{theorem}[Simple Markov Property (SiMP)]
 	Let $\mu$ be a distribution on E. Let $x \in E, k \in \mathbb{N}$. For every $f: E^{\mathbb{N}} \to \mathbb{R}_+$ measurable and bounded, for every $Z$ bounded which is $ \mathcal{F}_k$ measurable random variable:
 \begin{align}
-	\boxed{	\mathbb{E}_\mu \left[ f((X_{k+n})_{n \geq 0})Z | X_k = x_k \right] = \mathbb{E}_{x_k} \left[ f((X_n)_{n \geq 0} \right] \mathbb{E}_\mu \left[ Z | X_k=x \right] }. 
+	\boxed{	\mathbb{E}_\mu \left[ f((X_{k+n})_{n \geq 0})Z | X_k = x_k \right] = \mathbb{E}_{x_k} \left[ f((X_n)_{n \geq 0} \right] \mathbb{E}_\mu \left[ Z | X_k=x \right].} 
 \end{align}
 \end{theorem}
 \begin{proof}
@@ -248,7 +249,7 @@ i.e. conditional on $X_n=x$, $x_{n+1}$ is sampled like the first step of a $ \te
 \begin{align}
 	\mathbb{E}_{\mu } \left[ f((X_{k+n})_{n\geq 0}) | X_0=x_0 , \ldots , X_k=x_k \right]= \mathbb{E}_{x_k} \left[ f((X_n)_{n\geq 0}) \right]
 .\end{align}
-	 We will proceed using measure theoretic induction (see any book on measure theory). Approximate $f$ by step functions $f_k$, using linearity, we only have to show our claim for the function $\mathbbm{1}_{A} $ with $A \subset E ^{\mathbb{N}}$ measurable, i.e. 
+We will proceed using {\color{blue} measure theoretic} induction. Approximate $f$ by step functions $f_k$, using linearity, we only have to show our claim for the function $\mathbbm{1}_{A} $ with $A \subset E ^{\mathbb{N}}$ measurable, i.e. 
 	\begin{align}
 	\mathbb{P}_{\mu } \left[ (X_{k+n})_{n\geq 0}\in A | X_0=x_0, \ldots ,X_k=x_k \right] = \mathbb{P}_{x_k} \left[ (X_n)_{n\geq 0} \in A \right] 
 .\end{align}  
@@ -267,7 +268,7 @@ Dynkin's Lemma then allows us to extend this property to the entire $\sigma$-alg
 \begin{cor}
 Let $\mu$ be a  distribution on $E$, $x \in E$, $k \in \mathbb{N}$, for all $f: E^{\mathbb{N}} \to \mathbb{R}$ measurable and bounded:
 \begin{align}
-	\boxed{	\mathbb{E}_\mu \left[ f((X_{k+n})_{n \geq 0} | X_k =x \right] = \mathbb{E} _x \left[ f((X_n)_{n \geq 0} \right] } . 
+	\boxed{	\mathbb{E}_\mu \left[ f((X_{k+n})_{n \geq 0} | X_k =x \right] = \mathbb{E} _x \left[ f((X_n)_{n \geq 0} \right] .}  
 \end{align}
 \end{cor}
 
@@ -279,7 +280,7 @@ Let $\mu$ be a  distribution on $E$, $x \in E$, $k \in \mathbb{N}$, for all $f: 
 
 \begin{prop}[Chapman Kolmogorov (CK)]
 \begin{align}
-	\forall m,n \geq 0 \ \forall x,y \in E \quad \boxed{ p_{xy}^{(m+n)}= \sum_{z \in E} p_{xz}^{(m)}p_{zy}^{(n)}}.
+	\forall m,n \geq 0 \ \forall x,y \in E \quad \boxed{ p_{xy}^{(m+n)}= \sum_{z \in E} p_{xz}^{(m)}p_{zy}^{(n)}.}
 \end{align}
 	
 \end{prop}
@@ -317,12 +318,12 @@ for any $n\geq 0$, with $f = [f(1), \ldots ,f(n)]^T$.
 \begin{defn}
 	Let $\pi$ be a distribution on $E$, we say that $\pi$ is stationary (for $p$) if for $y \in E$
 \begin{align}
-	\boxed{ \pi(y) = \sum_{x \in E} \pi(x)p_{xy}}
-.\end{align}
+	\boxed{ \pi(y) = \sum_{x \in E} \pi(x)p_{xy}.}
+\end{align}
 
 \textbf{Linear Algebra interpretation} If $E$ is finite and we write  $\pi = [\pi(1), \ldots ,\pi(n)]^T$, then 
 \begin{align}
-	\boxed{ \pi \textrm{ is stationary} \iff \pi P = \pi },
+	\boxed{ \pi \textrm{ is stationary} \iff \pi P = \pi ,}
 \end{align}
 i.e. $\pi$ is a left eigenvector of P for the eigenvalue 1.
 
@@ -337,7 +338,7 @@ No matter how far along you are in the chain, the probability that you land on a
 \begin{defn}
 	A distribution $\pi $ on $ E$ is said to be reversible (for $p$) if for any $x,y \in E$
 \begin{align}
-	\boxed{ \pi (x) p_{xy}= \pi (y)p_{yx} }.
+	\boxed{ \pi (x) p_{xy}= \pi (y)p_{yx}. }
 \end{align}
 The probability of starting at $y$ and going to $x$ is equal to the probability of starting at $x$ and going to $y$. More generally, one can prove by induction that $\pi $ is reversible $ \iff \forall n; \forall x_0, \ldots ,x_n: \mathbb{P}_{\pi } \left[ X_0=x_0, \ldots ,X_n=x_n \right] = \mathbb{P}_{\pi } \left[ X_0=x_n, \ldots ,X_n=X_0 \right] $.
 \end{defn}
@@ -422,8 +423,8 @@ Here we will will see $p$ as a weighted oriented graph.
 	Let $\mu $ be a distribution on $E$, $T$ an $ \mathcal{F}_n$-stopping time. Let $x \in E$,
 	then for all $f:E^{\mathbb{N}} \to \mathbb{R}$ measurable and bounded, and $Z$ which are $ \mathcal{F}_T$ measurable and bounded, we have:
 \begin{align}
-	\boxed{ \mathbb{E}_{\mu } \left[ f((X_{T+n})_{n\geq 0}) \cdot Z | T<\infty, X_T=x \right] = \mathbb{E}_{x} \left[ f((X_n)_{n\geq 0}) \right]  \mathbb{E}_{\mu } \left[ Z | T<\infty, X_T=x \right]} 
-.\end{align}
+	\boxed{ \mathbb{E}_{\mu } \left[ f((X_{T+n})_{n\geq 0}) \cdot Z | T<\infty, X_T=x \right] = \mathbb{E}_{x} \left[ f((X_n)_{n\geq 0}) \right]  \mathbb{E}_{\mu } \left[ Z | T<\infty, X_T=x \right].} 
+\end{align}
 \end{theorem}
 \noindent
 "Conditioned on $\{T<\infty,X_T=x\}$, $(X_{T+n})_{n\geq 0}$ is a $ \textrm{MC}(\delta_x,p)$ independent of $ \mathcal{F}_T$ "

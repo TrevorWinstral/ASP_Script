@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE ipe SYSTEM "ipe.dtd">
 <ipe version="70218" creator="Ipe 7.2.23">
-<info created="D:20211107144947" modified="D:20211107151935"/>
+<info created="D:20211107144947" modified="D:20211121183444"/>
 <ipestyle name="basic">
 <symbol name="arrow/arc(spx)">
 <path stroke="sym-stroke" fill="sym-stroke" pen="sym-pen">
@@ -364,50 +364,32 @@ h
 448 320 m
 448 312 l
 </path>
-<text matrix="1 0 0 1 -31.243 -14" transformations="translations" pos="64 304" stroke="black" type="label" width="28.909" height="8.167" depth="2.36" valign="baseline" size="small" style="math">H_0^{N_n -3}</text>
-<text matrix="1 0 0 1 -78.4545 -26" transformations="translations" pos="192 312" stroke="black" type="label" width="28.909" height="8.167" depth="2.36" valign="baseline" size="small" style="math">H_0^{N_n -2}
+<text matrix="1 0 0 1 -30.4545 -17.1868" transformations="translations" pos="64 304" stroke="black" type="label" width="28.909" height="8.167" depth="2.36" valign="baseline" size="small" style="math">H_0^{N_n -3}</text>
+<text matrix="1 0 0 1 -78.4545 -25.1868" transformations="translations" pos="192 312" stroke="black" type="label" width="28.909" height="8.167" depth="2.36" valign="baseline" size="small" style="math">H_0^{N_n -2}
 </text>
-<text matrix="1 0 0 1 -30.4545 -14" transformations="translations" pos="224 304" stroke="black" type="label" width="28.909" height="8.167" depth="2.36" valign="baseline" size="small" style="math">H_0^{N_n - 1}
+<text matrix="1 0 0 1 -30.4545 -17.1868" transformations="translations" pos="224 304" stroke="black" type="label" width="28.909" height="8.167" depth="2.36" valign="baseline" size="small" style="math">H_0^{N_n - 1}
 </text>
 <text matrix="1 0 0 1 -73.75 32" transformations="translations" pos="352 304" stroke="black" type="label" width="19.5" height="8.167" depth="2.36" valign="baseline" size="small" style="math">H_0^{N_n}</text>
-<text matrix="1 0 0 1 -46.3715 28" transformations="translations" pos="416 304" stroke="black" type="label" width="28.743" height="8.167" depth="2.36" valign="baseline" size="small" style="math">H_0^{N_n +1}</text>
-<path stroke="black">
+<text matrix="1 0 0 1 -46.3715 32" transformations="translations" pos="416 304" stroke="black" type="label" width="28.743" height="8.167" depth="2.36" valign="baseline" size="small" style="math">H_0^{N_n +1}</text>
+<path stroke="black" arrow="normal/small">
 32 300 m
 64 300 l
-64 304 l
-64 296 l
 </path>
-<path matrix="1 0 0 1 0 4" stroke="black">
-64 296 m
-64 288 l
-64 292 l
-192 292 l
-192 296 l
-192 288 l
-</path>
-<path stroke="black">
-192 296 m
-192 304 l
+<path stroke="black" arrow="normal/small" rarrow="normal/small">
+64 300 m
 192 300 l
+</path>
+<path stroke="black" fill="1" arrow="normal/small" rarrow="normal/small">
+192 300 m
 224 300 l
-224 304 l
-224 296 l
 </path>
-<path stroke="black">
-224 328 m
-224 336 l
-224 332 l
+<path stroke="black" arrow="normal/small" rarrow="normal/small">
+224 332 m
 352 332 l
-352 328 l
-352 336 l
 </path>
-<path matrix="1 0 0 1 0 4" stroke="black">
-352 328 m
-352 320 l
-352 324 l
-416 324 l
-416 320 l
-416 328 l
+<path stroke="black" arrow="normal/small" rarrow="normal/small">
+352 332 m
+416 332 l
 </path>
 <path stroke="black">
 192 320 m
@@ -418,5 +400,29 @@ h
 272 312 l
 </path>
 <text matrix="1 0 0 1 -2.7795 -1" transformations="translations" pos="272 308" stroke="black" type="label" width="5.559" height="3.861" depth="0" valign="baseline" size="small" style="math">n</text>
+<path stroke="black">
+192 304 m
+192 296 l
+</path>
+<path stroke="black">
+224 304 m
+224 296 l
+</path>
+<path stroke="black" fill="white">
+64 304 m
+64 296 l
+</path>
+<path stroke="black" fill="white">
+224 336 m
+224 328 l
+</path>
+<path stroke="black" fill="white">
+352 328 m
+352 336 l
+</path>
+<path stroke="black" fill="white">
+416 336 m
+416 328 l
+</path>
 </page>
 </ipe>
