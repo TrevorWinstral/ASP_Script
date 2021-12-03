@@ -10,22 +10,22 @@
 \begin{enumerate}
 	\item  For all $n \geq 0$ and $x_1,\ldots,x_{n+1} \in E$
 \begin{align}
-	\quad \boxed{\mathbb{P} \left[ X_{n+1}=x_{n+1} | X_0=x_0,\ldots,X_n=x_n \right] = \mathbb{P} \left[ X_{n+1}=x_{n+1} | X_n = x_n \right].}
+	\quad \boxed{\mathbb{P} \left[ X_{n+1}=x_{n+1} \ | \ X_0=x_0,\ldots,X_n=x_n \right] = \mathbb{P} \left[ X_{n+1}=x_{n+1} \ | \ X_n = x_n \right].}
 \end{align}
 	\item For all $m,n \geq 0$ and $x,y \in E$
 \begin{align}	
-	\boxed{\mathbb{P} \left[ X_{n+1}=y | X_{n}=x \right] = \mathbb{P} \left[ X_{n+1=y}| X_n=x \right].} 
+	\boxed{\mathbb{P} \left[ X_{n+1}=y \ | \ X_{n}=x \right] = \mathbb{P} \left[ X_{n+1=y}\ | \ X_n=x \right].} 
 \end{align}
 \end{enumerate}
 
 \end{defn}
 
-\textbf{Note:} By convention when we write $\mathbb{P} \left[ A|B \right] $ we assume $\mathbb{P} \left[ B \right] >0$.
+\textbf{Note:} By convention when we write $\mathbb{P} \left[ A\ | \ B \right] $ we assume $\mathbb{P} \left[ B \right] >0$.
 
 \begin{rmk}
 The first condition is equivalent to
 \begin{align}
-	\forall f:E\to \mathbb{R}\textrm{ bounded},\ \mathbb{E} \left[ f(X_{n+1}) | X_0,\ldots,X_n \right] = \mathbb{E} \left[ f(X_{n+1}) | X_n \right] 
+	\forall f:E\to \mathbb{R}\textrm{ bounded},\ \mathbb{E} \left[ f(X_{n+1}) \ | \ X_0,\ldots,X_n \right] = \mathbb{E} \left[ f(X_{n+1}) \ | \ X_n \right] 
 .\end{align}
 
 \end{rmk}
@@ -33,7 +33,7 @@ The first condition is equivalent to
 \begin{rmk}
 The first condition is equivalent to for all $f: E\to \mathbb{R}$ bounded,
 \begin{align}
-	\boxed{\mathbb{E} \left[ f(X_{n+1}) | X_0,\ldots,X_n \right] = \mathbb{E} \left[ f(X_{n+1}) | X_n \right].} 
+	\boxed{\mathbb{E} \left[ f(X_{n+1}) \ | \ X_0,\ldots,X_n \right] = \mathbb{E} \left[ f(X_{n+1}) \ | \ X_n \right].} 
 \end{align}
 
 \end{rmk}
@@ -75,7 +75,7 @@ There are a few different representations of transition probabilities.
 	%\phantom{\includegraphics[width=0.1\textwidth]{figures/6_step_MC.pdf}}
 	%$\vcenter{\hbox{\includegraphics[width=0.35\textwidth]{figures/6_step_MC.pdf}}}$
 	\includegraphics[width=\textwidth]{figures/n_step_MC.pdf}
-\caption{6-State (asymmetric) Markov Chain and 3-State Markov Chain}
+\caption{6-state (asymmetric) Markov Chain and 3-state Markov Chain}
 \end{figure}
 
 \begin{defn}
@@ -87,31 +87,31 @@ There are a few different representations of transition probabilities.
 
 
 \begin{prop}
-	Let $X=(X_n)_{n \geq 0}$ sequence of random variables with values in $E$:
+	Let $X=(X_n)_{n \geq 0}$ sequence of random variables with values in $E$. We have
 	\begin{align}
-	X\textrm{ is a Markov Chain }\iff \exists \mu, p\textrm{ such that }X\textrm{ is a }MC(\mu, p)
+		(X\textrm{ is a Markov Chain })\iff (\exists \mu, p\textrm{ such that }X\textrm{ is a }MC(\mu, p))
 	.\end{align}
 	
 \end{prop}
 \begin{proof}
-	$\implies:$ Define $\mu =$ law of $X_0$ and set 
+	$\implies:$ Let $\mu =$ be the law of $X_0$ and set 
 	\begin{align}
 		p_{xy} = 
 	\begin{cases}
-		\mathbb{P}_{} \left[ X_{n+1}=y | X_n -x \right] & \textrm{if } \exists n: \mathbb{P}_{} \left[ X_n = x \right] >0 \\
-		\mathbbm{1}_{x=y} & \textrm{else}
-	\end{cases}.
+		\mathbb{P}_{} \left[ X_{n+1}=y \ | \ X_n -x \right] & \textrm{if } \exists n: \mathbb{P}_{} \left[ X_n = x \right] >0 \\
+		\mathbbm{1}_{x=y} & \textrm{else}.
+	\end{cases}
 	\end{align}
 	By homogeneity, $p_{xy}$ is well-defined. Furthermore, for every $x_0,\ldots,x_n \in E$ we have
 \begin{align}
 & \mathbb{P}_{} \left[ X_0=x_0, \ldots ,X_n=x_n \right] \\ 
-	& \qquad = \mathbb{P}_{} \left[ X_n = x_n | X_0=x_0 , \ldots , X_{n-1}=x_{n-1} \right] \mathbb{P}_{} \left[ X_0=x_0 , \ldots , X_{n-1}=x_{n-1} \right] \\
-	& \qquad = \mathbb{P}_{} \left[ X_0 = x_0 \right] \prod_{i=1}^{n} \mathbb{P}_{} \left[ X_i = x_i | X_0=x_0, \ldots , X_{i-1}=x_{i-1} \right] \\
-	& \qquad = \mu(x_0) \prod_{i=1}^n \mathbb{P}_{} \left[ X_i = x_i | X_{i-1} = x_{i-1}  \right] = \mu(x_0) \prod_{i=1}^n p_{x_{i-1}x_{i}} 
+	& \qquad = \mathbb{P}_{} \left[ X_n = x_n \ | \ X_0=x_0 , \ldots , X_{n-1}=x_{n-1} \right] \mathbb{P}_{} \left[ X_0=x_0 , \ldots , X_{n-1}=x_{n-1} \right] \\
+	& \qquad = \mathbb{P}_{} \left[ X_0 = x_0 \right] \prod_{i=1}^{n} \mathbb{P}_{} \left[ X_i = x_i \ | \ X_0=x_0, \ldots , X_{i-1}=x_{i-1} \right] \\
+	& \qquad = \mu(x_0) \prod_{i=1}^n \mathbb{P}_{} \left[ X_i = x_i \ | \ X_{i-1} = x_{i-1}  \right] = \mu(x_0) \prod_{i=1}^n p_{x_{i-1}x_{i}} 
 .\end{align}
-It remains to check that $p$ is a transition probability. Let $x \in E$. If there exists $n\geq 0$ such that $\mathbb{P}_{} \left[ X_n=x \right] >0$, then 
+It remains to check that $P$ is a transition probability. Let $x \in E$. If there exists $n\geq 0$ such that $\mathbb{P}_{} \left[ X_n=x \right] >0$, then 
 \begin{align}
-	\sum_{y \in E}^{} p_{xy} = \sum_{y \in E}^{} \mathbb{P}_{} \left[ X_{n+1}=y | X_n =x \right] =1.
+	\sum_{y \in E}^{} p_{xy} = \sum_{y \in E}^{} \mathbb{P}_{} \left[ X_{n+1}=y \ | \ X_n =x \right] =1.
 \end{align}
 Otherwise,
 \begin{align}
@@ -119,14 +119,14 @@ Otherwise,
 .\end{align}
 $\impliedby:$ Assume  $(X_n)_{n\geq 0}$ is a MC$(\mu ,p)$. Let $n\geq 0$ and $x_0,\ldots,x_{n+1}$ such that $\mu (x_0) p_{x_0 x_1}\cdots p_{x_{n-1}x_n}>0$. We have that
 \begin{align}
-	\mathbb{P}_{} \left[ X_{n+1} = x_{n+1} | x_0 = x_0, \ldots, X_n = x_n \right] = \frac{\mathbb{P}_{} \left[ X_0 = x_0, \ldots, X_{n+1}= x_{n+1} \right] }{\mathbb{P}_{} \left[ X_0=x_0, \ldots, X_n = X_n \right] } = p_{x_nx_{n+1}}.
+	\mathbb{P}_{} \left[ X_{n+1} = x_{n+1} \ | \ X_0 = x_0, \ldots, X_n = x_n \right] = \frac{\mathbb{P}_{} \left[ X_0 = x_0, \ldots, X_{n+1}= x_{n+1} \right] }{\mathbb{P}_{} \left[ X_0=x_0, \ldots, X_n = x_n \right] } = p_{x_nx_{n+1}}.
 \end{align}
 Now let $n\geq 0$ and $y \in E$ such that $\mathbb{P}_{} \left[ X_n = x \right] > 0$.
 \begin{align}
-&	\mathbb{P}_{} \left[ X_{n+1} = y | X_n =x \right] \\
-&\qquad = \sum_{(u_0, \ldots ,u_{n-1}) \in E^n}^{} \mathbb{P}_{} \left[ X_{n+1}=y | X_0=u_0, \ldots ,X_{n-1}=u_{n-1}, X_n =x \right] \cdot \\
-& \qquad \qquad \qquad \qquad \qquad  \mathbb{P}_{} \left[ X_0=u_0, \ldots , X_{n-1}=u_{n-1} | X_n = x \right] \\
-&\qquad = p_{xy} \sum_{(u_0, \ldots ,u_{n-1})\in E^n}^{} \mathbb{P}_{} \left[ X_0=u_0, \ldots ,X_{n-1}=u_{n-1} | X_n = x \right] = p_{xy}
+&	\mathbb{P}_{} \left[ X_{n+1} = y \ | \ X_n =x \right] \\
+&\qquad = \sum_{(u_0, \ldots ,u_{n-1}) \in E^n}^{} \mathbb{P}_{} \left[ X_{n+1}=y \ | \ X_0=u_0, \ldots ,X_{n-1}=u_{n-1}, X_n =x \right] \cdot \\
+& \qquad \qquad \qquad \qquad \qquad  \mathbb{P}_{} \left[ X_0=u_0, \ldots , X_{n-1}=u_{n-1} \ | \ X_n = x \right] \\
+&\qquad = p_{xy} \sum_{(u_0, \ldots ,u_{n-1})\in E^n}^{} \mathbb{P}_{} \left[ X_0=u_0, \ldots ,X_{n-1}=u_{n-1} \ | \ X_n = x \right] = p_{xy}
 .\end{align}
 This concludes that $X$ fulfills the two properties of a Markov Chain.
 
@@ -135,42 +135,42 @@ This concludes that $X$ fulfills the two properties of a Markov Chain.
 	\begin{align}
 		p_{xy} = 
 	\begin{cases}
-		\mathbb{P}_{} \left[ X_{n+1}=y | X_n -x \right] & \textrm{if } \exists n: \mathbb{P}_{} \left[ X_n = x \right] >0 \\
+		\mathbb{P}_{} \left[ X_{n+1}=y \ | \ X_n -x \right] & \textrm{if } \exists n: \mathbb{P}_{} \left[ X_n = x \right] >0 \\
 		\mathbbm{1}_{x=y} & \textrm{else}
 	\end{cases}.
 	\end{align}
 	We have that $\sum_{y \in E}^{} p_{xy}=1$, as the conditional probability is a probability measure itself, and $p_{xy}\geq 0$, for every $x, y \in E$ for the same reason. Thus we have that the collection of $(p_{xy})_{x,y \in E}$ forms a transition probability. Setting $\mu(x) = \mathbb{P}_{} \left[ X_0 =x \right] $, which is also clearly a probability measure on $E$. Now we only have to show that $X_{n} $ is a $ \textrm{MC}(\mu, p)$. For every $x_0,\ldots , x_n \in E$, and every $n\geq 0$, we have
 \begin{align}
 & \mathbb{P}_{} \left[ X_0=x_0, \ldots ,X_n=x_n \right] \\ 
-	& \qquad = \mathbb{P}_{} \left[ X_n = x_n | X_0=x_0 , \ldots , X_{n-1}=x_{n-1} \right] \mathbb{P}_{} \left[ X_0=x_0 , \ldots , X_{n-1}=x_{n-1} \right] \\
-	& \qquad = \mathbb{P}_{} \left[ X_0 = x_0 \right] \prod_{i=1}^{n} \mathbb{P}_{} \left[ X_i = x_i | X_0=x_0, \ldots , X_{i-1}=x_{i-1} \right] \\
-	& \qquad = \mu(x_0) \prod_{i=1}^n \mathbb{P}_{} \left[ X_i = x_i | X_{i-1} = x_{i-1}  \right] = \mu(x_0) \prod_{i=1}^n p_{x_{i-1}x_{i}} 
+	& \qquad = \mathbb{P}_{} \left[ X_n = x_n \ | \ X_0=x_0 , \ldots , X_{n-1}=x_{n-1} \right] \mathbb{P}_{} \left[ X_0=x_0 , \ldots , X_{n-1}=x_{n-1} \right] \\
+	& \qquad = \mathbb{P}_{} \left[ X_0 = x_0 \right] \prod_{i=1}^{n} \mathbb{P}_{} \left[ X_i = x_i \ | \ X_0=x_0, \ldots , X_{i-1}=x_{i-1} \right] \\
+	& \qquad = \mu(x_0) \prod_{i=1}^n \mathbb{P}_{} \left[ X_i = x_i \ | \ X_{i-1} = x_{i-1}  \right] = \mu(x_0) \prod_{i=1}^n p_{x_{i-1}x_{i}} 
 .\end{align}
 Thus we have proven this implication by using the Markov property of Markov Chains.
 
 $\impliedby:$ Here we have to demonstrate the two properties of a Markov Chain, the Markov property and homogeneity. For homogeneity we have
 \begin{align}
-&	\mathbb{P}_{} \left[ X_{n+1} = y | X_n =x \right] \\
-&\qquad = \sum_{(u_0, \ldots ,u_{n-1}) \in E^n}^{} \mathbb{P}_{} \left[ X_{n+1}=y | X_0=u_0, \ldots ,X_{n-1}=u_{n-1}, X_n =x \right] \cdot \\
-& \qquad \qquad \qquad \qquad \qquad  \mathbb{P}_{} \left[ X_0=u_0, \ldots , X_{n-1}=u_{n-1} | X_n = x \right] \\
-&\qquad = p_{xy} \sum_{(u_0, \ldots ,u_{n-1})\in E^n}^{} \mathbb{P}_{} \left[ X_0=u_0, \ldots ,X_{n-1}=u_{n-1} | X_n = x \right] = p_{xy}
+&	\mathbb{P}_{} \left[ X_{n+1} = y \ | \ X_n =x \right] \\
+&\qquad = \sum_{(u_0, \ldots ,u_{n-1}) \in E^n}^{} \mathbb{P}_{} \left[ X_{n+1}=y \ | \ X_0=u_0, \ldots ,X_{n-1}=u_{n-1}, X_n =x \right] \cdot \\
+& \qquad \qquad \qquad \qquad \qquad  \mathbb{P}_{} \left[ X_0=u_0, \ldots , X_{n-1}=u_{n-1} \ | \ X_n = x \right] \\
+&\qquad = p_{xy} \sum_{(u_0, \ldots ,u_{n-1})\in E^n}^{} \mathbb{P}_{} \left[ X_0=u_0, \ldots ,X_{n-1}=u_{n-1} \ | \ X_n = x \right] = p_{xy}
 .\end{align}
 here we have implicitly assumed that $\mathbb{P}_{} \left[ X_n = x \right] > 0$, as without this the conditional probability we are taking is not well-defined. In the case where this is not true, the fulfillment of the homogeneity property is trivial as the transition probability is constantly $1$.
 
 For the Markov Property we have
 \begin{align}
-	\mathbb{P}_{} \left[ X_{n+1} = x_{n+1} | X_0 =x_0, \ldots ,X_n=X_n \right] &=
+	\mathbb{P}_{} \left[ X_{n+1} = x_{n+1} \ | \ X_0 =x_0, \ldots ,X_n=x_n \right] &=
 		\frac{\mathbb{P}_{} \left[ X_0=x_0, \ldots , X_{n+1}=x_{n+1} \right] }
 		{\mathbb{P}_{} \left[ X_0=x_0 , \ldots , X_{n}=x_{n} \right]} \\
 	&= \frac{\mu(x_0)p_{x_0 x_1}  \cdots  p_{x_{n}x_{n+1}}} {\mu(x_0)p_{x_0x_1} \cdots p_{x_{n-1}x_{n}}} \\
-	&= p_{x_n x_{n+1}} = \mathbb{P}_{} \left[ X_{n+1} = x_{n+1} | X_n=x_n \right] 
+	&= p_{x_n x_{n+1}} = \mathbb{P}_{} \left[ X_{n+1} = x_{n+1} \ | \ X_n=x_n \right] 
 .\end{align}
 Where it is important to note that, again,  we have implicitly assumed that \newline $\mu(x_0)p_{x_0x_1} \cdots p_{x_{n-1}x_n}>0$. 
 }
 \end{proof}
 
 
-\textbf{Question} Given $\mu, p$ does $ \textrm{MC}(\mu, p)$ always exist (as a Markov Chain)?
+\textbf{Question} Given $\mu, p$ does a $ \textrm{MC}(\mu, p)$ always exist?
 
 \section{Existence}
 
@@ -179,7 +179,7 @@ Where it is important to note that, again,  we have implicitly assumed that \new
 \begin{enumerate}
 	\item a measurable space $(\Omega, F)$,
 	\item a collection of probability measures $(\mathbb{P}_x)_{x}$ on $(\Omega, F)$, and
-	\item a sequence of random variables $(X_n)_{n \geq 0}$ on $(\Omega, F)$ such that for all $x\in E$, under $P_x$, $(X_n)$ is  $ \textrm{MC}(\delta_x, p)$.
+	\item a sequence of random variables $(X_n)_{n \geq 0}$ on $(\Omega, \mathcal{F})$ such that for all $x\in E$, under $\mathbb{P}_x$, $(X_n)$ is  $ \textrm{MC}(\delta_x, p)$.
 \end{enumerate}
 
 \end{theorem}
@@ -194,8 +194,8 @@ Then we have for every $x_0, \ldots, x_n \in E$
 	\mathbb{P}_{} \left[ X_0=x_0, \ldots ,X_n=x_n \right] &=
 		\mathbb{P}_{} \left[ X_0=x_0, \Phi(x_0, U_1)=x_1 , \ldots , \Phi(x_{n-1}, U_{n}) = x_n \right] \\
 	&= \mu(x_0)p_{x_0x_1} \cdots p_{x_{n-1}x_n}
-\end{align}
-Now define for every $x \in E$ $\mathbb{P}_{x}  = \mathbb{P}_{} \left[ \cdot | X_0 = x \right] $, this is well defined as $\mu (x)>0$. Then we have that for all $x \in E$ 
+.\end{align}
+Now define for every $x \in E$ $\mathbb{P}_{x}  = \mathbb{P}_{} \left[\ \cdot \ | \ X_0 = x \right] $, this is well defined as $\mu (x)>0$. Then we have that for all $x \in E$ 
 \begin{align}
 	\mathbb{P}_{x} \left[ X_0 = x_0, \ldots, X_n = x_n \right] = \delta_x(x_0) p_{x_0 x_1} \cdots p_{x_{n-1}x_n}.
 \end{align}
@@ -215,7 +215,7 @@ We now have that $\mathbb{P}_{} \left[\Phi(x,U_1) = y  \right] = p_{xy}$. So if 
 ,\end{align}
 by independence.
 
-Now if we define $\mathbb{P}_{x} $ as $\mathbb{P}_{} \left[\ \cdot\ | X_0 = x \right] $, then we have for every $x \in E$ that
+Now if we define $\mathbb{P}_{x} $ as $\mathbb{P}_{} \left[\ \cdot \ | \ X_0 = x \right] $, then we have for every $x \in E$ that
 \begin{align}
 	\mathbb{P}_{x} \left[ X_0=x_0, \ldots ,X_n=x_n \right] = \delta_x(x_0)p_{x_0x_1} \cdots p_{x_{n-1}x_n}
 .\end{align}
@@ -226,37 +226,38 @@ Now if we define $\mathbb{P}_{x} $ as $\mathbb{P}_{} \left[\ \cdot\ | X_0 = x \r
 \textbf{Framework for the rest of the chapter} 
 $E$ is finite or countable, $p$ transition probability, $(\Omega, \mathcal{F}, (P_x)_{x \in E})$ Probability Spaces, $(X_n)_{n \geq 0}$ random variables such that it is a  $ \textrm{MC}(\delta_x, p)$ under $P_x$.
 
-For $\mu$ Prob measure on $E $ we write $\mathbb{P}_\mu = \sum_{x}\mu(x)\mathbb{P}_{x}$
+For $\mu$ a probability measure on $E $ we write $\mathbb{P}_\mu = \sum_{x}\mu(x)\mathbb{P}_{x}$.
 
 \section{Simple Markov Property}
 \begin{rmk}[]
 Under $\mathbb{P}_\mu$, $X=(X_n)_{n \geq 0}$ is $ \textrm{MC}(\mu, p)$.
 \begin{align}
-	\mathbb{P}_\mu [X_{n+1}=x_{n+1} | X_0 = x_0, \ldots ,.X_n=x_n] = \mathbb{P}_\mu[X_{n+1}=x_{n+1}| X_n = x_n] = \mathbb{P}_{x_n}[X_1 =x_{n+1}]
+	\mathbb{P}_\mu [X_{n+1}=x_{n+1} \ | \ X_0 = x_0, \ldots ,.X_n=x_n] = \mathbb{P}_\mu[X_{n+1}=x_{n+1}\ | \ X_n = x_n] = \mathbb{P}_{x_n}[X_1 =x_{n+1}]
 \end{align}
 i.e. conditional on $X_n=x$, $x_{n+1}$ is sampled like the first step of a $ \textrm{MC}(\delta_{x},p)$ independent of the past.
 \end{rmk}
+\noindent
 \textbf{Notation} $ \mathcal{F}_n = \sigma(X_0, \ldots ,X_n)$.
 
 \begin{theorem}[Simple Markov Property (SiMP)]
-	Let $\mu$ be a distribution on E. Let $x \in E, k \in \mathbb{N}$. For every $f: E^{\mathbb{N}} \to \mathbb{R}_+$ measurable and bounded, for every $Z$ bounded which is $ \mathcal{F}_k$ measurable random variable:
+	Let $\mu$ be a distribution on E. Let $x \in E, k \in \mathbb{N}$. For every $f: E^{\mathbb{N}} \to \mathbb{R}_+$ measurable and bounded, for every $Z$ bounded which is $ \mathcal{F}_k$ measurable random variable, we have
 \begin{align}
-	\boxed{	\mathbb{E}_\mu \left[ f((X_{k+n})_{n \geq 0})Z | X_k = x_k \right] = \mathbb{E}_{x_k} \left[ f((X_n)_{n \geq 0} \right] \mathbb{E}_\mu \left[ Z | X_k=x \right].} 
+	\boxed{	\mathbb{E}_\mu \left[ f((X_{k+n})_{n \geq 0})Z \ | \ X_k = x_k \right] = \mathbb{E}_{x_k} \left[ f((X_n)_{n \geq 0} \right] \mathbb{E}_\mu \left[ Z \ | \ X_k=x \right].} 
 \end{align}
 \end{theorem}
 \begin{proof}
 	First note that using $Z= \mathbbm{1}_{X_0=x_0, \ldots ,X_{k-1}=x_{k-1}}$ we only have to prove that 
 \begin{align}
-	\mathbb{E}_{\mu } \left[ f((X_{k+n})_{n\geq 0}) | X_0=x_0 , \ldots , X_k=x_k \right]= \mathbb{E}_{x_k} \left[ f((X_n)_{n\geq 0}) \right]
+	\mathbb{E}_{\mu } \left[ f((X_{k+n})_{n\geq 0}) \ | \ X_0=x_0 , \ldots , X_k=x_k \right]= \mathbb{E}_{x_k} \left[ f((X_n)_{n\geq 0}) \right]
 .\end{align}
-We will proceed using {\color{blue} measure theoretic} induction. Approximate $f$ by step functions $f_k$, using linearity, we only have to show our claim for the function $\mathbbm{1}_{A} $ with $A \subset E ^{\mathbb{N}}$ measurable, i.e. 
+We will proceed using induction. Approximate $f$ by step functions $f_k$, using linearity, we only have to show our claim for the function $\mathbbm{1}_{A} $ with $A \subset E ^{\mathbb{N}}$ measurable, i.e. 
 	\begin{align}
-	\mathbb{P}_{\mu } \left[ (X_{k+n})_{n\geq 0}\in A | X_0=x_0, \ldots ,X_k=x_k \right] = \mathbb{P}_{x_k} \left[ (X_n)_{n\geq 0} \in A \right] 
+	\mathbb{P}_{\mu } \left[ (X_{k+n})_{n\geq 0}\in A \ | \ X_0=x_0, \ldots ,X_k=x_k \right] = \mathbb{P}_{x_k} \left[ (X_n)_{n\geq 0} \in A \right] 
 .\end{align}  
-The collection of sets of the form $A=\{w \in E^{\mathbb{N}}: w_0=y_0, \ldots ,w_N=y_N\}$ for $N\geq 0$ and $y_0, \ldots ,y_N \in E$ form a $\pi $ system generating our $\sigma$-algebra. Furthermore, on such sets 
+The collection of sets of the form $A=\{w \in E^{\mathbb{N}}: w_0=y_0, \ldots ,w_N=y_N\}$ for $N\geq 0$ and $y_0, \ldots ,y_N \in E$ form a $\pi $-system generating the $\sigma$-algebra. Furthermore, on such sets 
 \begin{align}
-&	\mathbb{P}_{\mu } \left[ (X_{k+n})_{n\geq 0}\in A | X_0 = x_0, \ldots ,X_k=x_k \right] \\
-&\qquad= \mathbb{P}_{\mu} \left[ X_k=y_0, \ldots ,X_{k+N}= y_N | X_0=x_0, \ldots ,X_k=x_k  \right] \\
+&	\mathbb{P}_{\mu } \left[ (X_{k+n})_{n\geq 0}\in A \ | \ X_0 = x_0, \ldots ,X_k=x_k \right] \\
+&\qquad= \mathbb{P}_{\mu} \left[ X_k=y_0, \ldots ,X_{k+N}= y_N \ | \ X_0=x_0, \ldots ,X_k=x_k  \right] \\
 &\qquad= \frac{\mu (x_0) p_{x_0x_1} \cdots p_{x_{k-1}x_k} \delta_{x_k}(y_0)p_{y_0y_1} \cdots p_{y_{N-1}y_N}}{\mu (x_0) p_{x_0x_1} \cdots p_{x_{k-1}x_k} } \\
 & \qquad= \delta_{x_k}(y_0)p_{y_0y_1} \cdots p_{y_{N-1}y_N} \\
 & \qquad= \mathbb{P}_{x_k} \left[ (X_n)_{n\geq 0} \in A \right] 
@@ -268,7 +269,7 @@ Dynkin's Lemma then allows us to extend this property to the entire $\sigma$-alg
 \begin{cor}
 Let $\mu$ be a  distribution on $E$, $x \in E$, $k \in \mathbb{N}$, for all $f: E^{\mathbb{N}} \to \mathbb{R}$ measurable and bounded:
 \begin{align}
-	\boxed{	\mathbb{E}_\mu \left[ f((X_{k+n})_{n \geq 0} | X_k =x \right] = \mathbb{E} _x \left[ f((X_n)_{n \geq 0} \right] .}  
+	\boxed{	\mathbb{E}_\mu \left[ f((X_{k+n})_{n \geq 0} \ | \ X_k =x \right] = \mathbb{E} _x \left[ f((X_n)_{n \geq 0} \right] .}  
 \end{align}
 \end{cor}
 
@@ -276,20 +277,20 @@ Let $\mu$ be a  distribution on $E$, $x \in E$, $k \in \mathbb{N}$, for all $f: 
 \section{n-Step Transition Probabilities}
 \begin{defn}
 	For every $n\geq0$, $x, y \in E$, define $p_{xy}^{(n)}=P_x[X_n=y]$
-\end{defn}
+.\end{defn}
 
 \begin{prop}[Chapman Kolmogorov (CK)]
 \begin{align}
-	\forall m,n \geq 0 \ \forall x,y \in E \quad \boxed{ p_{xy}^{(m+n)}= \sum_{z \in E} p_{xz}^{(m)}p_{zy}^{(n)}.}
+	\forall m,n \geq 0 \quad \forall x,y \in E \quad \boxed{ p_{xy}^{(m+n)}= \sum_{z \in E} p_{xz}^{(m)}p_{zy}^{(n)}.}
 \end{align}
-	
 \end{prop}
+{\color{blue} TODO: Figure}
 \begin{proof}
 Fix $m,n$ and $x,y \in E$.
 	\begin{align}
 		p_{xy}^{(m+n)} &\stackrel{\phantom{\textrm{(SiMP)}}}{=} 
 			\mathbb{P}_{x} \left[ X_{m+n}=y \right] =
-			\sum_{z \in E}^{} \mathbb{P}_{x} \left[ X_{m+n} | X_m = z \right] \mathbb{P}_{x} \left[ X_m = z \right] \\
+			\sum_{z \in E}^{} \mathbb{P}_{x} \left[ X_{m+n} \ | \ X_m = z \right] \mathbb{P}_{x} \left[ X_m = z \right] \\
 		&\stackrel{\textrm{(SiMP)}}{=} \sum_{z \in E}^{} \mathbb{P}_{z} \left[ X_n=y \right] \mathbb{P}_{x} \left[ X_m=z \right] = \sum_{z \in E}^{} p_{xz}^{(m)} p_{zy}^{(n)}  	
 	.\end{align}
 	
@@ -297,8 +298,8 @@ Fix $m,n$ and $x,y \in E$.
 
 
 \begin{prop}[]
-	If $E$ is finite:
-The matrix $(p_{ij}^{(n)})_{ij \leq 0}$ is equal to $P^n$. for $\mu$ a distribution on $E$ the following holds for any $f:E \to \mathbb{R}$
+	Assume $E$ is finite:
+The matrix $(p_{ij}^{(n)})_{ij \leq 0}$ is equal to $P^n$. For every $n$, $\mu$ a distribution on $E$, and any $f:E \to \mathbb{R}$ we have
 	\begin{align}
 	\mathbb{E}_{\mu} \left[ f(X_n) \right] = \mu P^n f
 ,\end{align}
@@ -340,7 +341,11 @@ No matter how far along you are in the chain, the probability that you land on a
 \begin{align}
 	\boxed{ \pi (x) p_{xy}= \pi (y)p_{yx}. }
 \end{align}
-The probability of starting at $y$ and going to $x$ is equal to the probability of starting at $x$ and going to $y$. More generally, one can prove by induction that $\pi $ is reversible $ \iff \forall n; \forall x_0, \ldots ,x_n: \mathbb{P}_{\pi } \left[ X_0=x_0, \ldots ,X_n=x_n \right] = \mathbb{P}_{\pi } \left[ X_0=x_n, \ldots ,X_n=X_0 \right] $.
+The probability of starting at $y$ and going to $x$ is equal to the probability of starting at $x$ and going to $y$. More generally, one can prove by induction that $\pi $ is reversible if and only if for every $n$ and any $ x_0, \ldots ,x_n$
+\begin{align}
+\mathbb{P}_{\pi } \left[ X_0=x_0, \ldots ,X_n=x_n \right] = \mathbb{P}_{\pi } \left[ X_0=x_n, \ldots ,X_n=X_0 \right] .
+\end{align}
+
 \end{defn}
 
 \textbf{Motivation} We want an easy criterion for invariance, such reversible systems appear often in physics.
@@ -368,22 +373,16 @@ Hence, $\pi (x)= \binom{N}{x} \frac{1}{2^N}$, the binomial distribution; which i
 
 
 \section{Communication Classes}
-Here we will will see $p$ as a weighted oriented graph.
+Here we will see $p$ as a weighted oriented graph.
 \begin{defn}
-	Let $x,y \in E$. We say that "$y$ can be reached from $ x$" if there exists an $n \geq 0$ such that  $p_{xy}^{(n)}>0$ and we write $x \to y$. Furthermore, we say that "$x$ and $y $ communicate"  if $y$ can be reached from $x$ and $x$ can be reached from $y$, we write $x  \leftrightarrow y$.
+	Let $x,y \in E$. We say that "$y$ can be reached from $ x$" if there exists an $n \geq 0$ such that  $p_{xy}^{(n)}>0$ and we write $x \to y$. Furthermore, we say that "$x$ and $y $ communicate"  if $y  \rightarrow x$ and $x  \rightarrow y$, and  we write $x  \leftrightarrow y$.
 \end{defn}
 
 \begin{prop}[]
-	$\leftrightarrow$ is an equivalence class on E
+	$\leftrightarrow$ is an equivalence class on E.
 \end{prop}
 \begin{proof}
-	Let $x,y,z \in E$ and $m,n \geq 0$ such that $p_{xy}^{(m)}>0$ and $p_{yz}^{(n)}>0$.
-\begin{enumerate}
-	\item Transitivity: $p_{xz}^{(m+n)} \geq p_{xy}^{(m)}p_{yz}^{(n)} >0$ thus we know that $x\rightarrow z$, we can apply the same argument in the other direction as well. 
-	\item Reflexivity: $p_{xx}^{(0)} = \mathbb{P}_{x} \left[ X_0 = x \right] =1>0$, hence $ x \leftrightarrow x$. 
-	\item Symmetry: Trivial.
-\end{enumerate}
-\end{proof}
+Trivial\end{proof}
 
 
 \begin{defn}
@@ -399,31 +398,35 @@ Here we will will see $p$ as a weighted oriented graph.
  x \in C, x \to y \implies y \in C.
 \end{align}
 \end{defn}
-"If you start in $C$ you never leave."
+"If one starts in $C$, one never leaves."
 
 \section{Strong Markov Property}
 %$F_n=\sigma(X_0, \ldots ,X_n)$ 
 	
 \begin{defn}
-	Let $T:\Omega \to \mathbb{N} \cup \{+\infty\}$ random variable with values in $\mathbb{N}\cup\{+\infty\}$. We say that $T$ is an ($ \mathcal{F}_n$)-stopping time if for all $n \in \mathbb{N}$:
+	Let $T:\Omega \to \mathbb{N} \cup \{+\infty\}$ random variable with values in $\mathbb{N}\cup\{+\infty\}$. We say that $T$ is an ($ \mathcal{F}_n$)-stopping time if
+	
 	\begin{align}
-		\{T=n\} \in \mathcal{F}_n
+		\forall n \in \mathbb{N} \{T=n\} \in \mathcal{F}_n
 	.\end{align}
 \end{defn}
 
 \begin{ex}[Stopping Times]
-	$H_{A}=\min\{n \geq 0: X_n \in  A\}$ (for $A$ measurable) and $H_x=\min\{n\geq 0: X_n = x\}$ are stopping times.
+	$H_{A}=\min\{n \geq 0: X_n \in  A\}$ (for $A \subset E$) and $H_x=\min\{n\geq 0: X_n = x\}$ are stopping times.
 \end{ex}
 
 \begin{defn}
-	Let $T$ be a stopping time. $ \mathcal{F}_T=\{A \in \mathcal{F}: \forall n \in \mathbb{N}: \{T=n\}\cap A \in \mathcal{F}_n \}$
+	Let $T$ be a stopping time. 
+	\begin{align}
+	\mathcal{F}_T=\{A \in \mathcal{F}: \forall n \in \mathbb{N}: \{T=n\}\cap A \in \mathcal{F}_n \}.
+	\end{align}
 \end{defn}
 
-\begin{theorem}[Strong Markov Property (SMP)]
+\begin{theorem}[Strong Markov Property (SiMP)]
 	Let $\mu $ be a distribution on $E$, $T$ an $ \mathcal{F}_n$-stopping time. Let $x \in E$,
 	then for all $f:E^{\mathbb{N}} \to \mathbb{R}$ measurable and bounded, and $Z$ which are $ \mathcal{F}_T$ measurable and bounded, we have:
 \begin{align}
-	\boxed{ \mathbb{E}_{\mu } \left[ f((X_{T+n})_{n\geq 0}) \cdot Z | T<\infty, X_T=x \right] = \mathbb{E}_{x} \left[ f((X_n)_{n\geq 0}) \right]  \mathbb{E}_{\mu } \left[ Z | T<\infty, X_T=x \right].} 
+	\boxed{ \mathbb{E}_{\mu } \left[ f((X_{T+n})_{n\geq 0}) \cdot Z \ | \ T<\infty, X_T=x \right] = \mathbb{E}_{x} \left[ f((X_n)_{n\geq 0}) \right]  \mathbb{E}_{\mu } \left[ Z \ | \ T<\infty, X_T=x \right].} 
 \end{align}
 \end{theorem}
 \noindent
@@ -433,7 +436,7 @@ We will multiply each side of the equation by $\mathbb{P}_{} \left[ T < \infty, 
 \begin{align}
 &	\mathbb{E}_{\mu } \left[ f((X_{T+n})_{n\geq 0})Z \mathbbm{1}_{T<\infty, X_T=x}  \right] =
 		\sum_{k\geq 0}^{} \mathbb{E}_{\mu } \left[ f((X_{k+n})_{n\geq 0} Z \mathbbm{1}_{T=k, X_T=k}  \right] \\
-&\qquad	\stackrel{\phantom{\text{(SiMP)}}}{=}  \sum_{k\geq 0}^{} \mathbb{E}_{\mu } \left[ f((X_{k+n})_{n\geq 0}) Z \mathbbm{1}_{T=k} | X_k = x \right] \mathbb{P}_{\mu } \left[ X_k = x  \right] \\ 
+&\qquad	\stackrel{\phantom{\text{(SiMP)}}}{=}  \sum_{k\geq 0}^{} \mathbb{E}_{\mu } \left[ f((X_{k+n})_{n\geq 0}) Z \mathbbm{1}_{T=k} \ | \ X_k = x \right] \mathbb{P}_{\mu } \left[ X_k = x  \right] \\ 
 &\qquad	\stackrel{\text{(SiMP)}}{=} \sum_{k\geq 0}^{} \mathbb{E}_{x} \left[ f((X_{n})_{n\geq 0}) \right] \mathbb{E}_{\mu } \left[ Z \mathbbm{1}_{T=k, X_k = x}  \right] \\
 &\qquad	\stackrel{\phantom{\text{(SiMP)}}}{=} \mathbb{E}_{x} \left[ f((X_n)_{n\geq 0} \right] \sum_{k\geq 0}^{} \mathbb{E}_{\mu } \left[ Z \mathbbm{1}_{T=k, X_k=x}  \right]  
 		= \mathbb{E}_{x} \left[ f((X_n)_{n\geq 0}) \right] \mathbb{E}_{\mu } \left[ Z \mathbbm{1}_{T<\infty, X_T=x}  \right] 
@@ -452,20 +455,25 @@ We will multiply each side of the equation by $\mathbb{P}_{} \left[ T < \infty, 
 \end{axis}
 \end{tikzpicture}
 \end{center}
-\caption{Example of a reflected simple random walk for $a=2$}
+\caption{Example of a reflected simple random walk for $a=2$.}
 \end{figure}
 
-Consider the SRW on $\mathbb{Z}$: 
+Consider the SRW on $\mathbb{Z}$ 
 
 \begin{prop}[]
-Let $k\geq 0$ even, $a\geq1$ odd: $\mathbb{P}_{0} \left[ \max_{0 \leq m \leq k} X_m \geq a \right] = \mathbb{P}_{0} \left[ |X_k|\geq a \right]  $
+Let $k\geq 0$ even, $a\geq1$ odd. We have 
+\begin{align}
+	\mathbb{P}_{0} \left[ \max_{0 \leq m \leq k} X_m \geq a \right] = \mathbb{P}_{0} \left[ |X_k|\geq a \right] . 
+\end{align}
+
 \end{prop}
 \begin{proof}
 	Define $H_a= \min\{n \geq 1: X_n =a\}$, this is a stopping time.
 	\begin{align}
 		\mathbb{P}_{0} \left[ \max_{0 \leq m \leq k}X_m \geq a \right] = \mathbb{P}_{0} \left[ H_a \leq k \right] = \mathbb{P}_{0} \left[ X_k > a \right]  + \mathbb{P}_{0} \left[ H_a \leq k, X_k < a \right] 
 		.\end{align}		
-		Now our goal is to show the term on the right is equal to $\mathbb{P}_{0} \left[ X_k > a \right] $, as $2\mathbb{P}_{0} \left[ X_k > a \right] = \mathbb{P}_{0} \left[ |X_k| >a \right] $ by symmetry. We can go from $>$ to $\geq$ because $a$ is even and $k$ is odd. At this point we note that $X_{H_a +n}$ is distributed as $a + (a-X_{H_a +n}) = 2a - X_{H_a +n}$. Geometrically, this means that if we only look at the walk after hitting $a$, the walk has the same distribution if we inverse the direction of each step: 'looking at the path after hitting $a$, we cannot tell if it is the normal or the inverted step walk'.
+	{\color{blue}
+	Now our goal is to show that the term on the right is equal to $\mathbb{P}_{0} \left[ X_k > a \right] $, as $2\mathbb{P}_{0} \left[ X_k > a \right] = \mathbb{P}_{0} \left[ |X_k| >a \right] $ by symmetry. We can go from $>$ to $\geq$ because $a$ is even and $k$ is odd. At this point we note that $X_{H_a +n}$ is distributed as $a + (a-X_{H_a +n}) = 2a - X_{H_a +n}$. Geometrically, this means that if we only look at the walk after hitting $a$, the walk has the same distribution if we inverse the direction of each step: 'looking at the path after hitting $a$, we cannot tell if it is the normal or the inverted step walk'. We have}
 	\begin{align}
 		\mathbb{P}_{0} \left[ H_a \leq k, X_k < a \right] &= \sum_{m=0}^{k} \mathbb{P}_{0} \left[ X_k < a, H_a = m \right] = \sum_{m=0}^{k} \mathbb{P}_{a} \left[ X_{k-m} < a \right] \mathbb{P}_{0} \left[ H_a = m \right]  \\
 		&= \sum_{m=0}^{k} \mathbb{P}_{a} \left[ X_{k-m}>a \right] \mathbb{P}_{0} \left[ H_a = m \right] = 
