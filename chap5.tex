@@ -12,13 +12,13 @@
 \textbf{Goal} Define $\Omega \to $'set of points'. For a general state space $\mathbb{R}^2, [0,1]^2,$ a manifold, etc. 
 \ref{q:1} and \ref{q:2} are specific to $\mathbb{R}_+$, so they do not generalize. \ref{q:3} is not very easy to describe. \ref{q:4} is actually nice, so we will  use this point of view.
 
-\textbf{Framework} $(E,d)$ a Polish space (separable, complete, metric space). $\mathcal{E}$ Borel $\sigma$-algebra. $\mu: \sigma$ finite measure on $(E, \mathcal{E})$, ie  $\exists  B_i \uparrow E: \mu(B_i)<\infty$ where $B_i \uparrow E \iff B_1 \subset B_2 \subset \ldots : \bigcup_{i\geq 1}B_i=E$.
+\textbf{Framework} $(E,d)$ a Polish space (separable, complete, metric space). $\mathcal{E}$ Borel $\sigma$-algebra. $\mu: \sigma$ finite measure on $(E, \mathcal{E})$, i.e. there exist $B_i \uparrow E$ such that $\mu(B_i)<\infty$ where $B_i \uparrow E$ if and only if $B_1 \subset B_2 \subset \ldots$ with $\bigcup_{i\geq 1}B_i=E$.
 
 \begin{ex}[] Of such spaces: 
 \begin{enumerate}
-	\item $E=\{0\}, \mu = \delta_0$
-	\item $E=\mathbb{R}_+, \mu = \lambda \mathcal{L}$
-	\item $E=\mathbb{R}^2, \mu(dx)=\frac{1}{\pi} e^{- |x|^2}dx$ 'Gaussian'
+	\item $E=\{0\},\ \mu = \delta_0$
+	\item $E=\mathbb{R}_+,\ \mu = \lambda \mathcal{L}$
+	\item $E=\mathbb{R}^2,\ \mu(dx)=\frac{1}{\pi} e^{- |x|^2}dx$ 'Gaussian'
 \end{enumerate}
 \end{ex}
 
@@ -27,7 +27,7 @@
 \section{Point Processes}
 \textbf{Notation} 
 \begin{align}
-	\mathcal{N}=\{\sigma-\textrm{finite measures: } \forall B \in \mathcal{E}: \sigma(B) \in \mathbb{N} \cup \{+\infty\}\}.
+	\mathcal{N}=\{\sigma-\textrm{finite measures: } \forall B \in \mathcal{E}: \nu(B) \in \mathbb{N} \cup \{+\infty\}\}.
 \end{align}
 
 \noindent
@@ -43,7 +43,7 @@
 	Thus $\eta$ corresponds to a collection of points $\{X_1, \ldots ,X_{\tau}\}$.
 \end{rmk}
 \begin{proof}
-	Fix $ \mathcal{Y}=\{y_1,y_2,\ldots\}$ countable and dense in $E$. (WLOT we can assume that $E$ is infinite). We have $\mathcal{N}= \bigcup_{k=0}^{\infty}\mathcal{N}_{k}$ (disjoint) where $\mathcal{N}_{k}=\{ \eta:\ \eta(E)=k\}$. We prove by induction on $k\geq 0$ that for every $k\geq 0$ there exist $Z_1,\ldots ,Z_k:\ \mathcal{N}_{k} \to E$ measurable such that 
+	Fix $ \mathcal{Y}=\{y_1,y_2,\ldots\}$ countable and dense in $E$. (WLOG we can assume that $E$ is infinite). We have $\mathcal{N}= \bigcup_{k=0}^{\infty}\mathcal{N}_{k}$ (disjoint) where $\mathcal{N}_{k}=\{ \eta:\ \eta(E)=k\}$. We prove by induction on $k\geq 0$ that for every $k\geq 0$ there exist $Z_1,\ldots ,Z_k:\ \mathcal{N}_{k} \to E$ measurable such that 
 	\begin{align}
 		\forall \eta \in \mathcal{N}_{k} \quad \eta = \sum_{i=1}^{k} \delta_{Z_i}.
 	\end{align}
@@ -93,7 +93,7 @@ This means $N: \Omega \to \mathcal{N};\ \omega \mapsto N_{\omega } $ is measurab
 \begin{defn}
 	A Poisson process with intensity $\mu$ on $(E, \mathcal{E})$ (ppp$(\mu)$) is a point process such that
  \begin{enumerate}
-	 \item For all $B_1 \ldots B_k \subset E$ measurable and disjoint, $N(B_1) \ldots N(B_k)$ are independent.
+	 \item For all $B_1 \ldots B_k \subset E$ measurable and disjoint, $N(B_1), \ldots ,N(B_k)$ are independent.
 	 \item For all $B \subset E$ measurable, $N(B)$ has law Pois$(\mu(B))$.
 \end{enumerate}
 \end{defn}
@@ -198,7 +198,11 @@ Let $N$ be a ppp$(\mu )$ on $E$, its law $P_N$ is a probability measure on $ \ma
 \begin{proof}
 Let $B_1,B_2 \subset E$ measurable, $n_1,n_2\geq 0$. Define $C_1 = B_1 \setminus B_2$, $C_2 = B_1 \cap B_2$, and $C_3= B_2 \setminus B_1$. 
 
-{\color{blue} TODO: Figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{figures/intersection.pdf}
+\end{figure}
+
 
 \begin{align}
 	\mathbb{P}_{} \left[ N(B_1)=n_1, N(B_2)=n_2 \right] &= \sum_{\substack{m_1+m_2 = n_1\\ m_2+m_3 = n_2}}^{} \mathbb{P}_{} \left[ N(C_1) = n_1, N(C_2)=m_2, N(C_3)=m_3 \right] \\ 
@@ -211,11 +215,6 @@ Where the second equality holds as the $C_i$ are disjoint. Equivalently, for all
 \end{align}
 Therefore $P_N(A) \stackrel{(*)}{=} P_{N'}(A)$ for every set of the form $A=\{\eta: \ (\eta(B_1),\ldots ,\eta(B_k) ) \in K\}$ for $B_1,\ldots ,B_k \subset E$ measurable and $K \subset \mathbb{N}^{k}$. Such sets for a $\pi $-system and generate $\mathcal{B}(\mathcal{N})$. Hence, by Dynkin's lemma, $(*)$ holds for every measurable set $A \subset \mathcal{N}$ measurable.  
 \end{proof}
-
-
-\begin{theorem}[Representation of ppp as Proper Processes]
-	Let $N$ be a ppp$(\mu )$ on $(E, \mathcal{E})$, there exists some random variable $\tau \in \mathbb{N} \cup \{+\infty \}$ st: $X_n \in E, n\geq 1: N = \sum_{i=1}^{\tau(} $
-\end{theorem}
 
 \section{Laplace Functional}
 \begin{lemma}[]
@@ -310,7 +309,7 @@ $(E, \mathcal{E}), (F, \mathcal{F})$ Polish spaces, $\mu$ a $ \sigma$-finite mea
 			0 \textrm{ a.s.} & \textrm{if }i \neq j \\
 			N_i'(B) \textrm{ a.s.} & \textrm{if } i=j
 		\end{cases} \\
-			       &= N_j'(B) \textrm{ a.s.}	
+			       &= \widetilde{N}_j'(B) \textrm{ a.s.}	
 	\end{align}
 Hence $N_{C_j}' = N_j'$ a.s. Let $f_1, \ldots, f_k: \mathcal{N} \to \mathbb{R}_+$ measurable. 
 \begin{align}
@@ -370,14 +369,14 @@ is measurable.
 \noindent
 \textbf{Motivation} Cars on a highway, at time 0 the position of the cars is a ppp$(1)$ on $\mathbb{R}$ (that means on average 1 car per kilometer of highway). We put an observer (Olga) at 0 on $\mathbb{R}$.
 
-Case 1: All of the cars have speed 50km/h, we want to study $X=$ number of cars seen by Olga in 1 hour. What is the law of $X$? $X \sim Pois(50)$.
+Case 1: All of the cars have speed 50km/h, we want to study $X=$ number of cars seen by Olga in 1 hour. What is the law of $X$? $X \sim \textrm{Pois}(50)$.
 
 Case 2: The cars have a random speed $ \sim \mathcal{U}([50,100]) $. What is the law of $X$? It may at first seem complicated, but it is not!
 
 \noindent
 \textbf{Framework} $(E, \mathcal{E})$ Polish, $\mu$ $\sigma$-finite. $(F, \mathcal{F}, \nu )$ Polish, probability space ('space of marks').
 \begin{defn}
-	Let $N=\sum_{i=1}^{\tau} \delta_{X_i}$ be a proper ppp$(\mu)$ on $E$. $(Y_i)_{i> 0}$ i.i.d. random variable with law $\nu $ independent of $N$. The \emph{marked point process} is the pp on $E \times F$ defined by 
+	Let $N=\sum_{i=1}^{\tau} \delta_{X_i}$ be a proper ppp$(\mu)$ on $E$. $(Y_i)_{i> 0}$ i.i.d. random variable with law $\nu $ independent of $N$. The \emph{marked point process} is the point process on $E \times F$ defined by 
 	\begin{align}
 	\boxed{M=\sum_{i=1}^{\tau} \delta_{(X_i, Y_i)}.}
 	\end{align}
@@ -415,205 +414,5 @@ Hence $M$ is a ppp$(\mu \otimes \nu )$.
 \end{proof}
 
 
-\noindent \textbf{Conclusion} The general PPP we have defined gives us a very general way to talk about a random processes on a large class of spaces (Polish), which fulfill a Markov-like property. This tool will allow us to make much stronger statements in more specific cases.
-
-\section{Standard Poisson Process}
-In discrete time processes $(X_n)_{n\in N}$, the law is characterised by the law of $(X_{n_1},..X_{n_k}; n_1 \ldots n_k \in \mathbb{N})$. In continuous time processes we have $(X_t)_{t\geq 0}$, we need to define $X_t$ for every $ t \in \mathbb{R}$ which is not countable.
-
-\noindent \textbf{Outset} We would like to define a renewal process which also fulfills the Markov property. Furthermore we would like a simple continuous time process which is in some way a 'universal' stationary process on $\mathbb{R}_+ \to \mathbb{N}$ with independent increments and jumps of size 1. We would also like to see if any of the ideas from the previous chapter can be specified to this context.
-
-\textbf{Applications} Queuing processes, insurance claims, compound Poisson process.
-
-\textbf{Framework} $(\Omega, \mathcal{F}, \mathbb{P})$ probability space, time space: $\mathbb{R}_{+}=[0,\infty)$ 
-
-There are 2 points of view: random points on $\mathbb{R}_{+}$ (reminiscent of PPP) or continuous time stochastic process (renewal process).
-
-\section{Exponential Random Variables}
-\textbf{Note} We will use the 2nd point of view here.
-
-\begin{defn}
-	Let $\lambda> 0$, a real random variable $T$ is exponential with parameter $\lambda$ (we write $T \sim Exp(\lambda)$) if it has density $f(t) = \lambda e ^{-\lambda t} \mathbbm{1}_{\{t\geq 0\}}$ equivalently for all $t\geq 0\ \mathbb{P}_{} \left[ T>t \right] = e^{-\lambda t}$
-\end{defn}
-
-\begin{prop}[Memoryless Property]
-	Let $\lambda > 0$ and $T$ be an Exp$(\lambda)$ random variable. Then  
-	\begin{align}
-		\boxed{\forall s,t\geq 0\quad \mathbb{P}_{} \left[ T>s+t | T>t \right] = \mathbb{P}_{} \left[ T>s \right]. }
-	\end{align}
-\end{prop}
-\begin{prop}[Minimum of independent Exponentials]
-	Let $n\geq 0, T_1, \ldots ,T_n$ independent with $T_i \sim Exp(\lambda_i)$ for $ \lambda_i > 0$, then 
-\begin{itemize}
-	\item $\min\{T_1, \ldots, T_n\} \sim \textrm{Exp}(\lambda_1+ \ldots +\lambda_n)$,
-	\item $\mathbb{P}_{} \left[ T_1 = \min\{T_1, \ldots ,T_n\} \right] = \frac{\lambda_1}{\lambda_1+ \ldots +\lambda_n}$.
-\end{itemize}
-
-\end{prop}
- 
-\textbf{Reminder} $X$ a real random variable with density $f$, $Y$ a random variable with values in some measurable space $E$ independent of X. Then for every $\phi:\mathbb{R} \times E \to \mathbb{R}$ measurable and bounded we have  
-\begin{align}
-	\mathbb{E}_{} \left[ \phi(X,Y) \right] = \int_{0}^{\infty} \mathbb{E}_{} \left[ \phi(x,Y) \right] f(x) dx.
-\end{align}
-\begin{proof}
-For every $t\geq 0$ 
-\begin{align}
-	\mathbb{P}_{} \left[ \min(T_1, \ldots , T_n) \geq t \right] = \prod_{i=1}^{n}\mathbb{P}_{} \left[ T_i \geq t \right] = \exp(-(\lambda _1 + \ldots + \lambda_n)t).
-\end{align}
-\begin{align}
-	\mathbb{P}_{} \left[ T_1 = \min(T_1,\ldots ,T_n) \right] &= \int_{0}^{\infty } \mathbb{P}_{} \left[ t = \min(t, T_2, \ldots ,T)n) \right] \lambda _{1}e^{-\lambda_1 t} dt \\
-								 &= \int_{0}^{\infty } \mathbb{P}_{} \left[ \min(T_2, \ldots ,T_n) \geq t \right] \lambda _1 e^{-\lambda t}dt \\
-								 &= \lambda_1 \int_{0}^{\infty } e^{-(\lambda_1 + \ldots + \lambda_n)t}dt = \frac{\lambda_1}{\lambda_1 + \ldots + \lambda_n}.
-\end{align}
-\end{proof}
-
-
-\begin{prop}[Sum of Exponentials]
-	Let $\lambda > 0,\ n\geq 1$. Let $T_1, \ldots, T_n$ be i.i.d. Exp$(\lambda)$ random variables. Then  $S_n = T_1+ \ldots +T_n$ is  $\Gamma(n, \lambda)$ distributed. I.e. $S_n$ is continuous with density $f_{S_n}(t)=\lambda e^{-\lambda t} \frac{(\lambda t)^{n-1}}{(n-1)!}$
-\end{prop}
-\begin{rmk}[]
-We can check that $\Gamma(1,t)=\textrm{Exp}(\lambda)$
-\end{rmk}
-
-\begin{proof}
-	By induction.
-
-	$n=1$ is trivial.
-
-	Assume that the results holds for some $n\geq 1$. Let $T_1,\ldots ,T_{n+1}$ be i.i.d. Exp$(\lambda)$. $S_n = T_1 + \ldots + T_n$ and $T_{n+1}$ are independent. Hence, $S_{n+1} = S_n + T_{n+1}$ and $T_{n+1}$ admits a density given by the convolution
-	\begin{align}
-		f_{S_{n+1}} &= \int_{0}^{t} f_{S_n}(s)f_{T_{n+1}}(t-s)ds = \int_{0}^{t} \lambda^2 e^{-\lambda s} \frac{(\lambda s)^{n-1}}{(n-1)!} e^{-\lambda(t-s)}ds = \lambda e^{-\lambda t} \frac{(\lambda t)^{n}}{n!}.
-	\end{align}
-\end{proof}
-
-
-\section{Definition of Poisson Processes}
-\textbf{Setup}  $\lambda > 0, (T_i)_{i\geq 0}$ i.i.d. Exp$(\lambda ), S_n = T_1+ \ldots +T_n$
-
-\begin{defn}
-	The stochastic process $N=(N_t)_{t\geq 0}$
-	\begin{align}
-		\boxed{\forall t\geq 0 \quad N_t = \sum_{i=1}^{\infty} \mathbbm{1}_{S_i \leq t}.}
-	\end{align}
-	is called the \emph{Poisson process with intensity $\lambda$} (pp$(\lambda)$). The random variables $T_1,T_2, \ldots $ are the inter-arrival times and  $S_1,S_2, \ldots $ the arrival/jump times.
-\end{defn}
-\noindent
-\textbf{Elementary Properties}
-\begin{itemize}
-	\item The mapping $t \mapsto N_t$ is a.s. right continuous, with values in $\mathbb{N}$,
-	\item For fixed $t\geq 0$, $N_t$ has distribution Pois$(\lambda t)$, i.e. $\mathbb{P}_{} \left[ N_t = n \right] = \frac{(\lambda t)^n}{n!}e^{- \lambda  t}$.
-\end{itemize}
-
-{\color{blue}
-\noindent \textbf{Comment} "A property hold a.s." means there exists a measurable set $A$ with $\mathbb{P}_{} \left[ A \right] =1$ and such that for every $\omega \in A$ the property holds. This is different than what we have previously used for almost sure, and is a necessary change as properties like continuity are not measurable.
-
-\begin{rmk}[]
-	A Poisson process can be seen from two perspectives. On one had it is a renewal process with Exp$(\lambda)$ waiting times, on the other it is a Poisson point process on $\mathbb{R}_+$ with intensity measure $\lambda \mathcal{L}$.
-\end{rmk}
-
-}
-
-\section{Markov Property}
-\begin{theorem}[Markov Property of N]
-	Fix $t\geq 0$, the stochastic process $N^{(t)}=(N^{(t)}_{s})_{s \geq 0}$ defined by $N^{(t)}_s = N_{t+s}-N_{t}$ is a Poisson process, independent of $(N_u)_{0 \leq u \leq t}$.
-\end{theorem}
-{\color{blue}
-\begin{proof}
-	Since N is a ppp$(\lambda \mathcal{L})$, $N([0,t])$ is independent of $N((t,t+s])$. TODO: why is it a ppp?	
-\end{proof}}
-
-
-\section{Stationary and Independent Increments}
-\textbf{Motivation} We want to describe the law of $(N_{t_0}, \ldots ,N_{t_k})$, the key here is that they are not totally independent. If we have 5 points at time $t_0$ then we know at time $t_1$ there will be at least 5 points. So we look at the law of $(N_{t_1}-N_{t_0}, \ldots ,N_{t_k}-N_{t_{k-1}})$ ie the increments.
-
-\begin{defn}
-	A stochastic process $(X_t)_{t\geq 0}$ is said to have independent and stationary increments if 
-\begin{itemize}
-	\item $\forall k \geq 1, \forall 0=t_0 <  \ldots  < t_k: X_{t_1}-X_{t_0},  \ldots , X_{t_k}- X _{t_{k-1}}$ are indep
-	\item $\forall  s<t, \forall  n \geq 0: X_t - X_s \stackrel{law}{=} X _{t+h}-X_{s+h}$
-\end{itemize}
-
-\end{defn}
-
-\begin{theorem}[Marginals of Poisson Process]
-We have the following:
-\begin{enumerate}
-	\item $\forall k \geq 1, \forall 0=t_0< \ldots <t_k: N_{t_1}-N_{t_0}, \ldots ,N_{t_k}- N_{t_{k-1}}$ are indep
-	\item $\forall s \leq t: N_t - N_s \sim Pois(\lambda (t-s))$
-\end{enumerate}
-In particular $N=(N_t)_{t\geq 0}$ has independent and stationary increments.
-	
-\end{theorem}
-
-We know the law of $(N_{t_1}, \ldots ,N_{t_k}$ for every fixed $t_1 \ldots t_k$. 
-\begin{align}
-	\mathbb{P}_{} \left[ N_{t_1}=m_1 \ldots N_{t_k}=m_k \right] =& \mathbb{P}_{} \left[ N_{t_1}=m_1, N_{t_2}-N_{t_1}=m_2 - m_1, \ldots , N_{t_k}-N_{t_{k-1}}=m_k - m_{k-1} \right] \nonumber \\ 
-	=& \prod_{i=1}^{k}\frac{(\lambda (t_0 - t_{i-1}))^{m_i-m_{i-1}}}{m_i - m_{i-1}} e^{- \lambda (t_i - t_{i-1})}
-\end{align}
-
-\section{Finite Marginals Characterization}
-\textbf{Motivation}  Let $(N_t)_{t\geq 0}$ a stochastic process. Does the last formula from above ensure that the process is $pp(\lambda)$? No, we can define $\tilde{N}_t =  \sum_{i \geq 1}^{} \chi_{S_i<t} $, we could also just change the value of the process as some random points, thus when we fix $t_1, \ldots ,t_k$ we have 0 probability to see these.
-
-In order to get a characterization we need to add some regularity assumptions.
-
-\begin{defn}
-	Let $N=(N_t)_{t \geq 0}$ be a continuous stoch process with values in $\mathbb{R}$. We say that $N$ is a counting process if the following holds a.s.:
-\begin{enumerate}
-	\item $N_0 = 0$ a.s.
-	\item  $t \to N_t$ is non decreasing, right continuous, with values in $\mathbb{N}$ \label{continCond}
-\end{enumerate}
-In this case, we can define the jump times by setting $S_1=min\{t: N_t >0\}$ and by induction  $S_{i+1}= min\{t \geq S_i: N_t > N_{S_i}\}$.
-\end{defn}
-
-\begin{ex}[]
-	$pp(\lambda )$ is a counting process.
-\end{ex}
-
-\begin{rmk}[]
-	The condition \ref{continCond} is almost sure in the following manner: $\exists A$ meas. with $\mathbb{P}_{} \left[ A \right] =1$ st $\forall \omega \in A: t \to N_t(w)$ is non decreasing, right continuous, with values in $\mathbb{N}$.
-\end{rmk}
-
-\begin{theorem}[]
-	Let $\lambda> 0:$ Let $N$ be a counting process, the following are equivalent:
-\begin{enumerate}
-	\item $N$ is $pp(\lambda)$
-	\item $\forall k \geq 1, \forall t_0 =0 < t_1 < \ldots <t_k, \forall n_1, \ldots ,n_k \in \mathbb{N}:$ \\ $\mathbb{P}_{} \left[ N_{t_1}-N_{t_0}=n_1, \ldots ,N_{t_k}-N_{t_k-1}=n_k \right] = \prod_{i=1}^k \frac{(\lambda (t_i - t_{i-1}))^{n_i}}{n_i!} e^{-\lambda (t_i - t_{i-1})} $
-\end{enumerate}
-
-\end{theorem}
-
-\begin{rmk}[]
-	By def $N$ is a $pp(\lambda)$ $\iff $ $N$ is a counting process with jumps of size 1 a.s. and  $S_1,S_2-S_1, \ldots $ are i.i.d.  $exp(\lambda)$.
-\end{rmk}
-
-\section{Microscopic Characterization}
-\begin{theorem}[]
-	Let $N$ be a counting process, let $\lambda> 0$. TFAE:
-\begin{enumerate}
-	\item $N$ is $pp(\lambda)$ 
-	\item $N$ has independent and stationary increments and $\mathbb{P}_{} \left[ N_t =1 \right] = \lambda t + o(t)$ and $\mathbb{P}_{} \left[ N_t \geq 2 \right] = o(t)$
-\end{enumerate}
-
-\end{theorem}
-
-\section{Properties of Poisson Process}
-
-\begin{theorem}[Law of Large Numbers]
-Let $N$ be a $pp(\lambda), \lambda > 0$, then: $lim_{t \to \infty} \frac{N_t}{t}=\lambda$.
-\end{theorem}
-
-\textbf{Motivation} If we want to specify (and remove) certain points, for instance if the PP is describing arrival times at a bakery then say we want to differentiate between customers who are younger than 45 and those who are older. If we just look at one of these groups, what type of process are they?
-
-\begin{theorem}[Thinning]
-	Let $(N_t)_{t\geq 0} \sim pp(\lambda)$ with jump times $(S_i)_{i\geq 0}$. Let $(X_i)_{i\geq 0}$ i.i.d. $Ber(p)$ independent of $N$ (this is the differentiation, called the marking of $N$). Define $N_t^1 = \sum_{i\geq 1}^{} \chi_{S_i \leq t, X_i = 1}$ and $N_t^0 = \sum_{i \geq 1}^{} \chi_{S_i \leq t, X_i = 0}$.
-\\ \noindent	
-	$(N_t^0)$ and  $(N_t^1)$ are independent Poisson processes with respective rates  $\lambda_0 = (1-p)\lambda, \lambda _1=p\lambda $.
-\end{theorem}
-
-Let $(N_t^0)$ and $(N_t^1)$ be independent Poisson processes with respective rates $\lambda_0> 0, \lambda_1> 0$. Let $N_t = N_t^0 + N_t^1$.
-\begin{theorem}[]
-$N_t$ is a counting process and we define for every $i $: $X_i = \mathbbm{1}_{\textrm{\{i'th jump of }N_t\textrm{ is a jumping time of }N_t^1\}}$. Then  $N_t$ is a $pp(\lambda_0 + \lambda_1)$ and  $(X_i)$ is a marking of  $N$ with $\forall i: \mathbb{P}_{} \left[ X_i=1 \right] = \frac{\lambda_1}{\lambda_0+\lambda_1}$.
-\end{theorem}
-
-\noindent \textbf{Conclusion} We successfully defined a renewal process with the Markov property, we also found that this object is also a PPP, thus giving us a process which has the asymptotic behavior (LLN, etc) from the renewal process perspective and getting the Strong and Weak Markov Property from the Poisson Point Process perspective. 
-
+\noindent \textbf{Conclusion} The general ppp we have defined gives us a very general way to talk about a random processes on a large class of spaces (Polish), which fulfill a Markov-like property. This tool will allow us to make much stronger statements in more specific cases.
 

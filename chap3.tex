@@ -393,7 +393,6 @@ We can use this to show that the second inequality is actually an equality. Fix 
 Hence, $\pi(x) = \frac{1}{\mathbb{E}_{x} \left[ H_x \right] } $ defines a distribution, which is stationary.
 \end{proof}
 
-TODO: Applications
 
 \section{Periodicity}
 \begin{defn}
@@ -428,11 +427,21 @@ hence $d_y | k+l+n$. Since $d_y | k+l$, we also have $d_y|n$.
 \begin{prop}[]
 	Let $x$ be in $E$. We have $d_x=1$ if and only if there is an $n_0 \geq 1$ such that for every $n \geq n_0$ we have that $ p_{xx}^{(n)}>0$.
 \end{prop}
+\begin{lemma}
+	Let $A \subset \mathbb{N}\setminus \{0\}$ be stable under addition (i.e. $x,y\in A \implies x+y \in A$). Then
+	\begin{align}
+		\gcd (A) = 1 \iff \exists n_0 \in \mathbb{N}: \{n \in \mathbb{N}: n \geq n_0 \} \subset A.	
+	\end{align}
+	
+\end{lemma}
 \begin{proof}
-	This follows from a lemma out of Number Theory, see the Appendix for more details.
+	See Appendix.
 \end{proof}
 
-TODO: Proof, possibly include number theory lemma in appendix, in my opinion the idea can be explained in a hand wavy fashion intuitively and the algebra distracts from the concept here.
+\begin{proof}[Proof (Proposition)]
+	The set $A_x = \{n> 0: p_{xx}^{(n)}> 0\}$ under addition, because $p_{xx}^{(m+n)} \geq p_{xx}^{(m)}p_{xx}^{(n)}$ for every $m,n> 0$. The proof follows by applying the lemma to $A=A_x$.
+\end{proof}
+
 
 \section{Product Chain}
 TODO: This needs some work with how we phrase it
@@ -746,6 +755,11 @@ Using the lemma ($\overline{P}$ is irreducible and recurrent) we find that
 \end{align}
 \end{proof}
 
+{\color{blue}\textbf{Applications} 
+	In practice we may not be able to identify the stationary distribution analytically, in which case we can instead simulate the chain and record its path. The empirical distribution this process yields will then converge towards the stationary distribution. 
+
+	Alternatively, we may want to generate samples from a given distribution, under certain conditions a direct approach using the cumulative distribution function may prove ineffective. Thus we can instead create a Markov Chain with stationary distribution as our desired distribution (by choosing the transition probabilities correctly), simulating this chain will then give us samples (in the limit) which are distributed like our target distribution.
+}
 
 \noindent \textbf{Conclusion} We previously asked the following questions:
 \begin{itemize}
