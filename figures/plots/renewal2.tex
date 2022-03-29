@@ -1,0 +1,28 @@
+\documentclass{standalone}
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.8}
+
+
+\tikzset{
+  jumpdot/.style={mark=*,solid},
+  excl/.append style={jumpdot,fill=white},
+  incl/.append style={jumpdot,fill=black},
+}
+
+\begin{document}
+  \begin{tikzpicture}
+    \begin{axis}
+	\addplot[incl] coordinates {(0,0)};
+        \addplot[very thick, smooth,samples=200,domain=0:1.4]{0};
+	\addplot[excl] coordinates {(1.4,0)};
+	\addplot[excl] coordinates {(1.4,1)};
+        \addplot[incl] coordinates {(1.4,2)};
+        \addplot[very thick, smooth,samples=200,domain=1.4:4]{2};
+        \addplot[excl] coordinates {(4,2)};
+        \addplot[excl] coordinates {(4,3)};
+        \addplot[incl] coordinates {(4,4)};
+        \addplot[very thick, smooth,samples=200,domain=4:5]{4};
+        \addplot[excl] coordinates {(5,4)};
+    \end{axis}
+  \end{tikzpicture}
+\end{document}

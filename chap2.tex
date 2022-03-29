@@ -284,7 +284,6 @@ Let $\mu$ be a  distribution on $E$, $x \in E$, $k \in \mathbb{N}$, for all $f: 
 	\forall m,n \geq 0 \quad \forall x,y \in E \quad \boxed{ p_{xy}^{(m+n)}= \sum_{z \in E} p_{xz}^{(m)}p_{zy}^{(n)}.}
 \end{align}
 \end{prop}
-{\color{blue} TODO: Figure}
 \begin{proof}
 Fix $m,n$ and $x,y \in E$.
 	\begin{align}
@@ -293,9 +292,12 @@ Fix $m,n$ and $x,y \in E$.
 			\sum_{z \in E}^{} \mathbb{P}_{x} \left[ X_{m+n} \ | \ X_m = z \right] \mathbb{P}_{x} \left[ X_m = z \right] \\
 		&\stackrel{\textrm{(SiMP)}}{=} \sum_{z \in E}^{} \mathbb{P}_{z} \left[ X_n=y \right] \mathbb{P}_{x} \left[ X_m=z \right] = \sum_{z \in E}^{} p_{xz}^{(m)} p_{zy}^{(n)}  	
 	.\end{align}
-	
 \end{proof}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.45\textwidth]{figures/CK.pdf}
+\end{figure}
 
 \begin{prop}[]
 	Assume $E$ is finite:

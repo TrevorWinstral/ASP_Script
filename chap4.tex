@@ -27,11 +27,23 @@ is called the \emph{renewal process with arrival distribution $F$}.
 
 \begin{ex}[]
 	\begin{enumerate}
-		\item $pp(\lambda ), \lambda> 0,\ T_i$ a $Exp(\lambda)$ random variable,
-		\item $(T_i)_{i\geq 1}$ i.i.d. $Exp(\lambda)$, $(X_i)_{i\geq 1}$  i.i.d. $Ber(\frac{1}{2})$, $T_i'= X_i T_i$, where  $(T_i)$ and  $(X_i)$ are independent.
-		\item 'Fat Tailed' $\mathbb{P}_{} \left[ T_{i} \geq t \right] = \frac{1}{\sqrt{1+t}} \mathbbm{1}_{t\geq 0}$
+		\item If $T_1 \sim  \textrm{Exp}(\lambda )$ then $(N_t)_{t\geq 0}$ is a 
+Poisson Process with intensity $\lambda$.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/plots/renewal1.pdf}
+\end{figure}
+
+\item $T_i = X_i T_i'$ where  $T_i$ are i.i.d Exp$(\lambda)$ and $X_i$ i.i.d. Ber$(\frac{1}{2})$, which are independent of each other.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{figures/plots/renewal2.pdf}
+\end{figure}
+
+\item "Fat Tailed example" $\mathbb{P}_{} \left[ T_i \geq t \right] = \frac{1}{\sqrt{1+t}}\mathbbm{1}_{t\geq 0} $.
+\item $T_i = 1$ a.s. the "deterministic case".
+\item $T_i = \alpha $ with probability $\beta $ and $0$ with probability $1-\beta $, where $\alpha > 0$ and $0< \beta <1$. $N_t$ has law $X_0 + \sum_{i=1}^{\lfloor t/\alpha \rfloor}(1+X_i) $ where $X_i$ are i.i.d. geometric random variables with parameter  $\beta $.
 	\end{enumerate}
-	
 \end{ex}
 
 {\color{blue}
@@ -461,11 +473,16 @@ We call this 'stationary'. Write $S_k = \sum_{i\leq k}^{} T_i$ and $\overline{S}
 
 Now claim that for $\epsilon > 0$, a.s. there exists $K>1$ (random) such that
 \begin{align}
-|S_k - \overline{S}_k | \leq \epsilon.
+|S_K - \overline{S}_K | \leq \epsilon.
 \end{align}
 We admit this.
 
-{\color{blue} //TODO: Figure //}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{figures/blackwell.pdf}
+	\caption{Example of such a $K$, here $K=4$.}
+\end{figure}
+
 
 Consider 
 \begin{align}
