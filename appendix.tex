@@ -1,0 +1,52 @@
+\begin{lemma}[]
+\begin{align}
+\sum_{j=1}^{\infty} \sum_{k=j}^{\infty} \mathbb{P}_{x} \left[ V_x = k \right] = \sum_{j=1}^{\infty} \mathbb{P}_{x} \left[ V_x \geq j \right]  	
+\end{align}
+\end{lemma}
+\begin{proof}
+	In the sum on the left we sum over each row first (the inner sum), collect these values in a column, and then sum over that column (outer sum); meanwhile for the RHS we first sum over each column, collect these values in a row, and then sum over that row.	
+	\begin{align}
+	\begin{matrix}
+	\mathbb{P}_{x} \left[ V_x = 1 \right] & & & & \sum=\sum_{j=1}^{1} \mathbb{P}_{x} \left[ V_x =1 \right]  \\
+	\mathbb{P}_{x} \left[ V_x = 2 \right] & \mathbb{P}_{x} \left[ V_x =2 \right] & & & \sum = \sum_{j=1}^{2} \mathbb{P}_{x} \left[ V_x = 2 \right]  \\
+	\mathbb{P}_{x} \left[ V_x = 3 \right] & \mathbb{P}_{x} \left[ V_x =3 \right] &  \mathbb{P}_{x} \left[ V_x=3 \right] & & \sum = \sum_{j=1}^{3} \mathbb{P}_{x} \left[ V_x =3 \right]  \\
+	& & & & \vdots \\ 
+	\vdots & \vdots & & & \sum_{k=1}^{\infty} \sum_{j=1}^{k} \mathbb{P}_{x} \left[ V_x = k \right] \\
+	\sum_{k=1}^{\infty} \mathbb{P}_{x} \left[ V_x =k \right] & \sum_{k=2}^{\infty} \mathbb{P}_{x} \left[ V_x=k \right]  &  \ldots  & \sum_{j=1}^{\infty} \sum_{k=j}^{\infty} \mathbb{P}_{x} \left[ V_x = k \right]  
+	\end{matrix}
+	\end{align}
+\end{proof}
+
+\begin{rmk}[]
+	In fact, this holds much more generally
+\begin{align}
+	\mathbb{E}_{} \left[ X \right] = \sum_{k\geq 0}^{} k \mathbb{P}_{} \left[ X=k \right] = \sum_{k=0}^{\infty} \mathbb{P} \left[X \geq k  \right] 
+.\end{align}
+\end{rmk}
+
+\begin{lemma}
+	Let $A \subset \mathbb{N}\setminus \{0\}$ be stable under addition (i.e. $x,y\in A \implies x+y \in A$). Then
+	\begin{align}
+		\gcd (A) = 1 \iff \exists n_0 \in \mathbb{N}: \{n \in \mathbb{N}: n \geq n_0 \} \subset A.	
+	\end{align}
+\end{lemma}
+\begin{proof}
+	$\Longleftarrow$: Follows from the fact that $\gcd(n_0, n_0+1)=1$.
+
+	$\Longrightarrow$ : Assume $\gcd(A)=1$. Let $a \in A$ be arbitrary and  $a =  \prod_{i=1}^{k}p_{i}^{alpha_i}$ be its prime factorization. Since $\gcd(A)=1$, one can find $b_1, \ldots, b_k \in A$ such that for all $i$ $p_i \nmid b_i$. This implies
+	\begin{align}
+		\gcd(a,b_1,\ldots, b_k)=1.
+	\end{align}
+	Write $d=\gcd(b_1,\ldots, b_k)$. By Bezout's Theorem, we can pick $u_1,\ldots,u_k \in \mathbb{Z}$ such that
+	\begin{align}
+		u_1b_1 + \ldots + u_k b_k = d.
+	\end{align}
+	Now, choose an integer $\lambda $ large enough such that $u_i + \lambda a \geq 0$ for every $i$ and define
+	\begin{align}
+		b = (u_1 + \lambda a)b_1 + \ldots + (u_k + \lambda a)b_k = d + \lambda (b_1 + \ldots + b_k) a.
+	\end{align}
+	The first expression shows that $b\in A$, and the second implies that $\gcd(a,b) = gcd(a,d)=1$. To summarize, we found $a,b \in A$ such that $\gcd(a,b)=1$.
+
+	Without loss of generality, we may assume $a<b$. Since $\gcd(a,b)=1$, the set $B=\{b, 2b, \ldots, ab\}$ covers all of the residue classes modulo $a$. Since $a<b$, this implies that $B+\{ka,  k \in \mathbb{N}\}$ includes every number $z\geq ab$. This concludes the proof by choosing $n_0 = ab$.
+\end{proof}
+
